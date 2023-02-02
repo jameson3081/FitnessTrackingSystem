@@ -2,12 +2,14 @@
 .navbar{
     width: 100%;
     margin: auto;
-    padding: 5%;
+    padding: 1%;
+    padding-left: 3%;
     display: flex;
     align-items: center;
     justify-content: space-between;
     font-family: "inter";
     background-color: #ECEFF1;
+    border-bottom: solid black;
 }
 .navbar ul li{
     list-style: none;
@@ -20,6 +22,11 @@
     text-decoration: none;
     color:black (68, 0, 255);
     font:(inter)
+}
+
+.navbar ul li:hover{
+    color: #af241a;
+    cursor: pointer;
 }
 
 
