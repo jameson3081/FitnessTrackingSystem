@@ -22,6 +22,7 @@ main {
     padding: 16px;
     width: 90%;
     margin: auto;
+    max-width: 3000px;
 }
 
 .section-log, .activity-log, .food-log {
@@ -48,6 +49,7 @@ li {
 
 .question {
     color: white;
+    font-size: 1.3rem;
 }
 
 .question-input {
@@ -79,7 +81,7 @@ ul input, ul select {
 .types {
     display: grid;
     color: white;
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: 1fr;
     grid-template-rows: repeat(6, 150px);
     text-align: center;
     align-items: end;
@@ -88,11 +90,11 @@ ul input, ul select {
 .types-2 {
     display: grid;
     color: white;
-    grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: 150px auto;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(6, 150px);
     text-align: center;
     align-items: end;
-    row-gap: 5rem;
+
 }
 .activity-log h2, .food-log h2 {
     grid-column: 1/-1;
@@ -103,10 +105,6 @@ ul input, ul select {
     margin-bottom: 4rem;
     background-color: #782924;
     
-}
-
-.activity-log, .food-log {
-    min-height: 100vh;
 }
 
 .activity-log select, .food-log select {
@@ -128,9 +126,11 @@ ul input, ul select {
 .steps h4 {
     font-size: 1rem;
     margin-bottom: 0;
+    margin-right: 2rem;
     background-color: #FEC00F;
     color: black;
     padding: 0.5rem;
+    text-align: center;
 }
 
 .total-calories-burned {
@@ -144,9 +144,11 @@ ul input, ul select {
 .total-calories-burned h4 {
     font-size: 1rem;
     margin-bottom: 0;
+    margin-right: 2rem;
     background-color: #FEC00F;
     color: black;
     padding: 0.5rem;
+    text-align: center;
 }
 
 .add-row {
@@ -162,14 +164,17 @@ ul input, ul select {
     margin: 0;
     width: 150px;
     cursor: pointer;
+    margin-bottom: 5rem;
 }
 
 
 
 .add-row-food {
     justify-content: center;
-    grid-column: 2/3;
+    text-align: center;
     grid-row: 0;
+    align-self: center;
+    margin-top: 5rem;
 }
 
 .add-row-food button {
@@ -185,8 +190,8 @@ ul input, ul select {
 .overall-total-calories {
     display: flex;
     align-items: center;
-    justify-content: space-around;
-    grid-column: 3/5;
+    margin-top: 2rem;
+    justify-content: center;
     grid-row: 0;
   
 }
@@ -194,6 +199,7 @@ ul input, ul select {
 .overall-total-calories h4 {
     font-size: 1rem;
     margin-bottom: 0;
+    margin-right: 4rem;
     background-color: #FEC00F;
     color: black;
     padding: 0.5rem;
@@ -234,7 +240,7 @@ textarea {
 
 .slider-container {
     justify-content: center;
-    grid-column: 2/5;
+ 
     display: flex;
     margin-bottom: 1rem;
     flex-direction: column;
@@ -242,16 +248,95 @@ textarea {
 }
 
 .slider-container .slider-food {
-   width: 100%;
+   width: 50%;
+   margin: auto;
 
 }
 
-.add-row-food, .overall-total-calories {
-    margin-top: 10rem;
-}
+
 
 .answers {
    display: flex;
    justify-content: space-between;
     
+}
+
+.one {
+    display: flex;
+    justify-content: space-around;
+    
+}
+
+.two {
+    display: flex;
+    justify-content: space-around;    
+}
+
+#three {
+    display: none;
+    justify-content: space-around;
+}
+
+#four {
+  
+    justify-content: space-around;
+}
+
+#five, #six, #seven {
+
+    justify-content: space-around;
+}
+
+
+.last {
+    display: flex;
+    justify-content: space-around;
+    width: 80%;
+    
+}
+
+#limitm {
+    color: red;
+    font-size: 2rem;
+    text-align: center;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+}
+
+.food-row1 {
+    display: flex;
+    justify-content: space-around
+}
+
+.food-row2 {
+    display: flex;
+    justify-content: space-around
+
+}
+
+#food-row3 {
+    display: none;
+    justify-content: space-around
+}
+
+#food-row4 {
+    display: none;
+    justify-content: space-around
+}
+
+#food-row5 {
+    display: none;
+    justify-content: space-around
+}
+
+#food-row6 {
+    display: none;
+    justify-content: space-around
+}
+
+#limitfood {
+    color: red;
+    text-align: center;
+    font-size: 2rem;
+    margin-top: 5rem;
 }
