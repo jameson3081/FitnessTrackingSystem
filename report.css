@@ -1,0 +1,74 @@
+*, ::before, ::after {
+ box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+}
+
+.bg {
+    background-color: #E5DDCB;
+}
+
+main {
+    background-size: 100%;
+    min-height: 100vh;
+    width: 80%;
+    margin: auto;
+}
+
+.top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.download-btn {
+    border: 0;
+    background-color: black;
+    color: white;
+    padding: 8px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.choices, .generator-title, .download-btn {
+    margin-top: 2rem;
+}
+
+.choices {
+    font-size: 1.5rem;
+}
+
+select {
+    background-color: #782924;
+    color: white;
+    width: 100px;
+    text-align: center;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    
+    text-align: center;
+    background-color: white;
+    align-items: center;
+    margin-top: 2rem;
+    
+}
+
+h3 {
+    border: 1px solid black;
+
+}
+
+.grid-head {
+    margin-bottom: 0;
+}
+
+.sample {
+    font-weight: 400;
+    margin-bottom: 0;
+}
+
