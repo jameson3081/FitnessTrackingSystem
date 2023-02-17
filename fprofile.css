@@ -1,0 +1,292 @@
+/* NAVIGATION BAR */
+.navbar{
+    width: 100%;
+    margin: auto;
+    padding: 1%;
+    padding-left: 3%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: "inter";
+    background-color: #ECEFF2;
+    border-bottom: solid black;
+}
+.navbar ul li{
+    list-style: none;
+    display: inline-block;
+    margin: 0 20px;
+    font-size: 20px;
+    color: black;
+}
+.navbar ul li a{
+    text-decoration: none;
+    color:black (68, 0, 255);
+    font:(inter)
+}
+
+.navbar ul li:hover{
+    color: #af241a;
+    cursor: pointer;
+}
+
+
+/* HOME PAGE */
+
+.homeSection{
+    display: flex;
+    flex-direction: column;
+    background-color: #E5DDCB;
+    height: 100%;
+    padding: 20px;
+}
+
+.homepage-title{
+    text-align: center;
+    padding: 5%;
+    color: #782924;
+    font-family: 'Oswald';
+    font-size: 60px;
+}
+  
+.homeAbt, .homeAbt2 {
+    width: 30%;
+    height: 520px;
+    background-color: #2D2427;
+    text-align: center;
+    line-height: 150px;
+    color: white;
+    font-weight: bold;
+    margin-top: -5%;
+    font-family: "roboto";
+    overflow: hidden;
+}
+.homeAbtTitle{
+    color: #FEC00F;
+    margin-top: 35px;
+}
+.homePharagraph{
+    font-family: "Poppins";
+    margin: 2%;
+}
+  
+.logo2Container {
+    width: 33%;
+    height: 520px;
+    text-align: center;
+    line-height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: -5%;
+
+}
+  
+.logo2{
+    width: 100%;
+    height: 70%;
+}
+/*1450*/
+/*
+body {
+    width:2000px; 
+    margin: 0 auto;
+    
+   
+  }
+  */
+  
+#notesLabel{
+    font-family: "roboto";
+    font-weight: bold;
+    color: #FEC00F;
+    float: right;
+    margin-right: 50px;
+}
+
+#notes{
+    float: right;
+    background-color: #E5DDCB;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 20px;
+    
+    width:300px;
+    height:400px;
+    margin-left: 100px;
+}
+#notesBody{
+    font-family: "roboto";
+    font-weight: bold;
+    font-size: 14px;
+}
+
+#fprofile_box{
+    background-color: #2D2427;
+    height: 900px;
+    width: 1000px;
+    margin: 0 auto;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    padding: 60px;
+    position: relative;
+}
+#fprofile_title{
+    font-family: "roboto";
+    font-weight: bold;
+    color: #FEC00F;
+    text-align: center;
+}
+
+#classnumLabel{
+    font-family: "roboto";
+    font-weight: bold;
+    color: #FEC00F;
+}
+
+.fprofile_labels{
+    font-family: "roboto";
+    font-weight: bold;
+    color: white;
+    
+}
+
+.combobox{
+    background-color: #FEC00F;
+}
+
+select, input[type="text"] {
+    border-radius: 5px 5px 5px 5px;
+   
+    display: inline-block;
+   margin-bottom: 10px;
+  }
+
+
+.button{
+    border-radius: 5px 5px 5px 5px;
+    float: right;
+}
+
+  label {
+    width:130px;
+    display: inline-block;
+    
+}
+
+#sexToBMR select{
+    display: inline-block;
+    width: 100px;
+}
+
+#sexToBMR input[type="text"]{
+    display: inline-block;
+    width: 100px;
+}
+
+#sexToBMR  label {
+    width:75px;
+    display: inline-block
+}
+
+
+#bmilabel{
+
+    margin-left: 20px;
+
+}
+
+#bmrlabel{
+
+    margin-left: 20px;
+
+}
+
+
+#heightlabel{
+    width: 85px;
+    display: inline-block;
+
+}
+
+#Height{
+    width: 90px;
+
+}
+#weightlabel {
+    width: 85px;
+    display: inline-block
+}
+
+#weight{
+    width: 90px;
+}
+
+.heightweight{
+    display: inline-block
+
+}
+
+#actLevelLabel{
+    width: 100px;
+    display: inline-block;
+    margin-left: 20px;
+}
+
+#actLevel{
+    width: 150px;
+}
+
+#goal_label{
+    width: 45px;
+    display: inline-block;
+}
+
+#goal{
+    width: 190px;
+    margin-bottom: 10px;
+}
+
+#kglabel{
+    margin-left: 40px;
+}
+
+#howMuch{
+    width: 75px;
+}
+
+#timeFrame{
+    width: 120px;
+    margin-bottom: 10px;
+}
+
+#goalKcal{
+    width: 100px;
+    margin-bottom: 10px;
+}
+
+.check{
+    color: #E5DDCB;
+    margin-left: 10px;
+    /*display:none;*/
+}
+
+#goal_result{
+    color: #1bb515;
+    margin-left: 10px;
+}
+
+#saveButton{
+    width:50px;
+    
+}
+
+#saveButton:before{
+    font-family: FontAwesome;
+    content:"\f044";
+}
+
+.centerAligned{
+    text-align: center;
+}
+/* PAGE NAME */
+    
