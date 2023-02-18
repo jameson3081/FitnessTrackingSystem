@@ -22,3 +22,14 @@ main {
     border-radius: 5px;
     font-weight: bold;
 }
+
+#accMgt{
+    background-color: #FEC00F;
+    color: rgb(0, 0, 0);
+    padding: 0.8rem 5rem;
+    width: 400px;
+    border-radius: 5px;
+    font-weight: bold;
+    border: #FEC00F;
+    
+}

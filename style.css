@@ -86,5 +86,10 @@
     height: 70%;
 }
 
-/* PAGE NAME */
-    
+/* ACCOUNT SIGN IN */
+.accSection{
+    display: flex;
+    flex-direction: column;
+    background-color: #E5DDCB;
+
+}
