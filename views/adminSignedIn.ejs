@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partials/title.ejs') %>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!--FONTS-->
+    <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Merriweather' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+
+    <!--CSS FILE-->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="signedIn.css">
+
+    <!--BOOTSTRAP REFERENCE-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <!--CONFLICT NA NAME KAYA NANDITO HEHE-->
+    <style>
+       .container {
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
+</head>
+<body>
+    <!--- NAVIGATION BAR --->
+
+        <div class="navbar">
+                <p><a href = "/"><img src="img/logo.png" width="460" height="90" ></p></a>
+                    <ul>
+                        <strong>
+                            <a href="/"><li>HOME</li></a>
+                            <a href="/adminFprofile"><li>FITNESS PROFILE</li></a>
+                            <a href="/adminFlog"><li>FITNESS LOG</li></a>
+                            <a href="/signIn"><li  style="color: #af241a;">ACCOUNT</li></a>
+                        </strong>
+
+                    </ul>
+        </div>
+
+
+
+    <!--Main Page Content-->
+
+    <main class="bg">
+        <div class="btn-container">
+            <button id="accMgt" style="font-family: 'Roboto';">ACCOUNT MANAGEMENT</button><br>
+            <button id="logout" style="margin-top: 5%; font-family: 'Roboto';">SIGN OUT</button>
+        </div>
+    </main>
+
+
+
+
+
+
+
+    <!--BOOTSTRAP REFERENCE-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partials/title.ejs') %>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!--FONTS-->
+    <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Merriweather' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!--CSS FILE-->
+    <link rel="stylesheet" href="fprofile.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <!--BOOTSTRAP REFERENCE-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+
+
+<body style = "background-color: #E5DDCB;">
+    
+    <!--- NAVIGATION BAR --->
+
+        <div class="navbar">
+                <p><a href = "/"><img src="img/logo.png" width="460" height="90" ></p></a>
+                    <ul>
+                        <strong>
+                            <a href="/"><li>HOME</li></a>
+                            <a href="/fprofile"><li style="color: #af241a">FITNESS PROFILE</li></a>
+                            <a href="/flog"><li>FITNESS LOG</li></a>
+                            <a href="/signIn"><li>ACCOUNT</li></a>
+                        </strong>
+
+                    </ul>
+        </div>
+
+
+
+    <!--Main Page Content-->
+
+        <div id = "fprofile_box" class="wrapper">
+            <h1 id = "fprofile_title">MY SMART FITNESS PROFILE</h1>
+            <form action="">
+                <label for="classNumber" id="classnumLabel">Class number:</label>
+                <br>
+                <input type="text" id = "classNumber" name = "classNumber" class = "centerAligned" value=" - ENTER CLASS NUM -">
+                <br>
+                
+
+                <label for="fullName" class = "fprofile_labels">Full Name:</label>
+                <input type="text" id = "fullName" name = "fullName" class = "centerAligned" value=" - ENTER NAME -">
+
+
+                <label for="notes" id="notesLabel">NOTES</label>
+                <br>
+                
+                <div id="notes">
+                    <p id="notesBody">
+                    1. All White Fields are to be filled out.
+                    <br>
+                    2. All Fields in Yellow are Drop Down 
+                    Buttons. Choose your answer from the menu.
+                    <br>
+                    3. There are indicators beside the fields 
+                    that indicate if your inputs are either correct or incorrect.
+                    These are automatically computed.
+                    <br>
+                    4. The goal is to get correct answers to 
+                    those fields with indicators. Once the 
+                    indicators show that you are correct, 
+                    it means you will get full points for 
+                    part 1 of the activity.
+                    <br>
+                    5. If your "Goal" is to "Maintain Weight",
+                    please choose 0 in the "How much in Kg?" field.
+                    <br>
+                    6. Please make sure that you answer all the fields.
+
+                </p>
+                </div>
+                <br>
+
+                <label for="yearANDsection" class = "fprofile_labels">Yr/Section:</label>
+                <input type="text" id = "yearANDsection" name = "yearANDsection" class = "centerAligned" value=" - ENTER YR/SEC -">
+                <br>
+
+                <label for="PEsched" class = "fprofile_labels">PE Schedule:</label>
+                <input type="text" id = "PEsched" name = "PEsched" class = "centerAligned" value=" - ENTER SCHED -" >
+                <br>
+
+                <br>
+                <br>
+                <br>
+                <div id = "sexToBMR">
+                <label for="sex" class = "fprofile_labels">Sex:   </label>
+                <select name="sex" id="sex" class="combobox">
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select>
+                <label for="BMI" class = "fprofile_labels" id = "bmilabel">BMI: </label>
+                <input type="text" id = "BMI" name = "BMI">
+                <span id="bmiCheck" class="check">Correct ✅ </span>    
+    
+                <br>
+                <label for="Age" class = "fprofile_labels">Age: </label>
+                <input type="text" id = "Age" name = "Age">
+
+                <label for="BMR" class = "fprofile_labels" id="bmrlabel">BMR: </label>
+                <input type="text" id = "BMR" name = "BMR">
+                <span id="bmrCheck" class="check">Correct ✅ </span>  
+                <br>
+                </div>
+
+                
+                <label for="Height" class = "fprofile_labels" id = "heightlabel">Height (cm): </label>
+                <input type="text" id = "Height" class = "heightweight" name = "Height">
+                    
+                <label for="actLevel" class = "fprofile_labels" id = actLevelLabel>Activity level:</label>
+                <select name="actLevel" id="actLevel" class="combobox">
+                    <option value="no">Little to no exercise</option>
+                    <option value="light">Lightly exercise (1-3 days a week)</option>
+                    <option value="medium">Medium exercise (3-5 days a week)</option>
+                    <option value="very_active">Hard exercise (6-7 days a week)</option>
+                    <option value="extra_active">Intense exercise/sports</option>
+                </select>
+                <br>
+                
+                <label for="Weight" class = "fprofile_labels" id = "weightlabel">Weight (kg): </label>
+                <input type="text" id = "weight" class = "heightweight" name = "weight">
+                <br>
+                
+                
+            
+                <span class = "fprofile_labels">Translation: </span>
+                <span id="bmiCheck" class="check">Correct ✅ </span>  
+
+                <br>
+                <br>
+                <br>
+                <br>
+                
+                <label for="goal" class = "fprofile_labels" id="goal_label">Goal: </label>
+                <select name="goal" id="goal" class="combobox">
+                    <option value="maintain">Maintain weight</option>
+                    <option value="lose">Lose weight</option>
+                    <option value="gain">Gain weight</option>
+                  
+                </select>
+
+                <label for="howMuch" class = "fprofile_labels" id = "kglabel">How much in kg?: </label>
+                <select name="howMuch" id="howMuch" class="combobox">
+                    <option value="value_0">0</option>
+                    <option value="value_1">1</option>
+                    <option value="value_2">2</option>
+                    <option value="value_3">3</option>
+                    <option value="value_4">4</option>
+                    <option value="value_5">5</option>
+                    <option value="value_6">6</option>
+                    <option value="value_7">7</option>
+                    <option value="value_8">8</option>
+                    <option value="value_9">9</option>
+                    <option value="value_10">10</option>
+                    <option value="value_11">11</option>
+                    <option value="value_12">12</option>
+                    <option value="value_13">13</option>
+                    <option value="value_14">14</option>
+                    <option value="value_15">15</option>
+                    <option value="value_16">16</option>
+                    <option value="value_17">17</option>
+                    <option value="value_18">18</option>
+                    <option value="value_19">19</option>
+                    <option value="value_20">20</option>
+                </select>
+
+                <br>
+
+                <label for="timeFrame" class = "fprofile_labels">Time frame (days): </label>
+                <select name="timeFrame" id="timeFrame" class="combobox">
+                    <option value="time_30">30</option>
+                    <option value="time_60">60</option>
+                    <option value="time_90">90</option>
+                  
+                </select>
+                <br>
+                <label for="goalKcal" class = "fprofile_labels">Goal kCal intake: </label>
+                <input type="text" id = "goalKcal" name = "goalKcal">
+                <span id="goalCheck" class="check">Correct ✅ </span>  
+                <br>
+
+                <p class="fprofile_labels" id="goal_result">This is a good goal! 🙂</p>
+
+               
+                    <button type="submit" id ="saveButton" class="button"> </button>
+
+          
+                
+                </form>
+
+
+                
+        </div>
+    
+      
+
+
+
+    <!--BOOTSTRAP REFERENCE-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>

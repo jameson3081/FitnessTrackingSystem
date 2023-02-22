@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partials/title.ejs') %>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!--FONTS-->
+    <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Merriweather' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+
+    <!--CSS FILE-->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="report.css">
+    <!--BOOTSTRAP REFERENCE-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+    <!--- NAVIGATION BAR --->
+
+        <div class="navbar">
+                <p><a href = "/"><img src="img/logo.png" width="460" height="90" ></p></a>
+                    <ul>
+                        <strong>
+                            <a href="/"><li>HOME</li></a>
+                            <a href="/fprofile"><li>FITNESS PROFILE</li></a>
+                            <a href="/flog"><li>FITNESS LOG</li></a>
+                            <a href="/signIn"><li>ACCOUNT</li></a>
+                        </strong>
+
+                    </ul>
+        </div>
+
+    <!--Main Page Content-->
+<div class="bg">
+    <main>
+        <div class="top">
+
+            <div class="choices">
+                <label for="section">Select Section:</label>
+                <select name="section" id="section">
+                    <option value=""></option>
+                    <option value="">3ISA</option>
+                    <option value="">3ISB</option>
+                </select>
+            </div>
+            <h1 class="generator-title">Report Generator</h1>
+
+            <button class="download-btn">DOWNLOAD PDF</button>
+        </div>
+
+        <section class="grid">
+            <h3 class="grid-head"">BLOCK</h3>
+            <h3 class="grid-head">Class Number</h3>
+            <h3 class="grid-head">Student Name</h3>
+            <h3 class="grid-head">Day 1 Grade</h3>
+            <h3 class="grid-head">Day 2 Grade</h3>
+            <h3 class="grid-head">Day 3 Grade</h3>
+            <h3 class="grid-head">Total Grade</h3>
+        
+            <h3 class="sample">User 1</h3>
+            <h3 class="sample">1</h3>
+            <h3 class="sample">John Wick</h3>
+            <h3 class="sample">95/100</h3>
+            <h3 class="sample">97/100</h3>
+            <h3 class="sample">100/100</h3>
+            <h3 class="sample">292/300</h3>
+ 
+        </section>
+    </main>
+
+
+
+</div>
+
+    <!--BOOTSTRAP REFERENCE-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>

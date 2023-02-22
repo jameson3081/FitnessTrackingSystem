@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partials/title.ejs') %>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!--FONTS-->
+    <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Merriweather' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+
+    <!--CSS FILE-->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="adminflog.css">
+
+    <!--BOOTSTRAP REFERENCE-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+    <!--- NAVIGATION BAR --->
+
+        <div class="navbar">
+                <p><a href = "/"><img src="img/logo.png" width="460" height="90" ></p></a>
+                    <ul>
+                        <strong>
+                            <a href="/"><li>HOME</li></a>
+                            <a href="/fprofile"><li>FITNESS PROFILE</li></a>
+                            <a href="/flog"><li style="color: #af241a;">FITNESS LOG</li></a>
+                            <a href="/signIn"><li>ACCOUNT</li></a>
+                        </strong>
+
+                    </ul>
+        </div>
+
+
+
+    <!--Main Page Content-->
+    <div class="background">
+        <main>
+            <h1 class="page-title">FITNESS LOG RECORDS</h1>
+            <select name="section" id="section">
+                <option value="">SELECT SECTION</option>
+                <option value=3ISA>3ISA</option>
+                <option value=3ISB>3ISB</option>
+            </select>
+            
+            <select name="student" id="student">
+                <option value="">SELECT STUDENT</option>
+                <option value=A>A</option>
+                <option value=B>B</option>
+                <option value=C>C</option>
+                <option value=D>D</option>
+            </select>
+
+            <select name="day" id="day">
+                <option value="">SELECT DAY</option>
+                <option value=1>1</option>
+                <option value=2>2</option>
+                <option value=3>3</option>
+                <option value=4>4</option>
+            </select>
+
+            <button class="generate">GENERATE REPORT</button>
+            <section class="section-log">
+                <h2>SLEEP LOG</h2>
+                    <ul>
+                        <div class="question-input">
+                            <li class="question">What time did you sleep yesterday / this morning?</li>
+                            <input type="time" id="sleep-time" name="sleep-time"readonly>
+                        </div>
+
+                        <div class="question-input">
+                            <li class="question">What time did you wake up this morning?</li>
+                            <input type="time" id="wake-time" name="wake-time"readonly>
+                        </div>
+
+                        <div class="question-input">
+                            <li class="question">How many hours did you sleep?</li>
+                            <input type="number" name="hours-sleep" id="hours-sleep" readonly>
+                        </div>
+
+                        <div class="question-input">
+                            <li class="question">How many times did you wake up in between your night's sleep?</li>
+                            <input type="number" name="hours-sleep" id="hours-sleep"readonly>
+                        </div>
+
+                        <div class="question-input">
+                            <li class="question">What is your mood today?</li>
+                            <select name="mood" id="mood">
+                                <option value=""></option>
+                                <option value="good">Good</option>
+                                <option value="bad">Bad</option>
+                            </select>
+                        </div>
+                    </ul>
+                    <div class="feeling">
+                        <h3>How Am I Feeling Today?</h3>
+                        <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+                    </div>
+            </section>
+
+            <section class="activity-log">
+                <h2>ACTIVITY LOG</h2>
+                <div class="types">
+                
+                <div class="one">
+                    <div class="phys-act">
+                        <h3>Physical Activity</h3>
+                        <input type="text" name="physical-act" id="physical-act" ">
+                    </div>
+                    <div class="type-act">
+                        <h3>Type of Physical Activity</h3>
+                        <select name="type-phys1" id="type-phys1" ">
+                            <option value=""></option>
+                            <option value="cardio">Cardio</option>
+                        </select>
+                    </div>
+                    <div class="intensity">
+                        <h3>Intensity</h3>
+                        <select name="intensity1" id="intensity1" ">
+                            <option value=""></option>
+                            <option value="moderate">Moderate</option>
+                        </select>
+                    </div>
+                    <div class="duration">
+                        <h3>Duration</h3>
+                        <input type="number" name="duration1" id="duration1" >
+                    </div>
+                    <div class="calorie-burned">
+                        <h3>Calorie Burned</h3>
+                        <input type="number" name="calorie-burned1" id="calorie-burned1" >
+                    </div>
+                    <div class="activity-snippet">
+                        <h3>Snippet</h3>
+                        <input type="file" name="activity-snippet1" id="activity-snippet1">
+                    </div>
+                </div>
+
+                <div class="two">
+                    <div class="phys-act">
+                        <input type="text" name="physical-act2" id="physical-act2" ">
+                    </div>
+                    <div class="type-act">
+                        <select name="type-phys" id="type-phys2" it="type-phys2" ">
+                            <option value=""></option>
+                            <option value="cardio">Cardio</option>
+                        </select>
+                    </div>
+                    <div class="intensity">
+                        <select name="intensity2" id="intensity2" ">
+                            <option value=""></option>
+                            <option value="moderate">Moderate</option>
+                        </select>
+                    </div>
+                    <div class="duration">
+                        <input type="number" name="duration2" id="duration2" ">
+                    </div>
+                    <div class="calorie-burned">
+                        <input type="number" name="calorie-burned2" id="calorie-burned2" ">
+                    </div>
+                    <div class="activity-snippet">
+                        <input type="file" name="activity-snippet2" id="activity-snippet2">
+                    </div>
+                </div>
+
+                <!--EXTRA ROWS-->
+                <div id="three">
+                    <div class="phys-act">
+                        <input type="text" name="physical-act3" id="physical-act3" ">
+                    </div>
+                    <div class="type-act">
+                        <select name="type-phys3" id="type-phys3" "></select>
+                    </div>
+                    <div class="intensity">
+                        <select name="intensity3" id="intensity3" "></select>
+                    </div>
+                    <div class="duration">
+                        <input type="number" name="duration3" id="duration3" ">
+                    </div>
+                    <div class="calorie-burned">
+                        <input type="number" name="calorie-burned3" id="calorie-burned3" ">
+                    </div>
+                    <div class="activity-snippet">
+                        <input type="file" name="activity-snippet3" id="activity-snippet3">
+                    </div>
+                </div>
+
+                <div id="four">
+                    <div class="phys-act">
+                        <input type="text" name="physical-ac4t" id="physical-act4" ">
+                    </div>
+                    <div class="type-act">
+                        <select name="type-phys4" id="type-phys4" "></select>
+                    </div>
+                    <div class="intensity">
+                        <select name="intensity4" id="intensity4" "></select>
+                    </div>
+                    <div class="duration">
+                        <input type="number" name="duration4" id="duration4" ">
+                    </div>
+                    <div class="calorie-burned">
+                        <input type="number" name="calorie-burned4" id="calorie-burned4" ">
+                    </div>
+                    <div class="activity-snippet">
+                        <input type="file" name="activity-snippet4" id="activity-snippet4">
+                    </div>
+                </div>
+
+                <div id="five">
+                    <div class="phys-act">
+                        <input type="text" name="physical-act5" id="physical-act5" ">
+                    </div>
+                    <div class="type-act">
+                        <select name="type-phys5" id="type-phys5" "></select>
+                    </div>
+                    <div class="intensity">
+                        <select name="intensity5" id="intensity5" "></select>
+                    </div>
+                    <div class="duration">
+                        <input type="number" name="duration5" id="duration5" ">
+                    </div>
+                    <div class="calorie-burned">
+                        <input type="number" name="calorie-burned5" id="calorie-burned5" ">
+                    </div>
+                    <div class="activity-snippet">
+                        <input type="file" name="activity-snippet5" id="activity-snippet5">
+                    </div>
+                </div>
+
+                <div id="six">
+                    <div class="phys-act">
+                        <input type="text" name="physical-act6" id="physical-act6" ">
+                    </div>
+                    <div class="type-act">
+                        <select name="type-phys6" id="type-phys6" "></select>
+                    </div>
+                    <div class="intensity">
+                        <select name="intensity6" id="intensity6" "></select>
+                    </div>
+                    <div class="duration">
+                        <input type="number" name="duration6" id="duration6" ">
+                    </div>
+                    <div class="calorie-burned">
+                        <input type="number" name="calorie-burned6" id="calorie-burned6" ">
+                    </div>
+                    <div class="activity-snippet">
+                        <input type="file" name="activity-snippet6" id="activity-snippet6">
+                    </div>
+                </div>
+
+                </div>
+                <p id="limitm"></p>
+
+            <div class="last">
+                <div class="steps">
+                    <h4>NUMBER OF STEPS FOR THE DAY</h4>
+                    <input type="number" name="steps" id="steps" readonly>
+                </div>
+
+                <div class="add-row">
+                    <button id="add-btn" onclick="add()">ADD ROW</button>
+                </div>
+
+                <div class="total-calories-burned">
+                    <h4>TOTAL CALORIES BURNED</h4>
+                    <input type="number" name="total-calories-burned"" id="total-calories-burned" readonly>
+                </div>
+            </div>
+            
+            </section>
+
+            <section class="food-log">
+                <h2>FOOD LOG</h2>
+                <div class="types-2">
+
+                <div class="food-row1">
+                    <div class="food-time">
+                        <h3>Time</h3>
+                        <input type="time" name="food-time1" id="food-time1">
+                    </div>
+                    <div class="meal">
+                        <h3>Meal</h3>
+                        <input type="text" name="meal1" id="meal1">
+                    </div>
+                    <div class="beverage">
+                        <h3>Beverage</h3>
+                        <input type="text" name="beverage1" id="beverage1">
+                    </div>
+                    <div class="total-calories-food">
+                        <h3>Total Calories</h3>
+                        <input type="number" name="total-calories-food1" id="total-calories-food1">
+                    </div>
+                    <div class="food-snippet">
+                        <h3>Snippet</h3>
+                        <input type="file" name="food-snippet1" id="food-snippet1">
+                    </div>
+                </div>
+
+
+                <div class="food-row2">
+                    <div class="food-time">
+                        <input type="time" name="food-time2" id="food-time2">
+                    </div>
+                    <div class="meal">
+                        <input type="text" name="meal2" id="meal2">
+                    </div>
+                    <div class="beverage">
+                        <input type="text" name="beverage2" id="beverage2">
+                    </div>
+                    <div class="total-calories-food">
+                        <input type="number" name="total-calories-food2" id="total-calories-food2">
+                    </div>
+                    <div class="food-snippet">
+                        <input type="file" name="food-snippet2" id="food-snippet2">
+                    </div>
+                    
+                </div>
+
+
+                <!--EXTRA ROWS-->
+                <div id="food-row3">
+                    <div class="food-time">
+                        <input type="time" name="food-time3" id="food-time3">
+                    </div>
+                    <div class="meal">
+                        <input type="text" name="meal3" id="meal3">
+                    </div>
+                    <div class="beverage">
+                        <input type="text" name="beverage3" id="beverage3">
+                    </div>
+                    <div class="total-calories-food">
+                        <input type="number" name="total-calories-food3" id="total-calories-food3">
+                    </div>
+                    <div class="food-snippet">
+                        <input type="file" name="food-snippet3" id="food-snippet3">
+                    </div>
+                </div>
+                    
+
+                <div id="food-row4">
+                    <div class="food-time">
+                        <input type="time" name="food-time4" id="food-time4">
+                    </div>
+                    <div class="meal">
+                        <input type="text" name="meal4" id="meal4">
+                    </div>
+                    <div class="beverage">
+                        <input type="text" name="beverage4" id="beverage4">
+                    </div>
+                    <div class="total-calories-food">
+                        <input type="number" name="total-calories-food4" id="total-calories-food4">
+                    </div>
+                    <div class="food-snippet">
+                        <input type="file" name="food-snippet4" id="food-snippet4">
+                    </div>
+                </div>
+
+                <div id="food-row5">
+                    <div class="food-time">
+                        <input type="time" name="food-time5" id="food-time5">
+                    </div>
+                    <div class="meal">
+                        <input type="text" name="meal5" id="meal5">
+                    </div>
+                    <div class="beverage">
+                        <input type="text" name="beverage5" id="beverage5">
+                    </div>
+                    <div class="total-calories-food">
+                        <input type="number" name="total-calories-food5" id="total-calories-food5">
+                    </div>
+                    <div class="food-snippet">
+                        <input type="file" name="food-snippet5" id="food-snippet5">
+                    </div>
+                </div>
+                    
+
+                <div id="food-row6">
+                    <div class="food-time">
+                        <input type="time" name="food-time6" id="food-time6">
+                    </div>
+                    <div class="meal">
+                        <input type="text" name="meal6" id="meal6">
+                    </div>
+                    <div class="beverage">
+                        <input type="text" name="beverage6" id="beverage6">
+                    </div>
+                    <div class="total-calories-food">
+                        <input type="number" name="total-calories-food6" id="total-calories-food6">
+                    </div>
+                    <div class="food-snippet">
+                        <input type="file" name="food-snippet6" id="food-snippet6">
+                    </div>
+                </div>
+                    
+                    
+                    
+        </div>
+
+             <p id="limitfood"></p>
+        <div class="bottom-food">
+                <div class="add-row-food">
+                    <button id="add-food-rows" onclick="addFoodRow()">ADD ROW</button>
+                </div>
+
+                <div class="overall-total-calories">
+                    <h4>OVERALL TOTAL CALORIES</h4>
+                    <input type="number" name="total-calories-burned"" id="total-calories-burned" readonly>
+                </div>
+                <br>
+                <div class="slider-container">
+                    <p>Am I eating more than, less than or just as I should?</p>
+                <input type="range" min="1" max="100" value="70" class="slider-food">
+               <div class="answers">
+                <p>Deficit</p>
+                <p>Surplus</p>
+                </div>     
+            </div>
+</div>
+            </section>
+
+            <div class="save-container">
+            <button class="save-record" onclick="getAllInputs()">SAVE RECORDS FOR TODAY</button>
+            <h5 class="grade-feedback">GRADE AND FEEDBACK</h5>
+            <p class="score">/100</p>
+            <textarea name="grade-and-feedback" id="" cols="5" rows="10"></textarea>
+        </div>
+        </main>
+    </div>
+
+
+
+<script src="flog.js"></script>
+    <!--BOOTSTRAP REFERENCE-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>
