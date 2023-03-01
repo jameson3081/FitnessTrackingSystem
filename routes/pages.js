@@ -13,6 +13,31 @@ router.get("/adminAcctMgt", (req,res) => {
     res.render('adminAcctMgt', {title:'Account Management'})
 })
 
+router.post("/adminAcctMgt", async(req,res) => {
+    const {email, password: plainTextPassword} = req.body
+
+    if(plainTextPassword.length < 5) {
+        return res.json({status: 'error', error:"Password too short"})
+    }
+
+    const password = await bcrypt.hash(plainTextPassword, 3)
+
+    try {
+        const response = await User.create({
+            email,
+            password
+        })
+        console.log("User created successfully", response)
+    } catch(error) {
+        if(error.code === 11000) {
+            return res.json({status: 'error', error: "Email already in use"})
+        }
+        throw error
+    }
+
+    res.json({status: 'ok'})
+})
+
 router.get("/adminFlog", (req,res) => {
     res.render('adminFlog', {title:'Manage Fitness Log'})
 })
@@ -46,6 +71,7 @@ router.get("/signIn", (req,res) => {
 })
 
 router.post('/signIn', async(req, res) => {
+    const JWT_SECRET = 'adjs0asfkjkoldmokjadjasopd'
     const {email, password} = req.body
     const user = await User.findOne({email}).lean()
 
@@ -56,7 +82,7 @@ router.post('/signIn', async(req, res) => {
     if(await bcrypt.compare(password, user.password)) {
 
         const token = jwt.sign({
-            id: user._id, 
+            id: user._id,
             email: user.email
         }, 
         JWT_SECRET
@@ -65,7 +91,7 @@ router.post('/signIn', async(req, res) => {
         return res.json({status: 'ok', data: token})
     }
 
-    res.json({status: 'error', error: "Invalid email/password"})
+    res.json({status: 'error', error: "Invalid email/passwords"})
 })
 
 router.use((req, res) =>{

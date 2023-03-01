@@ -43,7 +43,7 @@
                 <input class="input-password" type="password" name="password" id="password" placeholder="Password" required>
             </div>
                 <div class="btn-container">
-                    <button id="sign-btn">SIGN IN</button>
+                    <button type="submit" id="sign-btn">SIGN IN</button>
                 </div>
             </form>
         </main>
@@ -76,11 +76,22 @@
             }).then((res) => res.json())
             if(result.status === 'ok') {
                 console.log('Got the token: ', result.data)
-                alert('Success')
+                alert('Successfully logged in')
+                location.href="fprofile"
+                
+            
             }else {
                 alert(result.error)
             }
         }
+        /* function parseJwt (token) { //FOR DECODING JWT TOKEN AFTER LOGGING IN
+    var base64Url = token.split('.')[1];
+    var base64 = decodeURIComponent(atob(base64Url).split('').map(function(c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+
+    return JSON.parse(base64);
+} */
         </script>
 </body>
 </html>
