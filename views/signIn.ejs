@@ -80,7 +80,7 @@
                 location.href="signedIn"
                 signedIn = true;
                 console.log(signedIn)
-            
+                localStorage.setItem("TOKEN", result.data)
             }else {
                 alert(result.error)
             }
