@@ -6,6 +6,10 @@ const mongoose = require('mongoose')
 const morgan = require('morgan')
 const bodyParser = require('body-parser')
 
+//Account security
+const jwt = require('jsonwebtoken')
+const bcrypt = require('bcryptjs')
+
 //Set EJS as the View engine
 app.set('view engine', 'ejs');
 
@@ -46,3 +50,4 @@ app.listen(PORT, () =>{
 
 
 app.use('/', pagesRoute) //USE PAGES ROUTE
+

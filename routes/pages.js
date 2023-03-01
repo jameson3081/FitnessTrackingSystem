@@ -1,6 +1,9 @@
 const express = require('express')
 const router = express.Router()
-
+const User = require('../model/user')
+//Account security
+const jwt = require('jsonwebtoken')
+const bcrypt = require('bcryptjs')
 //ROUTES
 router.get("/", (req,res) => {
     res.render('index', {title:'Fitness Tracking System'})
@@ -40,6 +43,31 @@ router.get("/signedIn", (req,res) => {
 
 router.get("/signIn", (req,res) => {
     res.render('signIn', {title:'Sign In Your Account'})
+})
+
+router.post('/signIn', async(req, res) => {
+    const {email, password: plainTextPassword} = req.body
+
+    if(plainTextPassword.length < 5) {
+        return res.json({status: 'error', error:"Password too short"})
+    }
+
+    const password = await bcrypt.hash(plainTextPassword, 3)
+
+    try {
+        const response = await User.create({
+            email,
+            password
+        })
+        console.log("User created successfully", response)
+    } catch(error) {
+        if(error.code === 11000) {
+            return res.json({status: 'error', error: "Email already in use"})
+        }
+        throw error
+    }
+
+    res.json({status: 'ok'})
 })
 
 router.use((req, res) =>{
