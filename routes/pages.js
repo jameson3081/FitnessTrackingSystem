@@ -46,28 +46,26 @@ router.get("/signIn", (req,res) => {
 })
 
 router.post('/signIn', async(req, res) => {
-    const {email, password: plainTextPassword} = req.body
+    const {email, password} = req.body
+    const user = await User.findOne({email}).lean()
 
-    if(plainTextPassword.length < 5) {
-        return res.json({status: 'error', error:"Password too short"})
+    if(!user) {
+        return res.json({status: 'error', error: "Invalid email/password"})
     }
 
-    const password = await bcrypt.hash(plainTextPassword, 3)
+    if(await bcrypt.compare(password, user.password)) {
 
-    try {
-        const response = await User.create({
-            email,
-            password
-        })
-        console.log("User created successfully", response)
-    } catch(error) {
-        if(error.code === 11000) {
-            return res.json({status: 'error', error: "Email already in use"})
-        }
-        throw error
+        const token = jwt.sign({
+            id: user._id, 
+            email: user.email
+        }, 
+        JWT_SECRET
+    )
+
+        return res.json({status: 'ok', data: token})
     }
 
-    res.json({status: 'ok'})
+    res.json({status: 'error', error: "Invalid email/password"})
 })
 
 router.use((req, res) =>{
