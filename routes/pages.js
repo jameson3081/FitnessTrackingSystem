@@ -4,6 +4,9 @@ const User = require('../model/user')
 //Account security
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
+
+
+
 //ROUTES
 router.get("/", (req,res) => {
     res.render('index', {title:'Fitness Tracking System'})

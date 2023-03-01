@@ -55,10 +55,10 @@
     <!--BOOTSTRAP REFERENCE-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script>
-         const form = document.getElementById('login')
+        const form = document.getElementById('login')
         form.addEventListener('submit', login)
-
-
+        let signedIn = false;
+        console.log(signedIn)
         async function login(event) {
             event.preventDefault()
             const email = document.getElementById('email').value
@@ -77,8 +77,9 @@
             if(result.status === 'ok') {
                 console.log('Got the token: ', result.data)
                 alert('Successfully logged in')
-                location.href="fprofile"
-                
+                location.href="signedIn"
+                signedIn = true;
+                console.log(signedIn)
             
             }else {
                 alert(result.error)
@@ -91,6 +92,7 @@
     }).join(''));
 
     return JSON.parse(base64);
+
 } */
         </script>
 </body>

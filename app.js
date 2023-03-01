@@ -29,6 +29,7 @@ db.on('error', (err) => {
 
 db.once('open', () => {
     console.log('MongoDB Server Database Connection Established...')
+    console.log("localhost:3000/")
 })
 
 app.use(morgan('dev'))
