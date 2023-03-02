@@ -11,6 +11,7 @@ main {
 
 .btn-container {
     margin-top: 15rem;
+    text-align: center;
 }
 
 
@@ -21,6 +22,7 @@ main {
     width: 400px;
     border-radius: 5px;
     font-weight: bold;
+    margin-top: 2rem;
 }
 
 #accMgt{

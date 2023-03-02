@@ -39,8 +39,8 @@
     
         <main class="bg">
                 <div class="btn-container">
-                    <h1>Welcome, <span id="email-local-storage">EMAIL</span></h1>
-                    <button id="logout">SIGN OUT</button>
+                    <h1 id="full-sentence">Welcome, <span id="email-local-storage">EMAIL</span></h1>
+                    <button id="logout" onclick="logout()">SIGN OUT</button>
                 </div>
         </main>
 
@@ -52,7 +52,8 @@
     <script>
         let showEmail = document.getElementById("email-local-storage")
         let emailToken = parseJwt(localStorage.getItem("TOKEN")).email
-
+        let fullSentence = document.getElementById("full-sentence")
+        let logoutBtn = document.getElementById("logout")
         showEmail.textContent = emailToken;
         
         console.log("This is the token: ", localStorage.getItem("TOKEN"))
@@ -65,6 +66,20 @@
     return JSON.parse(base64);
 } 
 
+function logout() {
+
+
+if (localStorage.getItem("TOKEN")) {
+    console.log("removing token, loging out")
+    localStorage.removeItem("TOKEN")
+    window.location.href = "/"
+    alert("Logged out sucessful, redirecting to homepage")
+} else {
+    console.log("Not logged in")
+    fullSentence.textContent = "Not logged in"
+    showEmail.textContent = " "
+}
+}
 
 console.log("Hello " + parseJwt(localStorage.getItem("TOKEN")).email)
     </script>

@@ -75,7 +75,7 @@
                 })
             }).then((res) => res.json())
             if(result.status === 'ok') {
-                console.log('Got the token: ', result.data)
+                /* console.log('Got the token: ', result.data) */
                 alert('Successfully logged in')
                 location.href="signedIn"
                 signedIn = true;
