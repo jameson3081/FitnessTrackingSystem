@@ -50,3 +50,19 @@ input {
     font-weight: bold;
     border-radius: 5px;
 }
+
+#logout-div {
+    text-align: center;
+    margin-top: 15rem;
+    
+}
+
+#logout {
+    background-color: black;
+    color: white;
+    padding: 0.8rem 5rem;
+    width: 400px;
+    border-radius: 5px;
+    font-weight: bold;
+    margin-top: 2rem;
+}
