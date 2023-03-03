@@ -39,6 +39,7 @@
     <!--Main Page Content-->
     <div class="background">
         <main>
+            <form action="flog-form">
             <h1 class="page-title">FITNESS LOG</h1>
             <select name="day" id="day">
                 <option value="">SELECT DAY</option>
@@ -411,6 +412,7 @@
             <p class="score">/100</p>
             <textarea readonly name="grade-and-feedback" id="" cols="5" rows="10"></textarea>
         </div>
+        </form>
         </main>
     </div>
 
@@ -419,5 +421,24 @@
 <script src="flog.js"></script>
     <!--BOOTSTRAP REFERENCE-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script>
+        let allInp = document.querySelectorAll("input")
+        let allSel = document.querySelectorAll("select")
+
+    
+    if (!localStorage.getItem("TOKEN")) {
+        for (let i = 0; i < allInp.length; i++) {
+        allInp[i].setAttribute('readonly', true)                                                       
+        }
+
+    for (let i = 0; i < allSel.length; i++) {
+        allSel[i].setAttribute('disabled', true)
+        }
+    } else {
+
+    }
+   
+       
+    </script>
 </body>
 </html>
