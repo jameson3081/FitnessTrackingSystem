@@ -6,6 +6,10 @@ const mongoose = require('mongoose')
 const morgan = require('morgan')
 const bodyParser = require('body-parser')
 
+//Account security
+const jwt = require('jsonwebtoken')
+const bcrypt = require('bcryptjs')
+
 //Set EJS as the View engine
 app.set('view engine', 'ejs');
 
@@ -25,6 +29,7 @@ db.on('error', (err) => {
 
 db.once('open', () => {
     console.log('MongoDB Server Database Connection Established...')
+    console.log('localhost:3000')
 })
 
 app.use(morgan('dev'))
@@ -46,3 +51,4 @@ app.listen(PORT, () =>{
 
 
 app.use('/', pagesRoute) //USE PAGES ROUTE
+

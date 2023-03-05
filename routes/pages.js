@@ -1,5 +1,11 @@
 const express = require('express')
 const router = express.Router()
+const User = require('../model/user')
+//Account security
+const jwt = require('jsonwebtoken')
+const bcrypt = require('bcryptjs')
+
+
 
 //ROUTES
 router.get("/", (req,res) => {
@@ -8,6 +14,31 @@ router.get("/", (req,res) => {
 
 router.get("/adminAcctMgt", (req,res) => {
     res.render('adminAcctMgt', {title:'Account Management'})
+})
+
+router.post("/adminAcctMgt", async(req,res) => {
+    const {email, password: plainTextPassword} = req.body
+
+    if(plainTextPassword.length < 5) {
+        return res.json({status: 'error', error:"Password too short"})
+    }
+
+    const password = await bcrypt.hash(plainTextPassword, 3)
+
+    try {
+        const response = await User.create({
+            email,
+            password
+        })
+        console.log("User created successfully", response)
+    } catch(error) {
+        if(error.code === 11000) {
+            return res.json({status: 'error', error: "Email already in use"})
+        }
+        throw error
+    }
+
+    res.json({status: 'ok'})
 })
 
 router.get("/adminFlog", (req,res) => {
@@ -40,6 +71,30 @@ router.get("/signedIn", (req,res) => {
 
 router.get("/signIn", (req,res) => {
     res.render('signIn', {title:'Sign In Your Account'})
+})
+
+router.post('/signIn', async(req, res) => {
+    const JWT_SECRET = 'adjs0asfkjkoldmokjadjasopd'
+    const {email, password} = req.body
+    const user = await User.findOne({email}).lean()
+
+    if(!user) {
+        return res.json({status: 'error', error: "Invalid email/password"})
+    }
+
+    if(await bcrypt.compare(password, user.password)) {
+
+        const token = jwt.sign({
+            id: user._id,
+            email: user.email
+        }, 
+        JWT_SECRET
+    )
+
+        return res.json({status: 'ok', data: token})
+    }
+
+    res.json({status: 'error', error: "Invalid email/passwords"})
 })
 
 router.use((req, res) =>{

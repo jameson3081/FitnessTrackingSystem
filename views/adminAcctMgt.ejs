@@ -36,15 +36,16 @@
     <!--Main Page Content-->
     <div class="background">
         <main>
+            <form id="reg-form">
             <div class="save-acct">
-                <button id="btn">SAVE ACCOUNTS</button>
+                <button id="btn" type="submit">SAVE ACCOUNTS</button>
             </div>
             <section class="mgt-sec">
                 <div class="acc-list" >
                     <div class="one">
                         <div class="acc-type">
                             <h3>Type of Account</h3>
-                                <select id="select">
+                                <select class="select">
                                     <option value="type1">Student</option>
                                     <option value="type2">Admin</option>
                                 </select>                    
@@ -52,7 +53,7 @@
 
                         <div class="sec-name">
                             <h3>Section</h3>
-                                <select id="select">
+                                <select class="select">
                                     <option value="type0"></option>
                                     <option value="type1">3ISA</option>
                                     <option value="type2">3ISB</option>
@@ -61,17 +62,17 @@
 
                         <div class="username">
                             <h3>Username</h3>
-                            <input type="text" id="input">
+                            <input type="text" class="input">
                         </div>
 
                         <div class="email">
                             <h3>Email</h3>
-                            <input type="email" id="input">                  
+                            <input type="email" id="email" autocomplete="off">                  
                         </div>
 
                         <div class="password ">
                             <h3>Password</h3>
-                            <input type="password" id="input">                    
+                            <input type="password" id="password">                    
                         </div>
 
                         <div class="remove-acc"> 
@@ -84,7 +85,7 @@
                     <div class="two">
                         <div class="acc-type">
                            
-                                <select id="select">
+                                <select class="select">
                                     <option value="type1">Student</option>
                                     <option value="type2">Admin</option>
                                 </select>                    
@@ -92,7 +93,7 @@
 
                         <div class="sec-name">
                             
-                                <select id="select">
+                                <select class="select">
                                     <option value="type0"></option>
                                     <option value="type1">3ISA</option>
                                     <option value="type2">3ISB</option>
@@ -101,17 +102,17 @@
 
                         <div class="username">
                             
-                            <input type="text" id="input">
+                            <input type="text" class="input">
                         </div>
 
                         <div class="email">
                             
-                            <input type="email" id="input">                  
+                            <input type="email" class="input">                  
                         </div>
 
                         <div class="password ">
                             
-                            <input type="password" id="input">                    
+                            <input type="password" class="input">                    
                         </div>
 
                         <div class="remove-acc">
@@ -123,7 +124,7 @@
                     <div class="three">
                         <div class="acc-type">
                            
-                                <select id="select">
+                                <select class="select">
                                     <option value="type1">Student</option>
                                     <option value="type2">Admin</option>
                                 </select>                    
@@ -131,7 +132,7 @@
 
                         <div class="sec-name">
                             
-                                <select id="select">
+                                <select class="select">
                                     <option value="type0"></option>
                                     <option value="type1">3ISA</option>
                                     <option value="type2">3ISB</option>
@@ -140,17 +141,17 @@
 
                         <div class="username">
                             
-                            <input type="text" id="input">
+                            <input type="text" class="input">
                         </div>
 
                         <div class="email">
                             
-                            <input type="email" id="input">                  
+                            <input type="email" class="input">                  
                         </div>
 
                         <div class="password ">
                             
-                            <input type="password" id="input">                    
+                            <input type="password" class="input">                    
                         </div>
 
                         <div class="remove-acc">
@@ -164,16 +165,43 @@
                         <button id="add-acc-btn">ADD MORE ACCOUNT</button>
                     </div>
             </section>
-
+        </form>
            
            
         </main>
     </div>
 
 
-
+    
     <script src="acctMgt.js"></script>
     <!--BOOTSTRAP REFERENCE-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script>
+        const form = document.getElementById('reg-form')
+        form.addEventListener('submit', registerUser)
+        
+
+        async function registerUser(event) {
+            event.preventDefault()
+            const email = document.getElementById('email').value
+            const password = document.getElementById('password').value
+
+            const result = await fetch('/adminAcctMgt', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    email,
+                    password
+                })
+            }).then((res) => res.json())
+            if(result.status === 'ok') {
+                alert('Success')
+            }else {
+                alert(result.error)
+            }
+        }
+    </script>
 </body>
 </html>

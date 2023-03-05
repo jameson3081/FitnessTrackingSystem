@@ -37,22 +37,113 @@
 
     <!--Main Page Content-->
         <main class="bg">
-            <form action="">
+            <form id="login">
             <div class="inputs">
                 <input class="input-email" type="text" name="email" id="email" autocomplete="off" placeholder="Email Address" required>
-                <input class="input-password" type="text" name="password" id="password" placeholder="Password" required>
+                <input class="input-password" type="password" name="password" id="password" placeholder="Password" required>
             </div>
                 <div class="btn-container">
-                    <button id="sign-btn">SIGN IN</button>
+                    <button type="submit" id="sign-btn">SIGN IN</button>
                 </div>
+            
             </form>
+            <div id="logout-div">
+                <h1 id="full-sentence">Welcome, <span id="email-local-storage">EMAIL</span></h1>
+                <button id="logout" onclick="logout()">SIGN OUT</button>
+            </div>
         </main>
 
+        
 
 
 
 
     <!--BOOTSTRAP REFERENCE-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script>
+        //SHOW LOGOUT WHEN TOKEN AVAILABLE IN LOCALSTORAGE, ELSE SHOW LOGIN ^_^
+        let loginEl = document.getElementById("login")
+        let logoutEl = document.getElementById("logout-div")
+
+        if (localStorage.getItem("TOKEN")) {
+            loginEl.style.display = "none"
+          
+        } else {
+            logoutEl.style.display = "none"
+   
+        }
+
+        const form = document.getElementById('login')
+        form.addEventListener('submit', login)
+        let signedIn = false;
+        console.log(signedIn)
+        async function login(event) {
+            event.preventDefault()
+            const email = document.getElementById('email').value
+            const password = document.getElementById('password').value
+
+            const result = await fetch('/signIn', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    email,
+                    password
+                })
+            }).then((res) => res.json())
+            if(result.status === 'ok') {
+                /* console.log('Got the token: ', result.data) */
+                alert('Successfully logged in')
+                location.href="/signIn"
+                signedIn = true;
+                console.log(signedIn)
+                localStorage.setItem("TOKEN", result.data)
+            }else {
+                alert(result.error)
+            }
+        }
+        /* ~~~ CODE FOR DECODDING JWT TOKEN ~~~
+        function parseJwt (token) { //FOR DECODING JWT TOKEN AFTER LOGGING IN
+    var base64Url = token.split('.')[1];
+    var base64 = decodeURIComponent(atob(base64Url).split('').map(function(c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+
+    return JSON.parse(base64);
+
+} */
+//JS FOR WHEN SIGNED IN (SHOW LOGOUT BUTTON)
+let showEmail = document.getElementById("email-local-storage")
+        let emailToken = parseJwt(localStorage.getItem("TOKEN")).email
+        let fullSentence = document.getElementById("full-sentence")
+        let logoutBtn = document.getElementById("logout")
+        showEmail.textContent = emailToken;
+        
+        console.log("This is the token: ", localStorage.getItem("TOKEN"))
+        function parseJwt (token) { //FOR DECODING JWT TOKEN AFTER LOGGING IN
+        var base64Url = token.split('.')[1];
+        var base64 = decodeURIComponent(atob(base64Url).split('').map(function(c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+
+    return JSON.parse(base64);
+} 
+
+function logout() {
+if (localStorage.getItem("TOKEN")) {
+    console.log("removing token, logging out")
+    localStorage.removeItem("TOKEN")
+    window.location.href = "/signIn"
+    alert("Logged out sucessfully, redirecting to homepage")
+} else {
+    console.log("Not logged in")
+    fullSentence.textContent = "Not logged in"
+    showEmail.textContent = " "
+}
+}
+
+console.log("Hello " + parseJwt(localStorage.getItem("TOKEN")).email)
+        </script>
 </body>
 </html>
