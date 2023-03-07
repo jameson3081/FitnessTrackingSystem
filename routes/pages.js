@@ -11,11 +11,16 @@ const bcrypt = require('bcryptjs')
 router.get("/", (req,res) => {
     res.render('index', {title:'Fitness Tracking System'})
 })
-
-router.get("/adminAcctMgt", (req,res) => {
-    res.render('adminAcctMgt', {title:'Account Management'})
-})
-
+router.get('/adminAcctMgt', async (req, res) => {
+    try {
+      const users = await User.find()
+      res.render('adminAcctMgt', {users})
+    } catch (err) {
+      console.error(err)
+      res.status(500).send('Internal server error')
+    }
+  })
+  
 router.post("/adminAcctMgt", async(req,res) => {
     const {email, password: plainTextPassword} = req.body
 
@@ -102,4 +107,5 @@ router.use((req, res) =>{
 })
 
 
+  
 module.exports = router
