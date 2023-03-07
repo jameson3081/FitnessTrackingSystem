@@ -1,11 +1,18 @@
 const express = require('express')
 const router = express.Router()
 const User = require('../model/user')
+const Profile = require('../model/fprofile_model')
 //Account security
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
-
-
+const JWT_SECRET = 'adjs0asfkjkoldmokjadjasopd'
+/* Profile.findOne({classNumber: 21})
+.then((data) => {
+    console.log(data)
+})
+.catch((error) => {
+    console.log(error)
+}) */
 
 //ROUTES
 router.get("/", (req,res) => {
@@ -23,7 +30,10 @@ router.get('/adminAcctMgt', async (req, res) => {
   
 router.post("/adminAcctMgt", async(req,res) => {
     const {email, password: plainTextPassword} = req.body
-
+   
+   /*  const email = req.body.email;
+       const plainTextPassword = req.body.password; (Long version of upper part)*/ 
+    
     if(plainTextPassword.length < 5) {
         return res.json({status: 'error', error:"Password too short"})
     }
@@ -58,12 +68,20 @@ router.get("/adminSignedIn", (req,res) => {
     res.render('adminSignedIn', {title:'Account'})
 })
 
+  
 router.get("/flog", (req,res) => {
     res.render('flog', {title:'Fitness Log'})
 })
 
+
 router.get("/fprofile", (req,res) => {
     res.render('fprofile', {title:'Fitness Profile'})
+    console.log(newToken)
+})
+
+router.post("/fprofile", (req, res) => {
+    
+
 })
 
 router.get("/report", (req,res) => {
@@ -79,7 +97,7 @@ router.get("/signIn", (req,res) => {
 })
 
 router.post('/signIn', async(req, res) => {
-    const JWT_SECRET = 'adjs0asfkjkoldmokjadjasopd'
+    
     const {email, password} = req.body
     const user = await User.findOne({email}).lean()
 
@@ -96,7 +114,8 @@ router.post('/signIn', async(req, res) => {
         JWT_SECRET
     )
 
-        return res.json({status: 'ok', data: token})
+        return res.json({status: 'ok', data: token,})
+    
     }
 
     res.json({status: 'error', error: "Invalid email/passwords"})
