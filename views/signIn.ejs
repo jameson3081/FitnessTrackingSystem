@@ -76,7 +76,7 @@
         const form = document.getElementById('login')
         form.addEventListener('submit', login)
         let signedIn = false;
-        console.log(signedIn)
+        console.log("Is the user logged in: " + signedIn)
         async function login(event) {
             event.preventDefault()
             const email = document.getElementById('email').value
@@ -97,7 +97,7 @@
                 alert('Successfully logged in')
                 location.href="/signIn"
                 signedIn = true;
-                console.log(signedIn)
+                console.log("Is the user logged in: " + signedIn)
                 localStorage.setItem("TOKEN", result.data)
             }else {
                 alert(result.error)
@@ -143,7 +143,6 @@ if (localStorage.getItem("TOKEN")) {
 }
 }
 
-console.log("Hello " + parseJwt(localStorage.getItem("TOKEN")).email)
         </script>
 </body>
 </html>

@@ -42,15 +42,15 @@
 
         <div id = "fprofile_box" class="wrapper">
             <h1 id = "fprofile_title">MY SMART FITNESS PROFILE</h1>
-            <form action="">
+            <form id="fprofile-form">
                 <label for="classNumber" id="classnumLabel">Class number:</label>
                 <br>
-                <input type="text" id = "classNumber" name = "classNumber" class = "centerAligned" value=" - ENTER CLASS NUM -">
+                <input type="number" id = "classNumber" name = "classNumber" class = "centerAligned" placeholder=" - ENTER CLASS NUM -"">
                 <br>
                 
 
                 <label for="fullName" class = "fprofile_labels">Full Name:</label>
-                <input type="text" id = "fullName" name = "fullName" class = "centerAligned" value=" - ENTER NAME -">
+                <input type="text" id = "fullName" name = "fullName" class = "centerAligned" placeholder=" - ENTER NAME -">
 
 
                 <label for="notes" id="notesLabel">NOTES</label>
@@ -83,11 +83,11 @@
                 <br>
 
                 <label for="yearANDsection" class = "fprofile_labels">Yr/Section:</label>
-                <input type="text" id = "yearANDsection" name = "yearANDsection" class = "centerAligned" value=" - ENTER YR/SEC -">
+                <input type="text" id = "yearANDsection" name = "yearANDsection" class = "centerAligned" placeholder=" - ENTER YR/SEC -">
                 <br>
 
                 <label for="PEsched" class = "fprofile_labels">PE Schedule:</label>
-                <input type="text" id = "PEsched" name = "PEsched" class = "centerAligned" value=" - ENTER SCHED -" >
+                <input type="text" id = "PEsched" name = "PEsched" class = "centerAligned" placeholder=" - ENTER SCHED -" >
                 <br>
 
                 <br>
@@ -212,7 +212,7 @@
         let allInp = document.querySelectorAll("input")
         let allSel = document.querySelectorAll("select")
 
-    
+    //Make all inputs readonly, when not logged in
     if (!localStorage.getItem("TOKEN")) {
         for (let i = 0; i < allInp.length; i++) {
         allInp[i].setAttribute('readonly', true)                                                       
@@ -224,6 +224,8 @@
     } else {
 
     }
+
+
     </script>
 </body>
 </html>
