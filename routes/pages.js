@@ -6,25 +6,36 @@ const Profile = require('../model/fprofile_model')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 const JWT_SECRET = 'adjs0asfkjkoldmokjadjasopd'
-/* Profile.findOne({classNumber: 21})
+
+/* User.find({})
 .then((data) => {
-    console.log(data)
+    for (let i = 0; i < data.length; i++)
+    console.log(data[0].email)
 })
 .catch((error) => {
     console.log(error)
-}) */
+})
+ */
 
 //ROUTES
 router.get("/", (req,res) => {
     res.render('index', {title:'Fitness Tracking System'})
 })
 
-router.get("/adminAcctMgt", (req,res) => {
-    res.render('adminAcctMgt', {title:'Account Management'})
+router.get("/adminAcctMgt", async(req,res) => {
+    try {
+        const accounts = await User.find({}, 'email type');
+        // Render template with accounts
+        res.render('adminAcctMgt', {title:'Account Management', accounts: accounts});
+      } catch (err) {
+        console.log(err);
+        res.status(500).send('Internal Server Error');
+      }
+
 })
 
 router.post("/adminAcctMgt", async(req,res) => {
-    const {email, password: plainTextPassword} = req.body
+    const {email, password: plainTextPassword, type} = req.body
    
    /*  const email = req.body.email;
        const plainTextPassword = req.body.password; (Long version of upper part)*/ 
@@ -38,7 +49,8 @@ router.post("/adminAcctMgt", async(req,res) => {
     try {
         const response = await User.create({
             email,
-            password
+            password,
+            type
         })
         console.log("User created successfully", response)
     } catch(error) {
@@ -48,7 +60,24 @@ router.post("/adminAcctMgt", async(req,res) => {
         throw error
     }
 
-    res.json({status: 'ok'})
+    /* res.json({status: 'ok', userData: await User.find({})
+    .then((data) => {
+        for (let i = 0; i < data.length; i++)
+        console.log(data[0].email)
+    })
+    .catch((error) => {
+        console.log(error)
+    })})
+ */
+    try {
+        const userData = await User.find({});
+        
+        res.json({status: 'ok', userData: userData});
+      } catch (error) {
+        console.log(error);
+        res.json({status: 'error', error: error});
+      }
+
 })
 
 router.get("/adminFlog", (req,res) => {
@@ -66,17 +95,17 @@ router.get("/adminSignedIn", (req,res) => {
   
 router.get("/flog", (req,res) => {
     res.render('flog', {title:'Fitness Log'})
+
 })
 
 
 router.get("/fprofile", (req,res) => {
-    res.render('fprofile', {title:'Fitness Profile'})
-    console.log(newToken)
+    res.render('fprofile', {title: 'Fitness Profile' });
 })
+
 
 router.post("/fprofile", (req, res) => {
     
-
 })
 
 router.get("/report", (req,res) => {
@@ -109,8 +138,8 @@ router.post('/signIn', async(req, res) => {
         JWT_SECRET
     )
 
-        return res.json({status: 'ok', data: token,})
-    
+        return res.json({status: 'ok', data: token})
+
     }
 
     res.json({status: 'error', error: "Invalid email/passwords"})

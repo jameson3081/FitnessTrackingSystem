@@ -97,3 +97,35 @@
     border-radius: 10px;
     font-weight: 1000;
 }
+
+.system-users {
+    width: 80%;
+    margin: auto;
+    padding: 5rem 0;
+}
+
+.users-head {
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 3rem;
+}
+
+table {
+    width: 50%;
+    margin: auto;
+    text-align: center;
+}
+
+th  {
+    width: 30%;
+    font-size: 2rem;
+}
+
+
+td {
+    font-size: 1.5rem;
+}
+
+.type-data {
+    text-align: center;
+}

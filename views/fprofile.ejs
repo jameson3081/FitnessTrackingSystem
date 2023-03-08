@@ -225,6 +225,22 @@
 
     }
 
+    //GETS THE TOKEN FROM THE LOCAL STORAGE AND SENDS IT TO SERVER SIDE
+    const token = localStorage.getItem('TOKEN');
+
+    const headers = {
+    'Authorization': `Bearer ${token}`
+    };
+
+    fetch('/api/some-resource', {
+    headers: headers
+    })
+    .then(response => {
+    // Handle response here
+    })
+    .catch(error => {
+    console.error(error);
+    });
 
     </script>
 </body>

@@ -1,11 +1,11 @@
 const mongoose = require('mongoose')
 
-const ProfileSchema = new mongoose.Schema({
+const fprofileData = new mongoose.Schema({
     classNumber: {type: Number, required: true}
 },
 {collection: 'user-profiles'}
 )
 
-const model = mongoose.model('ProfileSchema', ProfileSchema)
+const model = mongoose.model('fprofileData', fprofileData)
 
 module.exports = model
