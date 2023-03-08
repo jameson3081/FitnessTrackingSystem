@@ -32,14 +32,6 @@
 
 /* HOME PAGE */
 
-.homeSection{
-    display: flex;
-    flex-direction: column;
-    background-color: #E5DDCB;
-    height: 100%;
-    padding: 20px;
-}
-
 .homepage-title{
     text-align: center;
     padding: 5%;
