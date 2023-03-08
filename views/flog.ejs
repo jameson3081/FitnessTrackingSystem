@@ -82,8 +82,15 @@
                         </div>
                     </ul>
                     <div class="feeling">
-                        <h3>How Am I Feeling Today?</h3>
+                        <h3>How Am I Feeling Today?</h3><br>
                         <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+
+                        <div class="feeling-label-container" style="width: 100%; display: flex; justify-content: space-between;">
+                            <h4 style="color: white; text-align: left; padding-left: 27%;">Terrible</h4>
+                            <h4 style="color: white; text-align: right; padding-right: 28%; ">Great</h4>
+                        </div>
+
+                        
                     </div>
             </section>
 
@@ -392,12 +399,20 @@
 
                 <div class="overall-total-calories">
                     <h4>OVERALL TOTAL CALORIES</h4>
-                    <input type="number" name="total-calories-burned"" id="total-calories-burned"">
+                    <input type="number" name="total-calories-burned" id="total-calories-burned">
                 </div>
                 <br>
                 <div class="slider-container">
-                    <p>Am I eating more than, less than or just as I should?</p>
+                    <h1 style="color: white; text-align: center; margin: 5rem 0; font-size: 1.5rem;">Am I eating more than, less than or just as I should?</h1>
                 <input type="range" min="1" max="100" value="70" class="slider-food">
+                
+                <div class="slider-food-label-container" style="width: 100%; display: flex; justify-content: space-between;">
+                    <h4 style="color: white; text-align: left; padding-left: 23%;">Deficit</h4>
+                    <h4 style="color: white; text-align: right; padding-right: 22%; ">Surplus</h4>
+                </div>
+
+
+
                <div class="answers">
                 <p>Deficit</p>
                 <p>Surplus</p>
@@ -437,6 +452,25 @@
     } else {
 
     }
+
+    //FOR SLIDER TRACKING PROGRESS RANGE STYLE
+    const rangeInputs = document.querySelectorAll('input[type="range"]')
+
+    function handleInputChange(e) {
+    let target = e.target
+    if (e.target.type !== 'range') {
+        target = document.getElementById('range')
+    } 
+    const min = target.min
+    const max = target.max
+    const val = target.value
+
+    target.style.backgroundSize = (val - min) * 100 / (max - min) + '% 100%'
+    }
+
+    rangeInputs.forEach(input => {
+    input.addEventListener('input', handleInputChange)
+    })
 
     </script>
 </body>
