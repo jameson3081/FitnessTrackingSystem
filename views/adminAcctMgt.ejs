@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <%- include('./partials/title.ejs') %>
+   <title>Account Management</title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -45,9 +45,9 @@
                     <div class="one">
                         <div class="acc-type">
                             <h3>Type of Account</h3>
-                                <select id="select-type" class="select">
-                                    <option value="student">Student</option>
-                                    <option value="admin">Admin</option>
+                                <select class="select">
+                                    <option value="type1">Student</option>
+                                    <option value="type2">Admin</option>
                                 </select>                    
                         </div>
 
@@ -164,16 +164,11 @@
                     <div class="add-acc">
                         <button id="add-acc-btn">ADD MORE ACCOUNT</button>
                     </div>
-                    
             </section>
-            
         </form>
-          
-        </main>  
-        <div class="system-users">
-            <!--WILL SHOW ACTIVE EMAILS FROM THE DB-->
-<%- include('./partials/extra.ejs') %>
-</div>
+           
+           
+        </main>
     </div>
 
 
@@ -184,14 +179,12 @@
     <script>
         const form = document.getElementById('reg-form')
         form.addEventListener('submit', registerUser)
-        let selectType = document.getElementById("select-type")
+        
 
         async function registerUser(event) {
             event.preventDefault()
             const email = document.getElementById('email').value
             const password = document.getElementById('password').value
-            let value = selectType.value;
-            let type = selectType.options[selectType.selectedIndex].text;
 
             const result = await fetch('/adminAcctMgt', {
                 method: 'POST',
@@ -200,21 +193,15 @@
                 },
                 body: JSON.stringify({
                     email,
-                    password,
-                    type
+                    password
                 })
             }).then((res) => res.json())
             if(result.status === 'ok') {
                 alert('Success')
-                console.log(result.userData)
-                console.log(result)
-                location.reload()
+            }else {
+                alert(result.error)
             }
-              
-          
         }
-
-
     </script>
 </body>
 </html>
