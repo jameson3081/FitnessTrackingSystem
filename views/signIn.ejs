@@ -71,10 +71,11 @@
         } else {
             logoutEl.style.display = "none"
    
-        }
+        }   
 
         const form = document.getElementById('login')
         form.addEventListener('submit', login)
+        
         let signedIn = false;
         console.log("Is the user logged in: " + signedIn)
         async function login(event) {

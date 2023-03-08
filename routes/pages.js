@@ -7,10 +7,10 @@ const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 const JWT_SECRET = 'adjs0asfkjkoldmokjadjasopd'
 
-/* User.find({})
+/* User.findByIdAndDelete('64089880693fe1020b6c1038')
 .then((data) => {
-    for (let i = 0; i < data.length; i++)
-    console.log(data[0].email)
+
+    console.log(data)
 })
 .catch((error) => {
     console.log(error)
@@ -22,23 +22,20 @@ router.get("/", (req,res) => {
     res.render('index', {title:'Fitness Tracking System'})
 })
 
-router.get("/adminAcctMgt", async(req,res) => {
+router.get('/adminAcctMgt', async (req, res) => {
     try {
-        const accounts = await User.find({}, 'email type');
-        // Render template with accounts
-        res.render('adminAcctMgt', {title:'Account Management', accounts: accounts});
-      } catch (err) {
-        console.log(err);
-        res.status(500).send('Internal Server Error');
-      }
-
-})
+      const users = await User.find({})
+      res.render('adminAcctMgt', {users, title: "Account Management System"})
+    } catch (err) {
+      console.error(err)
+      res.status(500).send('Internal server error')
+    }
+  })
 
 router.post("/adminAcctMgt", async(req,res) => {
-    const {email, password: plainTextPassword, type} = req.body
-   
-   /*  const email = req.body.email;
-       const plainTextPassword = req.body.password; (Long version of upper part)*/ 
+    const email = req.body.email;
+    const plainTextPassword = req.body.password;
+    const type = req.body.type;
     
     if(plainTextPassword.length < 5) {
         return res.json({status: 'error', error:"Password too short"})
@@ -59,27 +56,27 @@ router.post("/adminAcctMgt", async(req,res) => {
         }
         throw error
     }
-
-    /* res.json({status: 'ok', userData: await User.find({})
-    .then((data) => {
-        for (let i = 0; i < data.length; i++)
-        console.log(data[0].email)
-    })
-    .catch((error) => {
-        console.log(error)
-    })})
- */
-    try {
-        const userData = await User.find({});
-        
-        res.json({status: 'ok', userData: userData});
-      } catch (error) {
-        console.log(error);
-        res.json({status: 'error', error: error});
-      }
-
+    res.json({status: 'ok'})
 })
 
+
+router.delete('/adminAcctMgt/:userId', async (req, res) => {
+    const userId = req.params.userId;
+    console.log(userId)
+    try {
+      const user = await User.findById(userId);
+      if (!user) {
+        return res.json({status: 'error', error: 'User not found'});
+      }
+      await user.deleteOne();
+      console.log('User deleted successfully', user);
+    } catch (err) {
+      console.error(err);
+      res.status(500).send('Internal server error');
+    }   
+    res.json({status: 'ok'});
+});
+  
 router.get("/adminFlog", (req,res) => {
     res.render('adminFlog', {title:'Manage Fitness Log'})
 })
@@ -112,16 +109,12 @@ router.get("/report", (req,res) => {
     res.render('report', {title:'Report'})
 })
 
-router.get("/signedIn", (req,res) => {
-    res.render('signedIn', {title:'Account'})
-})
 
 router.get("/signIn", (req,res) => {
     res.render('signIn', {title:'Sign In Your Account'})
 })
 
 router.post('/signIn', async(req, res) => {
-    
     const {email, password} = req.body
     const user = await User.findOne({email}).lean()
 
@@ -142,7 +135,7 @@ router.post('/signIn', async(req, res) => {
 
     }
 
-    res.json({status: 'error', error: "Invalid email/passwords"})
+    res.json({status: 'error', error: "Invalid email/password"})
 })
 
 router.use((req, res) =>{
