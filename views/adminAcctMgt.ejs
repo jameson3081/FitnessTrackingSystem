@@ -125,36 +125,36 @@
     </div>
 
 
-    
+
     <script src="acctMgt.js"></script>
     <!--BOOTSTRAP REFERENCE-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script>
-      document.getElementById('reg-form').addEventListener('submit', registerUser)
-      
-      async function registerUser(event) {
-        event.preventDefault()
-        const email = document.getElementById('email').value
-        const password = document.getElementById('password').value
-    
-        const result = await fetch('/adminAcctMgt', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            email,
-            password
-          })
-        }).then((res) => res.json())
-    
-        if (result.status === 'ok') {
-          alert('Success')
-          location.reload() // Add this line to refresh the page
-        } else {
-          alert(result.error)
+        const form = document.getElementById('reg-form')
+        form.addEventListener('submit', registerUser)
+        
+
+        async function registerUser(event) {
+            event.preventDefault()
+            const email = document.getElementById('email').value
+            const password = document.getElementById('password').value
+
+            const result = await fetch('/adminAcctMgt', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    email,
+                    password
+                })
+            }).then((res) => res.json())
+            if(result.status === 'ok') {
+                alert('Success')
+            }else {
+                alert(result.error)
+            }
         }
-      }
     </script>
 </body>
 </html>

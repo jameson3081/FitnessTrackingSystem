@@ -18,7 +18,6 @@ const pagesRoute = require('./routes/pages')
 app.use(express.static(path.join('public'))) //USE files in 'public' folder
 
 
-
 //ESTABLISHING MONGODB NODESERVER CONNECTION(CHECK .env)
 mongoose.connect(process.env.DATABASE_URI, {useNewUrlParser: true, useUnifiedTopology: true} )
 const db = mongoose.connection

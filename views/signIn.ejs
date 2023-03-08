@@ -103,16 +103,7 @@
                 alert(result.error)
             }
         }
-        /* ~~~ CODE FOR DECODDING JWT TOKEN ~~~
-        function parseJwt (token) { //FOR DECODING JWT TOKEN AFTER LOGGING IN
-    var base64Url = token.split('.')[1];
-    var base64 = decodeURIComponent(atob(base64Url).split('').map(function(c) {
-        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-    }).join(''));
-
-    return JSON.parse(base64);
-
-} */
+       
 //JS FOR WHEN SIGNED IN (SHOW LOGOUT BUTTON)
 let showEmail = document.getElementById("email-local-storage")
         let emailToken = parseJwt(localStorage.getItem("TOKEN")).email
