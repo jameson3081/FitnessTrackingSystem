@@ -24,21 +24,19 @@ router.get("/", (req,res) => {
 
 router.get("/adminAcctMgt", async(req,res) => {
     try {
-        const accounts = await User.find({}, 'email type');
-        // Render template with accounts
-        res.render('adminAcctMgt', {title:'Account Management', accounts: accounts});
-      } catch (err) {
-        console.log(err);
-        res.status(500).send('Internal Server Error');
-      }
+      const users = await User.find({})
+      res.render('adminAcctMgt', {users, title: "Account Management System"})
+    } catch (err) {
+      console.error(err)
+      res.status(500).send('Internal server error')
+    }
 
 })
 
 router.post("/adminAcctMgt", async(req,res) => {
-    const {email, password: plainTextPassword, type} = req.body
-   
-   /*  const email = req.body.email;
-       const plainTextPassword = req.body.password; (Long version of upper part)*/ 
+    const email = req.body.email;
+    const plainTextPassword = req.body.password;
+    
     
     if(plainTextPassword.length < 5) {
         return res.json({status: 'error', error:"Password too short"})
@@ -49,8 +47,7 @@ router.post("/adminAcctMgt", async(req,res) => {
     try {
         const response = await User.create({
             email,
-            password,
-            type
+            password
         })
         console.log("User created successfully", response)
     } catch(error) {
@@ -60,15 +57,6 @@ router.post("/adminAcctMgt", async(req,res) => {
         throw error
     }
 
-    /* res.json({status: 'ok', userData: await User.find({})
-    .then((data) => {
-        for (let i = 0; i < data.length; i++)
-        console.log(data[0].email)
-    })
-    .catch((error) => {
-        console.log(error)
-    })})
- */
     try {
         const userData = await User.find({});
         

@@ -151,6 +151,7 @@
             }).then((res) => res.json())
             if(result.status === 'ok') {
                 alert('Success')
+                location.reload() // Add this line to refresh the page
             }else {
                 alert(result.error)
             }
