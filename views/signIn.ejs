@@ -48,8 +48,11 @@
             
             </form>
             <div id="logout-div">
+                <h4 id="account-type-show"></h4>
                 <h1 id="full-sentence">Welcome, <span id="email-local-storage">EMAIL</span></h1>
                 <button id="logout" onclick="logout()">SIGN OUT</button>
+                
+
             </div>
         </main>
 
@@ -107,20 +110,26 @@
        
 //JS FOR WHEN SIGNED IN (SHOW LOGOUT BUTTON)
 let showEmail = document.getElementById("email-local-storage")
-        let emailToken = parseJwt(localStorage.getItem("TOKEN")).email
-        let fullSentence = document.getElementById("full-sentence")
-        let logoutBtn = document.getElementById("logout")
-        showEmail.textContent = emailToken;
-        
-        console.log("This is the token: ", localStorage.getItem("TOKEN"))
-        function parseJwt (token) { //FOR DECODING JWT TOKEN AFTER LOGGING IN
+//FOR DECODING JWT TOKEN AFTER LOGGING IN
+        function parseJwt (token) { 
         var base64Url = token.split('.')[1];
         var base64 = decodeURIComponent(atob(base64Url).split('').map(function(c) {
         return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
     }).join(''));
 
     return JSON.parse(base64);
-} 
+}
+
+let emailToken = parseJwt(localStorage.getItem("TOKEN")).email
+        let fullSentence = document.getElementById("full-sentence")
+        let logoutBtn = document.getElementById("logout")
+        showEmail.textContent = emailToken;
+        console.log("This is the token: ", localStorage.getItem("TOKEN"))
+
+let accountType = document.getElementById("account-type-show")
+let type = parseJwt(localStorage.getItem("TOKEN")).type
+accountType.textContent = type + " account"
+accountType.style.color = "green"
 
 function logout() {
 if (localStorage.getItem("TOKEN")) {

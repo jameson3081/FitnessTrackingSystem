@@ -1,11 +1,13 @@
 const express = require('express')
 const router = express.Router()
-const User = require('../model/user')
-const Profile = require('../model/fprofile_model')
+const User = require('../model/User')
+const FProfile = require('../model/FProfile')
 //Account security
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 const JWT_SECRET = 'adjs0asfkjkoldmokjadjasopd'
+
+
 
 /* User.findByIdAndDelete('64089880693fe1020b6c1038')
 .then((data) => {
@@ -17,10 +19,13 @@ const JWT_SECRET = 'adjs0asfkjkoldmokjadjasopd'
 })
  */
 
+
+
 //ROUTES
 router.get("/", (req,res) => {
     res.render('index', {title:'Fitness Tracking System'})
 })
+
 
 router.get('/adminAcctMgt', async (req, res) => {
     try {
@@ -30,7 +35,7 @@ router.get('/adminAcctMgt', async (req, res) => {
       console.error(err)
       res.status(500).send('Internal server error')
     }
-  })
+})
 
 router.post("/adminAcctMgt", async(req,res) => {
     const email = req.body.email;
@@ -92,16 +97,53 @@ router.get("/adminSignedIn", (req,res) => {
   
 router.get("/flog", (req,res) => {
     res.render('flog', {title:'Fitness Log'})
+    
 
 })
 
+router.get("/fprofile", async (req, res) => {
+     let decodedID = req.query.decodedID;
+    try {
+       
+        let fprofile = await FProfile.findOne({ idFromUser: decodedID });
+        console.log("DECODED ID", decodedID)
+        if (fprofile) {
+            res.render('fprofile', { title: "Fitness Profile", fprofile });
+            console.log(fprofile);
+          } else {
+            res.render('fprofile', { title: "Fitness Profile" });
+            console.log("I am else")
+          }
+      } catch(error) {
+        console.log(error);
+        res.json({status: 'error', error: "An error occurred"});
+      }   
+    
+  });
 
-router.get("/fprofile", (req,res) => {
-    res.render('fprofile', {title: 'Fitness Profile' });
-})
+router.post("/fprofile", async (req, res) => {
+    const fullname = req.body.fullname
+    const decodedID = req.body.decodedID
 
-
-router.post("/fprofile", (req, res) => {
+   
+    try {
+        const fprofile = await FProfile.findOneAndUpdate(
+          { idFromUser: decodedID },
+          { fullname },
+          { upsert: true, new: true }
+        );
+        console.log("Fprofile data sent", fprofile);
+        const data = await FProfile.find().populate('idFromUser', 'email');
+        console.log(data)
+        res.json({ status: 'ok', data });
+    } catch(error) {
+        if (error.code === 11000) {
+            res.json({status: 'error', error: "Already have data"})
+        } else {
+            console.log(error);
+            res.json({status: 'error', error: "An error occurred"});
+        }
+    }   
     
 })
 
@@ -126,7 +168,8 @@ router.post('/signIn', async(req, res) => {
 
         const token = jwt.sign({
             id: user._id,
-            email: user.email
+            email: user.email,
+            type: user.type
         }, 
         JWT_SECRET
     )

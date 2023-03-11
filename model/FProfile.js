@@ -1,7 +1,8 @@
 const mongoose = require('mongoose')
 
 const fprofileData = new mongoose.Schema({
-    classNumber: {type: Number, required: true}
+    idFromUser: {type: mongoose.Schema.Types.ObjectId, ref: 'UserSchema'},
+    fullname: {type: String, required: true, unique: true},
 },
 {collection: 'user-profiles'}
 )

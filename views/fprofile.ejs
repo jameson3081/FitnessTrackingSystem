@@ -49,8 +49,8 @@
                 <br>
                 
 
-                <label for="fullName" class = "fprofile_labels">Full Name:</label>
-                <input type="text" id = "fullName" name = "fullName" class = "centerAligned" placeholder=" - ENTER NAME -">
+                <label for="fullname" class = "fprofile_labels">Full Name:</label>
+                <input type="text" id="fullname"  name="fullname" class = "centerAligned" placeholder=" - ENTER NAME -" >
 
 
                 <label for="notes" id="notesLabel">NOTES</label>
@@ -225,6 +225,76 @@
 
     }
 
+    const form = document.getElementById('fprofile-form')
+    form.addEventListener('submit', sendProfileData)
+
+    async function sendProfileData(event) {
+        event.preventDefault()
+        const fullname = document.getElementById('fullname').value
+        const lstoken = localStorage.getItem("TOKEN")
+
+        function parseJwt (token) { 
+        var base64Url = token.split('.')[1];
+        var base64 = decodeURIComponent(atob(base64Url).split('').map(function(c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+
+    return JSON.parse(base64);
+}
+
+    let decodedID = parseJwt(localStorage.getItem("TOKEN")).id
+    
+        const result = await fetch('/fprofile', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            fullname,
+            decodedID
+          })
+        }).then((res) => res.json())
+        if (result.status === 'ok') {
+          alert('Profile info submitted')
+          console.log(result.data)
+      
+        } else {
+          alert(JSON.stringify(result.error))
+        }
+      }
+
+
+     
+      function parseJwt (token) { 
+        var base64Url = token.split('.')[1];
+        var base64 = decodeURIComponent(atob(base64Url).split('').map(function(c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+
+        return JSON.parse(base64);
+    }
+
+
+  document.addEventListener("DOMContentLoaded", async () => {
+  try {
+    const token = localStorage.getItem("TOKEN");
+    const { id } = parseJwt(token);
+    const response = await fetch(`/fprofile?decodedID=${id}`);
+    const data = await response.json();
+
+    // Your code to handle the response data goes here
+    if (data.fprofile) {
+      console.log(data.fprofile.fullname);
+    } else {
+      console.log("I am else");
+    }
+  } catch (error) {
+    console.error(error);
+  }
+});
+
+
+  
 
     </script>
 </body>
