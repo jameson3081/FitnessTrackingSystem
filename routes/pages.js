@@ -102,25 +102,22 @@ router.get("/flog", (req,res) => {
 })
 
 router.get("/fprofile", async (req, res) => {
-     let decodedID = req.query.decodedID;
+    let decodedID = req.query.decodedID;
+  
     try {
-       
-        let fprofile = await FProfile.findOne({ idFromUser: decodedID });
-        console.log("DECODED ID", decodedID)
-        if (fprofile) {
-            res.render('fprofile', { title: "Fitness Profile", fprofile });
-            console.log(fprofile);
-          } else {
-            res.render('fprofile', { title: "Fitness Profile" });
-            console.log("I am else")
-          }
-      } catch(error) {
-        console.log(error);
-        res.json({status: 'error', error: "An error occurred"});
-      }   
-    
+      let fprofile = await FProfile.findOne({ idFromUser: decodedID });
+      if (fprofile) {
+        res.render('fprofile', { title: "Fitness Profile SUCCESS", fprofile });
+      } else {
+        res.render('fprofile', { title: "Fitness Profile", fprofile });
+      }
+    } catch(error) {
+      console.log(error);
+      res.json({status: 'error', error: "An error occurred"});
+    }
   });
 
+  
 router.post("/fprofile", async (req, res) => {
     const fullname = req.body.fullname
     const decodedID = req.body.decodedID

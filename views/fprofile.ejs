@@ -45,12 +45,12 @@
             <form id="fprofile-form">
                 <label for="classNumber" id="classnumLabel">Class number:</label>
                 <br>
-                <input type="number" id = "classNumber" name = "classNumber" class = "centerAligned" placeholder=" - ENTER CLASS NUM -"">
+                <input type="number" id = "classNumber" name = "classNumber" class = "centerAligned" placeholder=" - ENTER CLASS NUM -">
                 <br>
                 
 
                 <label for="fullname" class = "fprofile_labels">Full Name:</label>
-                <input type="text" id="fullname"  name="fullname" class = "centerAligned" placeholder=" - ENTER NAME -" >
+                <input type="text" id="fullname" name="fullname" class="centerAligned" placeholder="- ENTER NAME -" value="<%= fprofile && fprofile.fullname || '' %>">
 
 
                 <label for="notes" id="notesLabel">NOTES</label>
@@ -275,25 +275,30 @@
     }
 
 
-  document.addEventListener("DOMContentLoaded", async () => {
-  try {
-    const token = localStorage.getItem("TOKEN");
-    const { id } = parseJwt(token);
-    const response = await fetch(`/fprofile?decodedID=${id}`);
-    const data = await response.json();
+ 
+//CHANGES URL
 
-    // Your code to handle the response data goes here
-    if (data.fprofile) {
-      console.log(data.fprofile.fullname);
-    } else {
-      console.log("I am else");
-    }
-  } catch (error) {
-    console.error(error);
-  }
-});
+const token = localStorage.getItem("TOKEN");
+const { id } = parseJwt(token);
+const urlParams = new URLSearchParams(window.location.search);
+const decodedID = urlParams.get('decodedID');
 
-
+if (decodedID) {
+  // Fetch data using decodedID
+  fetch(`/fprofile?decodedID=${decodedID}`)
+    .then(response => response.json())
+    .then(data => {
+      if (data.fprofile) {
+        console.log(data.fprofile.fullname);
+      } else {
+        console.log("I am else");
+      }
+    })
+    .catch(error => console.error(error));
+} else {
+  // Redirect to the same URL with decodedID query string appended
+  window.location.href = `/fprofile?decodedID=${id}`;
+}
   
 
     </script>
