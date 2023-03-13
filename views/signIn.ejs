@@ -53,6 +53,8 @@
                 <h1 id="full-sentence">Welcome, <span id="email-local-storage">EMAIL</span></h1>
                 <button id="logout" onclick="logout()">SIGN OUT</button>
                 
+                <a href="/adminAcctMgt" class="link"><button id="acct-mgt"> MANAGE ACCOUNTS</button></a>
+                
 
             </div>
         </main>
@@ -143,6 +145,14 @@ if (localStorage.getItem("TOKEN")) {
     fullSentence.textContent = "Not logged in"
     showEmail.textContent = " "
 }
+}
+
+let manageBtn = document.getElementById('acct-mgt')
+
+if (type === 'Student') {
+    manageBtn.style.display = "none"
+} else {
+
 }
 
         </script>

@@ -330,6 +330,7 @@
     }
 
 
+
  
 //CHANGES URL
 
@@ -338,6 +339,16 @@ const { id } = parseJwt(token);
 const urlParams = new URLSearchParams(window.location.search);
 const decodedID = urlParams.get('decodedID');
 
+const typeacc = parseJwt(token).type
+console.log(typeacc)
+    
+/* if (typeacc === 'Student') {
+  window.location.href = "/adminFProfile"
+} else if (typeacc === 'student') {
+  // Render student dashboard content
+}
+
+ */
 if (decodedID) {
   // Fetch data using decodedID
   fetch(`/fprofile?decodedID=${decodedID}`)

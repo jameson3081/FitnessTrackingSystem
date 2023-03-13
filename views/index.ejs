@@ -109,5 +109,30 @@
 
     <!--BOOTSTRAP REFERENCE-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script>
+        //FOR DECODING JWT TOKEN AFTER LOGGING IN
+        function parseJwt (token) { 
+        var base64Url = token.split('.')[1];
+        var base64 = decodeURIComponent(atob(base64Url).split('').map(function(c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+
+    return JSON.parse(base64);
+}
+
+let amng = document.getElementById('manage')
+amng.style.display="none"
+let limng = document.getElementById('mng')
+
+let type = parseJwt(localStorage.getItem("TOKEN")).type
+if (type === "Student") {
+    amng.style.display="none"
+
+} else if (type === "Admin") {
+    amng.style.display="inline"
+} else {
+    
+}
+    </script>
 </body>
 </html>

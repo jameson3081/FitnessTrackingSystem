@@ -57,7 +57,7 @@ input {
     
 }
 
-#logout {
+#logout, #acct-mgt {
     background-color: black;
     color: white;
     padding: 0.8rem 5rem;
@@ -65,4 +65,20 @@ input {
     border-radius: 5px;
     font-weight: bold;
     margin-top: 2rem;
+    display: block;
+    margin: auto;
+}
+
+#logout {
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+#acct-mgt {
+    background-color: green;
+    border: 0px;
+}
+
+.link {
+    text-decoration: none;
 }
