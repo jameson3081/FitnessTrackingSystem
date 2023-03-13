@@ -59,7 +59,7 @@
                         <td>
                           <% if (users[i].type) { %>
                             <select class="select">
-                            <option>"<%= users[i].type %>"</option>
+                            <option><%= users[i].type %></option>
                           </select>
                           <% } %>
                        
@@ -82,7 +82,7 @@
                         <input type="password" value="<%= users[i].password %>">
                     </td>
                         <td>
-                          <button type="button" id="<%= users[i].id %>"  onclick="deleteUser(event)" class="btn btn-danger" name="remove">DELETE ACCOUNT</button>  
+                          <button type="button" id="<%= users[i]._id %>"  onclick="deleteUser(event)" class="btn btn-danger" name="remove">DELETE ACCOUNT</button>  
                         </td>
                     </tr>
                     <% } %>
@@ -142,7 +142,7 @@
         const password = document.getElementById('password').value
   
     let e = document.getElementById("type-options");
-  let type = e.value;
+    let type = e.value;
 
         const result = await fetch('/adminAcctMgt', {
           method: 'POST',
@@ -163,9 +163,11 @@
         }
       }
 
+
     async function deleteUser(event) {
     const userId = event.target.id;
     console.log(userId)
+  
     const confirmed = confirm('Are you sure you want to delete this account?');
     if (!confirmed) {
       return;
@@ -181,14 +183,14 @@
     }
   }
 
-  function parseJwt (token) { 
+  /* function parseJwt (token) { 
         var base64Url = token.split('.')[1];
         var base64 = decodeURIComponent(atob(base64Url).split('').map(function(c) {
         return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
     }).join(''));
 
     return JSON.parse(base64);
-}
+} */
 
 
     </script>

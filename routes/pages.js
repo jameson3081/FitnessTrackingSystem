@@ -107,7 +107,7 @@ router.get("/fprofile", async (req, res) => {
     try {
       let fprofile = await FProfile.findOne({ idFromUser: decodedID });
       if (fprofile) {
-        res.render('fprofile', { title: "Fitness Profile SUCCESS", fprofile });
+        res.render('fprofile', { title: "Fitness Profile With Data" , fprofile });
       } else {
         res.render('fprofile', { title: "Fitness Profile", fprofile });
       }
@@ -120,13 +120,24 @@ router.get("/fprofile", async (req, res) => {
   
 router.post("/fprofile", async (req, res) => {
     const fullname = req.body.fullname
+    const sex = req.body.sex
+    const age = req.body.age
+    const height = req.body.height
+    const weight = req.body.weight
+    const bmi = req.body.bmi
+    const bmr = req.body.bmr
+    const act = req.body.act
+    const goal = req.body.goal
+    const time = req.body.time
+    const kg = req.body.kg
+    const goalKcal = req.body.goalKcal
     const decodedID = req.body.decodedID
 
    
     try {
         const fprofile = await FProfile.findOneAndUpdate(
           { idFromUser: decodedID },
-          { fullname },
+          { fullname, sex, age, height, weight, bmi, bmr, act, goal, time, kg, goalKcal },
           { upsert: true, new: true }
         );
         console.log("Fprofile data sent", fprofile);

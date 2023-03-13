@@ -6,7 +6,7 @@ const UserSchema = new mongoose.Schema({
     password: {type: String, required: true},
     type: {type: String}
 },
-{collection: 'system-users'}
+{ collection: 'system-users' },
 )
 
 const model = mongoose.model('UserSchema', UserSchema)

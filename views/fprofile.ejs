@@ -95,40 +95,54 @@
                 <br>
                 <div id = "sexToBMR">
                 <label for="sex" class = "fprofile_labels">Sex:   </label>
-                <select name="sex" id="sex" class="combobox">
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                </select>
+                <select name="sex" id="sex-options" class="combobox">
+                    <% if (fprofile && fprofile.sex) { %>
+                      <option value="<%= fprofile.sex %>" selected><%= fprofile.sex %></option>
+                    <% } else { %>
+                      <option value="Male">Male</option>
+                      <option value="Female">Female</option>
+                    <% } %>
+                  </select>
                 <label for="BMI" class = "fprofile_labels" id = "bmilabel">BMI: </label>
-                <input type="text" id = "BMI" name = "BMI">
+                <input type="text" id = "bmi" name = "BMI" value="<%= fprofile && fprofile.bmi || '' %>">
                 <span id="bmiCheck" class="check">Correct ✅ </span>    
     
                 <br>
                 <label for="Age" class = "fprofile_labels">Age: </label>
-                <input type="text" id = "Age" name = "Age">
+                <input type="text" id = "age" name = "Age" value="<%= fprofile && fprofile.age || '' %>">
 
                 <label for="BMR" class = "fprofile_labels" id="bmrlabel">BMR: </label>
-                <input type="text" id = "BMR" name = "BMR">
+                <input type="text" id = "bmr" name = "BMR" value="<%= fprofile && fprofile.bmr || '' %>">
                 <span id="bmrCheck" class="check">Correct ✅ </span>  
                 <br>
                 </div>
 
                 
                 <label for="Height" class = "fprofile_labels" id = "heightlabel">Height (cm): </label>
-                <input type="text" id = "Height" class = "heightweight" name = "Height">
+                <input type="text" id = "Height" class = "heightweight" name = "Height" value="<%= fprofile && fprofile.height || '' %>">
                     
                 <label for="actLevel" class = "fprofile_labels" id = actLevelLabel>Activity level:</label>
                 <select name="actLevel" id="actLevel" class="combobox">
-                    <option value="no">Little to no exercise</option>
-                    <option value="light">Lightly exercise (1-3 days a week)</option>
-                    <option value="medium">Medium exercise (3-5 days a week)</option>
-                    <option value="very_active">Hard exercise (6-7 days a week)</option>
-                    <option value="extra_active">Intense exercise/sports</option>
-                </select>
+                    <% if (fprofile && fprofile.act) { %>
+                      <option value="<%= fprofile.act %>" selected><%= fprofile.act %></option>
+                      <option value="No exercise">Little to no exercise</option>
+                      <option value="Light">Lightly exercise (1-3 days a week)</option>
+                      <option value="Medium">Medium exercise (3-5 days a week)</option>
+                      <option value="Very_active">Hard exercise (6-7 days a week)</option>
+                      <option value="Extra_active">Intense exercise/sports</option>
+                    <% } else { %>
+                      <option value="" selected disabled>Select activity level</option>
+                      <option value="No exercise">Little to no exercise</option>
+                      <option value="Light">Lightly exercise (1-3 days a week)</option>
+                      <option value="Medium">Medium exercise (3-5 days a week)</option>
+                      <option value="Very_active">Hard exercise (6-7 days a week)</option>
+                      <option value="Extra_active">Intense exercise/sports</option>
+                    <% } %>
+                  </select>
                 <br>
                 
                 <label for="Weight" class = "fprofile_labels" id = "weightlabel">Weight (kg): </label>
-                <input type="text" id = "weight" class = "heightweight" name = "weight">
+                <input type="text" id = "weight" class = "heightweight" name = "weight" value="<%= fprofile && fprofile.weight || '' %>">
                 <br>
                 
                 
@@ -143,49 +157,54 @@
                 
                 <label for="goal" class = "fprofile_labels" id="goal_label">Goal: </label>
                 <select name="goal" id="goal" class="combobox">
-                    <option value="maintain">Maintain weight</option>
-                    <option value="lose">Lose weight</option>
-                    <option value="gain">Gain weight</option>
-                  
+                    <option value="Maintain weight" <% if (fprofile && fprofile.goal === "Maintain weight") { %> selected <% } %>>Maintain weight</option>
+                    <option value="Lose weight" <% if (fprofile && fprofile.goal === "Lose weight") { %> selected <% } %>>Lose weight</option>
+                    <option value="Gain weight" <% if (fprofile && fprofile.goal === "Gain weight") { %> selected <% } %>>Gain weight</option>
                 </select>
 
                 <label for="howMuch" class = "fprofile_labels" id = "kglabel">How much in kg?: </label>
                 <select name="howMuch" id="howMuch" class="combobox">
-                    <option value="value_0">0</option>
-                    <option value="value_1">1</option>
-                    <option value="value_2">2</option>
-                    <option value="value_3">3</option>
-                    <option value="value_4">4</option>
-                    <option value="value_5">5</option>
-                    <option value="value_6">6</option>
-                    <option value="value_7">7</option>
-                    <option value="value_8">8</option>
-                    <option value="value_9">9</option>
-                    <option value="value_10">10</option>
-                    <option value="value_11">11</option>
-                    <option value="value_12">12</option>
-                    <option value="value_13">13</option>
-                    <option value="value_14">14</option>
-                    <option value="value_15">15</option>
-                    <option value="value_16">16</option>
-                    <option value="value_17">17</option>
-                    <option value="value_18">18</option>
-                    <option value="value_19">19</option>
-                    <option value="value_20">20</option>
+                    <% if (fprofile && fprofile.kg) { %>
+                        <option value="<%= fprofile.kg %>" selected><%= fprofile.kg %></option>
+                      <% } %>                    
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                    <option value="16">16</option>
+                    <option value="17">17</option>
+                    <option value="18">18</option>
+                    <option value="19">19</option>
+                    <option value="20">20</option>
                 </select>
 
                 <br>
 
                 <label for="timeFrame" class = "fprofile_labels">Time frame (days): </label>
                 <select name="timeFrame" id="timeFrame" class="combobox">
-                    <option value="time_30">30</option>
-                    <option value="time_60">60</option>
-                    <option value="time_90">90</option>
+                    <% if (fprofile && fprofile.time) { %>
+                        <option value="<%= fprofile.time %>" selected><%= fprofile.time %></option>
+                      <% } %>
+                    <option value="30 days">30</option>
+                    <option value="60 days">60</option>
+                    <option value="90 days">90</option>
                   
                 </select>
                 <br>
                 <label for="goalKcal" class = "fprofile_labels">Goal kCal intake: </label>
-                <input type="text" id = "goalKcal" name = "goalKcal">
+                <input type="text" id="goalKcal" name="goalKcal" value="<%= fprofile && fprofile.goalKcal ? fprofile.goalKcal : '' %>">
                 <span id="goalCheck" class="check">Correct ✅ </span>  
                 <br>
 
@@ -194,7 +213,7 @@
                
                     <button type="submit" id ="saveButton" class="button"> </button>
 
-          
+                    
                 
                 </form>
 
@@ -227,10 +246,35 @@
 
     const form = document.getElementById('fprofile-form')
     form.addEventListener('submit', sendProfileData)
-
+  
     async function sendProfileData(event) {
         event.preventDefault()
         const fullname = document.getElementById('fullname').value
+        const age = document.getElementById('age').value
+        const height = document.getElementById('Height').value
+        const weight = document.getElementById('weight').value
+        const bmi = document.getElementById('bmi').value
+        const bmr = document.getElementById('bmr').value
+
+        let sexOptions = document.getElementById("sex-options");
+        let sex = sexOptions.value;
+
+        let actOptions = document.getElementById("actLevel");
+        let act = actOptions.value;
+
+        let goalOptions = document.getElementById("goal");
+        let goal = goalOptions.value;
+
+        let timeOptions = document.getElementById("timeFrame");
+        let time = timeOptions.value;
+
+
+        let inKG = document.getElementById("howMuch");
+        let kg = inKG.value
+
+        const goalKcal = document.getElementById('goalKcal').value
+
+
         const lstoken = localStorage.getItem("TOKEN")
 
         function parseJwt (token) { 
@@ -251,13 +295,23 @@
           },
           body: JSON.stringify({
             fullname,
+            sex,
+            age,
+            height,
+            weight,
+            bmi,
+            bmr,
+            act,
+            goal,
+            time,
+            kg,
+            goalKcal,
             decodedID
           })
         }).then((res) => res.json())
         if (result.status === 'ok') {
           alert('Profile info submitted')
           console.log(result.data)
-      
         } else {
           alert(JSON.stringify(result.error))
         }
