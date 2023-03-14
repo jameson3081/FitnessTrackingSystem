@@ -103,17 +103,22 @@ router.get("/flog", (req,res) => {
 
 router.get("/fprofile", async (req, res) => {
     let decodedID = req.query.decodedID;
-  
+    let data = [];
+
     try {
+      const fprofiles = await FProfile.find().select("idFromUser fullname");
+      data = fprofiles.map((fprofile) => {
+        return { idFromUser: fprofile.idFromUser, fullname: fprofile.fullname };
+      });
       let fprofile = await FProfile.findOne({ idFromUser: decodedID });
       if (fprofile) {
-        res.render('fprofile', { title: "Fitness Profile With Data" , fprofile });
+        res.render("fprofile", { title: "Fitness Profile With Data", fprofile, data });
       } else {
-        res.render('fprofile', { title: "Fitness Profile", fprofile });
+        res.render("fprofile", { title: "Fitness Profile", fprofile, data });
       }
-    } catch(error) {
+    } catch (error) {
       console.log(error);
-      res.json({status: 'error', error: "An error occurred"});
+      res.json({ status: "error", error: "An error occurred" });
     }
   });
 

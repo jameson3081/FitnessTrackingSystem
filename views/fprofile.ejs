@@ -213,17 +213,26 @@
 
                
                     <button type="submit" id ="saveButton" class="button"> </button>
-
-                    
-                
+            
                 </form>
-
+                
 
                 
         </div>
     
       
-
+        <div id="student-links">
+          <h2>List of currently available fitness profile :</h2>
+          <% if (data && data.length > 0) { %>
+            <ul>
+              <% data.forEach(function(item) { %>
+                <li><a href="/fprofile?decodedID=<%= item.idFromUser %>"><%= item.fullname %></a></li>
+              <% }); %>
+            </ul>
+          <% } else { %>
+            <p>No data available</p>
+          <% } %>
+        </div>  
 
 
     <!--BOOTSTRAP REFERENCE-->
@@ -244,6 +253,33 @@
     } else {
 
     }
+ 
+
+
+function parseJwt2 (token2) { 
+        var base64Url = token2.split('.')[1];
+        var base64 = decodeURIComponent(atob(base64Url).split('').map(function(c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+
+        return JSON.parse(base64);
+    }
+
+    const token2 = localStorage.getItem("TOKEN");
+let typeacc = token2 ? parseJwt2(token2).type : null;
+const studentLinks = document.getElementById("student-links");
+
+if (!token2) {
+  studentLinks.style.display = "none";
+} else if (typeacc === "Admin") {
+  studentLinks.style.display = "block";
+} else {
+  studentLinks.style.display = "none";
+}
+
+
+
+
 
     const form = document.getElementById('fprofile-form')
     form.addEventListener('submit', sendProfileData)
@@ -330,7 +366,6 @@
     }
 
 
-
  
 //CHANGES URL
 
@@ -339,16 +374,9 @@ const { id } = parseJwt(token);
 const urlParams = new URLSearchParams(window.location.search);
 const decodedID = urlParams.get('decodedID');
 
-const typeacc = parseJwt(token).type
-console.log(typeacc)
-    
-/* if (typeacc === 'Student') {
-  window.location.href = "/adminFProfile"
-} else if (typeacc === 'student') {
-  // Render student dashboard content
-}
 
- */
+
+
 if (decodedID) {
   // Fetch data using decodedID
   fetch(`/fprofile?decodedID=${decodedID}`)

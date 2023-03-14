@@ -290,3 +290,30 @@ select, input[type="text"] {
 }
 /* PAGE NAME */
     
+#student-links {
+    width: 52%;
+    margin: auto;
+    background: lightgreen;
+    padding: 1rem;
+}
+
+#student-links ul {
+    font-size: 1.5rem;
+}
+
+#student-links a {
+    color: black;
+    text-decoration:none;
+    
+}
+
+#student-links a:hover {
+    color: black;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+#student-links li {
+    margin-bottom: 0.8rem;
+    
+}
