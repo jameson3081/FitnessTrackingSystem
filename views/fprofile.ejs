@@ -46,10 +46,10 @@
             <form id="fprofile-form">
                 <label for="classNumber" id="classnumLabel">Class number:</label>
                 <br>
-                <input type="number" id = "classNumber" name = "classNumber" class = "centerAligned" placeholder=" - ENTER CLASS NUM -">
+                <input type="number" id = "classNumber" name = "classNumber" class = "centerAligned" placeholder=" - ENTER CLASS NUM -" value="<%= fprofile && fprofile.classNumber || '' %>">
+                <br>
                 <br>
                 
-
                 <label for="fullname" class = "fprofile_labels">Full Name:</label>
                 <input type="text" id="fullname" name="fullname" class="centerAligned" placeholder="- ENTER NAME -" value="<%= fprofile && fprofile.fullname || '' %>">
 
@@ -83,16 +83,8 @@
                 </div>
                 <br>
 
-                <label for="yearANDsection" class = "fprofile_labels">Yr/Section:</label>
-                <input type="text" id = "yearANDsection" name = "yearANDsection" class = "centerAligned" placeholder=" - ENTER YR/SEC -">
-                <br>
-
-                <label for="PEsched" class = "fprofile_labels">PE Schedule:</label>
-                <input type="text" id = "PEsched" name = "PEsched" class = "centerAligned" placeholder=" - ENTER SCHED -" >
-                <br>
-
-                <br>
-                <br>
+  
+               
                 <br>
                 <div id = "sexToBMR">
                 <label for="sex" class = "fprofile_labels">Sex:   </label>
@@ -126,18 +118,18 @@
                 <select name="actLevel" id="actLevel" class="combobox">
                     <% if (fprofile && fprofile.act) { %>
                       <option value="<%= fprofile.act %>" selected><%= fprofile.act %></option>
-                      <option value="No exercise">Little to no exercise</option>
-                      <option value="Light">Lightly exercise (1-3 days a week)</option>
-                      <option value="Medium">Medium exercise (3-5 days a week)</option>
-                      <option value="Very_active">Hard exercise (6-7 days a week)</option>
-                      <option value="Extra_active">Intense exercise/sports</option>
+                      <option value="Little to no exercise">Little to no exercise</option>
+                      <option value="Lightly exercise (1-3 days a week)">Lightly exercise (1-3 days a week)</option>
+                      <option value="Medium exercise (3-5 days a week)">Medium exercise (3-5 days a week)</option>
+                      <option value="Hard exercise (6-7 days a week)">Hard exercise (6-7 days a week)</option>
+                      <option value="Intense exercise/sports">Intense exercise/sports</option>
                     <% } else { %>
                       <option value="" selected disabled>Select activity level</option>
-                      <option value="No exercise">Little to no exercise</option>
-                      <option value="Light">Lightly exercise (1-3 days a week)</option>
-                      <option value="Medium">Medium exercise (3-5 days a week)</option>
-                      <option value="Very_active">Hard exercise (6-7 days a week)</option>
-                      <option value="Extra_active">Intense exercise/sports</option>
+                      <option value="Little to no exercise">Little to no exercise</option>
+                      <option value="Lightly exercise (1-3 days a week)">Lightly exercise (1-3 days a week)</option>
+                      <option value="Medium exercise (3-5 days a week)">Medium exercise (3-5 days a week)</option>
+                      <option value="Hard exercise (6-7 days a week)">Hard exercise (6-7 days a week)</option>
+                      <option value="Intense exercise/sports">Intense exercise/sports</option>
                     <% } %>
                   </select>
                 <br>
@@ -162,7 +154,7 @@
                     <option value="Lose weight" <% if (fprofile && fprofile.goal === "Lose weight") { %> selected <% } %>>Lose weight</option>
                     <option value="Gain weight" <% if (fprofile && fprofile.goal === "Gain weight") { %> selected <% } %>>Gain weight</option>
                 </select>
-
+<br>
                 <label for="howMuch" class = "fprofile_labels" id = "kglabel">How much in kg?: </label>
                 <select name="howMuch" id="howMuch" class="combobox">
                     <% if (fprofile && fprofile.kg) { %>
@@ -254,6 +246,7 @@
 
     }
  
+    
 
 
 function parseJwt2 (token2) { 
@@ -286,6 +279,8 @@ if (!token2) {
   
     async function sendProfileData(event) {
         event.preventDefault()
+
+        const classNumber = document.getElementById('classNumber').value
         const fullname = document.getElementById('fullname').value
         const age = document.getElementById('age').value
         const height = document.getElementById('Height').value
@@ -331,6 +326,7 @@ if (!token2) {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
+            classNumber,
             fullname,
             sex,
             age,

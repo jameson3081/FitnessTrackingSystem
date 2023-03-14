@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 
 const fprofileData = new mongoose.Schema({
     idFromUser: {type: mongoose.Schema.Types.ObjectId, ref: 'UserSchema'},
+    classNumber: {type: Number, required: true},
     fullname: {type: String, required: true, unique: true},
     sex: {type: String, required: true},
     age: {type: Number, required: true},

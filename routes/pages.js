@@ -124,6 +124,7 @@ router.get("/fprofile", async (req, res) => {
 
   
 router.post("/fprofile", async (req, res) => {
+    const classNumber = req.body.classNumber
     const fullname = req.body.fullname
     const sex = req.body.sex
     const age = req.body.age
@@ -142,7 +143,7 @@ router.post("/fprofile", async (req, res) => {
     try {
         const fprofile = await FProfile.findOneAndUpdate(
           { idFromUser: decodedID },
-          { fullname, sex, age, height, weight, bmi, bmr, act, goal, time, kg, goalKcal },
+          { classNumber, fullname, sex, age, height, weight, bmi, bmr, act, goal, time, kg, goalKcal },
           { upsert: true, new: true }
         );
         console.log("Fprofile data sent", fprofile);
