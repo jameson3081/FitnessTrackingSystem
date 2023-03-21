@@ -20,7 +20,9 @@ Password: tester
 
 
 Overview of the Fitness Tracking System
-There are 2 types of accounts
+
+
+There are 2 types of accounts:
 1. Admin 
 - Can manage accounts, view the fitness profiles/logs of students give grade and feedback, generate report, and save as pdf.
 
