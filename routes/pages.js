@@ -252,6 +252,7 @@ router.get("/fprofile", async (req, res) => {
 router.post("/fprofile", async (req, res) => {
     const classNumber = req.body.classNumber
     const fullname = req.body.fullname
+    const section = req.body.section
     const sex = req.body.sex
     const age = req.body.age
     const height = req.body.height
@@ -269,7 +270,7 @@ router.post("/fprofile", async (req, res) => {
     try {
         const fprofile = await FProfile.findOneAndUpdate(
           { idFromUser: decodedID },
-          { classNumber, fullname, sex, age, height, weight, bmi, bmr, act, goal, time, kg, goalKcal },
+          { classNumber, fullname, section, sex, age, height, weight, bmi, bmr, act, goal, time, kg, goalKcal },
           { upsert: true, new: true }
         );
         console.log("Fprofile data sent", fprofile);
@@ -287,10 +288,23 @@ router.post("/fprofile", async (req, res) => {
     
 })
 
-router.get("/report", (req,res) => {
-    res.render('report', {title:'Report'})
-})
+router.get("/report", async (req, res) => {
+  const selectedSection = req.query.section;
+  let reportData = [];
+  
+  try {
+    // Fetch the data from the database
+    reportData = await FProfile.find({ section: selectedSection });
+    let logSection = await FLog.find({});
 
+    
+    // Render the report template with the filtered data
+    res.render("report", { title: "Report with Data", section: selectedSection, reportData, logSection });
+  } catch (error) {
+    console.log(error);
+    res.json({ status: "error", error: "An error occurred" });
+  }
+});
 
 router.get("/signIn", (req,res) => {
     res.render('signIn', {title:'Sign In Your Account'})

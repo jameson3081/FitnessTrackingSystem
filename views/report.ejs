@@ -6,6 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.15/jspdf.plugin.autotable.min.js"></script>
 
     <!--FONTS-->
     <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
@@ -17,6 +19,7 @@
     <link rel="stylesheet" href="report.css">
     <!--BOOTSTRAP REFERENCE-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
 </head>
 <body>
     <!--- NAVIGATION BAR --->
@@ -41,34 +44,45 @@
 
             <div class="choices">
                 <label for="section">Select Section:</label>
-                <select name="section" id="section">
+                <select name="section" id="section-options">
                     <option value=""></option>
-                    <option value="">3ISA</option>
-                    <option value="">3ISB</option>
+                    <option value="2ISA">2ISA</option>
+                    <option value="2ISB">2ISB</option>
                 </select>
+                <button id="generate-btn">Generate Report</button>
             </div>
             <h1 class="generator-title">Report Generator</h1>
 
-            <button class="download-btn">DOWNLOAD PDF</button>
+            <button class="download-btn" id="download-btn">DOWNLOAD PDF</button>
         </div>
 
-        <section class="grid">
-            <h3 class="grid-head"">BLOCK</h3>
-            <h3 class="grid-head">Class Number</h3>
-            <h3 class="grid-head">Student Name</h3>
-            <h3 class="grid-head">Day 1 Grade</h3>
-            <h3 class="grid-head">Day 2 Grade</h3>
-            <h3 class="grid-head">Day 3 Grade</h3>
-            <h3 class="grid-head">Total Grade</h3>
-        
-            <h3 class="sample">User 1</h3>
-            <h3 class="sample">1</h3>
-            <h3 class="sample">John Wick</h3>
-            <h3 class="sample">95/100</h3>
-            <h3 class="sample">97/100</h3>
-            <h3 class="sample">100/100</h3>
-            <h3 class="sample">292/300</h3>
- 
+        <section>
+            <table class="table" id="report-table">
+                <thead class="thead-light">
+                  <tr>
+                    <th>Block</th>
+                    <th>Class Number</th>
+                    <th>Student Name</th>
+                    <th>Day 1 Grade</th>
+                  </tr>
+                </thead>
+                <tbody id="report-table-body">
+                    <% reportData.forEach(function(data) { %>
+                        <tr>
+                          <td><%= data.section %></td>
+                          <td><%= data.classNumber %></td>
+                          <td><%= data.fullname %></td>
+                          <% let grade = "NA"; %>
+                          <% logSection.forEach(function(log) { %>
+                            <% if (log.idFromUser.toString() === data.idFromUser.toString() && log.grade !== undefined) { %>
+                              <% grade = log.grade; %>
+                            <% } %>
+                          <% }); %>
+                          <td><%= grade %></td>
+                        </tr>
+                      <% }); %>
+                </tbody>
+              </table>
         </section>
     </main>
 
@@ -78,5 +92,26 @@
 
     <!--BOOTSTRAP REFERENCE-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script>
+        const generateReportBtn = document.getElementById("generate-btn");
+        const sectionOptions = document.getElementById("section-options");
+
+        generateReportBtn.addEventListener("click", () => {
+            const selectedSection = sectionOptions.value;
+            if (selectedSection) {
+            window.location.href = "/report?section=" + selectedSection;
+            }
+    });
+    window.jsPDF = window.jspdf.jsPDF;
+
+    const downloadPdfButton = document.getElementById("download-btn");
+  const table = document.querySelector("#report-table");
+  
+  downloadPdfButton.addEventListener("click", () => {
+  const doc = new jsPDF();
+  doc.autoTable({ html: table });
+  doc.save("report.pdf");
+});
+    </script>
 </body>
 </html>

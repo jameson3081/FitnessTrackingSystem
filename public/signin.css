@@ -61,7 +61,7 @@ input:focus {
     
 }
 
-#logout, #acct-mgt {
+#logout, #acct-mgt, #report-btn {
     background-color: black;
     color: white;
     padding: 0.8rem 5rem;
@@ -81,9 +81,14 @@ input:focus {
 #acct-mgt {
     background-color: green;
     border: 0px;
+    margin-bottom: 1rem;
+}
+
+#report-btn {
+    background-color: green;
+    border: 0;
 }
 
 .link {
     text-decoration: none;
 }
-

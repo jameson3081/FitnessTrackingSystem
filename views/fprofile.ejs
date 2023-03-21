@@ -67,7 +67,13 @@
                 
                 <label for="fullname" class = "fprofile_labels">Full Name:</label>
                 <input type="text" id="fullname" name="fullname" class="centerAligned" placeholder="- ENTER NAME -" value="<%= fprofile && fprofile.fullname || '' %>">
-
+                <br>
+        <label for="sex" class = "fprofile_labels">Section:</label>
+        <select name="section" id="section" class="combobox">
+          <option value="" <% if (!fprofile || !fprofile.section) { %>selected<% } %>></option>
+          <option value="2ISA" <% if (fprofile && fprofile.section === '2ISA') { %>selected<% } %>>2ISA</option>
+          <option value="2ISB" <% if (fprofile && fprofile.section === '2ISB') { %>selected<% } %>>2ISB</option>
+          </select>
 
                 <label for="notes" id="notesLabel">NOTES</label>
                 <br>
@@ -273,6 +279,7 @@ if (!token2) {
 
         const classNumber = document.getElementById('classNumber').value
         const fullname = document.getElementById('fullname').value
+        const section = document.getElementById('section').value
         const age = document.getElementById('age').value
         const height = document.getElementById('Height').value
         const weight = document.getElementById('weight').value
@@ -319,6 +326,7 @@ if (!token2) {
           body: JSON.stringify({
             classNumber,
             fullname,
+            section,
             sex,
             age,
             height,

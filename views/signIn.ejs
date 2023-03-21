@@ -57,6 +57,7 @@
                 <button id="logout" onclick="logout()">SIGN OUT</button>
                 
                 <a href="/adminAcctMgt" class="link"><button id="acct-mgt"> MANAGE ACCOUNTS</button></a>
+                <a href="/report" class="link"><button id="report-btn"> GENERATE REPORT</button></a>
                 
 
             </div>
@@ -152,9 +153,11 @@ if (localStorage.getItem("TOKEN")) {
 }
 
 let manageBtn = document.getElementById('acct-mgt')
+let reportBtn = document.getElementById('report-btn')
 
 if (type === 'Student') {
     manageBtn.style.display = "none"
+    reportBtn.style.display = "none"
 } else {
 
 }
