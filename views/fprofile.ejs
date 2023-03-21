@@ -109,28 +109,28 @@
                 <br>
                 <div id = "sexToBMR">
                 <label for="sex" class = "fprofile_labels">Sex:   </label>
-                <select name="sex" id="sex-options" class="combobox">
+                <select name="sex" id="sex-options" class="combobox" onchange="bmrChecker()">
                   <option value="" <% if (!fprofile || !fprofile.sex) { %>selected<% } %>></option>
                   <option value="Male" <% if (fprofile && fprofile.sex === 'Male') { %>selected<% } %>>Male</option>
                   <option value="Female" <% if (fprofile && fprofile.sex === 'Female') { %>selected<% } %>>Female</option>
                   </select>
                 <label for="BMI" class = "fprofile_labels" id = "bmilabel">BMI: </label>
-                <input type="text" id = "bmi" name = "BMI" value="<%= fprofile && fprofile.bmi || '' %>">
-                <span id="bmiCheck" class="check">Correct ✅ </span>    
+                <input type="number" id = "bmi" name = "BMI" value="<%= fprofile && fprofile.bmi || '' %>" onchange="bmiChecker()" step="0.01">
+                <span id="bmiCheck" class="check"></span>    
     
                 <br>
                 <label for="Age" class = "fprofile_labels">Age: </label>
-                <input type="text" id = "age" name = "Age" value="<%= fprofile && fprofile.age || '' %>">
+                <input type="number" id = "age" name = "age" value="<%= fprofile && fprofile.age || '' %>" onchange="bmrChecker()">
 
                 <label for="BMR" class = "fprofile_labels" id="bmrlabel">BMR: </label>
-                <input type="text" id = "bmr" name = "BMR" value="<%= fprofile && fprofile.bmr || '' %>">
-                <span id="bmrCheck" class="check">Correct ✅ </span>  
+                <input type="number" id = "bmr" name = "BMR" value="<%= fprofile && fprofile.bmr || '' %>" onchange="bmrChecker()" step="0.01">
+                <span id="bmrCheck" class="check"></span>  
                 <br>
                 </div>
 
                 
                 <label for="Height" class = "fprofile_labels" id = "heightlabel">Height (cm): </label>
-                <input type="text" id = "Height" class = "heightweight" name = "Height" value="<%= fprofile && fprofile.height || '' %>">
+                <input type="number" id = "Height" class = "heightweight" name = "Height" value="<%= fprofile && fprofile.height || '' %>" onchange="bmiChecker(); bmrChecker()">
                     
                 <label for="actLevel" class = "fprofile_labels" id = actLevelLabel>Activity level:</label>
                 <select name="actLevel" id="actLevel" class="combobox">
@@ -145,13 +145,12 @@
                 <br>
                 
                 <label for="Weight" class = "fprofile_labels" id = "weightlabel">Weight (kg): </label>
-                <input type="text" id = "weight" class = "heightweight" name = "weight" value="<%= fprofile && fprofile.weight || '' %>">
+                <input type="number" id = "weight" class = "heightweight" name = "weight" value="<%= fprofile && fprofile.weight || '' %>" onchange="bmiChecker(); bmrChecker()">
                 <br>
                 
                 
             
-                <span class = "fprofile_labels">Translation: </span>
-                <span id="bmiCheck" class="check">Correct ✅ </span>  
+    
 
                 <br>
                 <br>
@@ -205,12 +204,12 @@
                 </select>
                 <br>
                 <label for="goalKcal" class = "fprofile_labels">Goal kCal intake: </label>
-                <input type="text" id="goalKcal" name="goalKcal" value="<%= fprofile && fprofile.goalKcal ? fprofile.goalKcal : '' %>">
-                <span id="goalCheck" class="check">Correct ✅ </span>  
-                <br>
+                <input type="number" id="goalKcal" name="goalKcal" value="<%= fprofile && fprofile.goalKcal ? fprofile.goalKcal : '' %>">
+<!--                 <span id="goalCheck" class="check">Correct ✅ </span>  
+ -->                <br>
 
-                <p class="fprofile_labels" id="goal_result">This is a good goal! 🙂</p>
-
+<!--                 <p class="fprofile_labels" id="goal_result">This is a good goal! 🙂</p>
+ -->
                
                     <button type="submit" id ="saveButton" class="button"> </button>
             
@@ -243,8 +242,88 @@
 
     }
  
-    
+ 
+    let bmrCorrectSymbol = document.getElementById('bmrCheck')
+   
+    let bmrVal = document.getElementById('bmr').value
 
+    let sexUser = document.getElementById('sex-options').value
+    let ageUser = document.getElementById('age').value
+    let weightUser = document.getElementById('weight').value
+    let heightUser = document.getElementById('Height').value
+
+    let bmrMen = 88.362 + (13.397 * weightUser) + (4.799 * heightUser) - (5.677 * ageUser)
+    let bmrMenRounded = bmrMen.toFixed(2)
+
+    let bmrWomen = 447.593 + (9.247 * weightUser) + (3.098 * heightUser) - (4.330 * ageUser)
+    let bmrWomenRounded = bmrWomen.toFixed(2)
+
+    if (sexUser == "Male" && bmrMenRounded == bmrVal) {
+      bmrCorrectSymbol.innerText = "Correct ✅"
+    } else if (sexUser == "Female" && bmrWomenRounded == bmrVal) {
+      bmrCorrectSymbol.innerText = "Correct ✅"
+    } else {
+      bmrCorrectSymbol.innerText = "Incorrect ❌"
+      console.log(bmrMenRounded)
+      console.log(bmrWomenRounded)
+
+    }
+
+    let bmiCorrectSymbol = document.getElementById('bmiCheck')
+    let bmiVal = document.getElementById('bmi').value
+
+    let bmiFormula = weightUser / (heightUser/100) ** 2;
+      let bmiRounded = bmiFormula.toFixed(2)
+      
+      
+      if(bmiVal == bmiRounded) {
+      bmiCorrectSymbol.innerText = "Correct ✅"
+    } else {
+      bmiCorrectSymbol.innerText = "Incorrect ❌"
+    }
+  
+
+    function bmiChecker() {
+      let bmiVal = document.getElementById('bmi').value
+
+      let weightUser = document.getElementById('weight').value
+      let heightUser = document.getElementById('Height').value
+      let bmiFormula = weightUser / (heightUser/100) ** 2;
+      let bmiRounded = bmiFormula.toFixed(2)
+      
+      
+      if(bmiVal == bmiRounded) {
+      bmiCorrectSymbol.innerText = "Correct ✅"
+    } else {
+      bmiCorrectSymbol.innerText = "Incorrect ❌"
+    }
+  }
+
+  function bmrChecker() {
+    let bmrVal = document.getElementById('bmr').value
+
+    let sexUser = document.getElementById('sex-options').value
+    let ageUser = document.getElementById('age').value
+    let weightUser = document.getElementById('weight').value
+    let heightUser = document.getElementById('Height').value
+
+    let bmrMen = 88.362 + (13.397 * weightUser) + (4.799 * heightUser) - (5.677 * ageUser)
+    let bmrMenRounded = bmrMen.toFixed(2)
+
+    let bmrWomen = 447.593 + (9.247 * weightUser) + (3.098 * heightUser) - (4.330 * ageUser)
+    let bmrWomenRounded = bmrWomen.toFixed(2)
+
+    if (sexUser == "Male" && bmrMenRounded == bmrVal) {
+      bmrCorrectSymbol.innerText = "Correct ✅"
+    } else if (sexUser == "Female" && bmrWomenRounded == bmrVal) {
+      bmrCorrectSymbol.innerText = "Correct ✅"
+    } else {
+      bmrCorrectSymbol.innerText = "Incorrect ❌"
+      console.log(bmrMenRounded)
+      console.log(bmrWomenRounded)
+
+    }
+  }
 
 function parseJwt2 (token2) { 
         var base64Url = token2.split('.')[1];

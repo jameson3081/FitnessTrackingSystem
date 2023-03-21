@@ -154,7 +154,7 @@ body {
     background-color: #FEC00F;
 }
 
-select, input[type="text"] {
+select, input[type="text"], input[type="number"] {
     border-radius: 5px 5px 5px 5px;
    
     display: inline-block;
@@ -178,7 +178,7 @@ select, input[type="text"] {
     width: 100px;
 }
 
-#sexToBMR input[type="text"]{
+#sexToBMR input[type="text"], #sexToBMR input[type="number"]{
     display: inline-block;
     width: 100px;
 }
