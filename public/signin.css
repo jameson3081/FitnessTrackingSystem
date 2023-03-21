@@ -28,6 +28,10 @@ input {
     border-left-style: hidden;
 }
 
+input:focus {
+    border: 3px solid rgb(27, 155, 198);
+}
+
 .input-email, .input-password {
     margin: 0 auto;
     margin-bottom: 1rem;
@@ -82,3 +86,4 @@ input {
 .link {
     text-decoration: none;
 }
+

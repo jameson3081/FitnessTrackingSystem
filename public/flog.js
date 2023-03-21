@@ -1,4 +1,4 @@
-let divThree = document.getElementById("three")
+/* let divThree = document.getElementById("three")
 let divFour = document.getElementById("four")
 let divFive = document.getElementById("five")
 let divSix = document.getElementById("six")
@@ -171,3 +171,4 @@ function getAllInputs() {
 
 
 }
+ */

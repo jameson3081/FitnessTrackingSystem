@@ -40,7 +40,22 @@
 
 
     <!--Main Page Content-->
+    <div id="student-links">
+      <h2>List of currently available fitness profile :</h2>
+      <% if (data && data.length > 0) { %>
+        <ul>
+          <% data.forEach(function(item) { %>
+            <% if (item.type === 'Student') { %>
+              <li><a href="/fprofile?decodedID=<%= item.idFromUser._id %>"><%= item.fullname %></a></li>
+            <% } %>
+          <% }); %>
+        </ul>
+      <% } else { %>
+        <p>No data available</p>
+      <% } %>
+    </div>
 
+    
         <div id = "fprofile_box" class="wrapper">
             <h1 id = "fprofile_title">MY SMART FITNESS PROFILE</h1>
             <form id="fprofile-form">
@@ -89,12 +104,9 @@
                 <div id = "sexToBMR">
                 <label for="sex" class = "fprofile_labels">Sex:   </label>
                 <select name="sex" id="sex-options" class="combobox">
-                    <% if (fprofile && fprofile.sex) { %>
-                      <option value="<%= fprofile.sex %>" selected><%= fprofile.sex %></option>
-                    <% } else { %>
-                      <option value="Male">Male</option>
-                      <option value="Female">Female</option>
-                    <% } %>
+                  <option value="" <% if (!fprofile || !fprofile.sex) { %>selected<% } %>></option>
+                  <option value="Male" <% if (fprofile && fprofile.sex === 'Male') { %>selected<% } %>>Male</option>
+                  <option value="Female" <% if (fprofile && fprofile.sex === 'Female') { %>selected<% } %>>Female</option>
                   </select>
                 <label for="BMI" class = "fprofile_labels" id = "bmilabel">BMI: </label>
                 <input type="text" id = "bmi" name = "BMI" value="<%= fprofile && fprofile.bmi || '' %>">
@@ -116,21 +128,13 @@
                     
                 <label for="actLevel" class = "fprofile_labels" id = actLevelLabel>Activity level:</label>
                 <select name="actLevel" id="actLevel" class="combobox">
-                    <% if (fprofile && fprofile.act) { %>
-                      <option value="<%= fprofile.act %>" selected><%= fprofile.act %></option>
-                      <option value="Little to no exercise">Little to no exercise</option>
-                      <option value="Lightly exercise (1-3 days a week)">Lightly exercise (1-3 days a week)</option>
-                      <option value="Medium exercise (3-5 days a week)">Medium exercise (3-5 days a week)</option>
-                      <option value="Hard exercise (6-7 days a week)">Hard exercise (6-7 days a week)</option>
-                      <option value="Intense exercise/sports">Intense exercise/sports</option>
-                    <% } else { %>
-                      <option value="" selected disabled>Select activity level</option>
-                      <option value="Little to no exercise">Little to no exercise</option>
-                      <option value="Lightly exercise (1-3 days a week)">Lightly exercise (1-3 days a week)</option>
-                      <option value="Medium exercise (3-5 days a week)">Medium exercise (3-5 days a week)</option>
-                      <option value="Hard exercise (6-7 days a week)">Hard exercise (6-7 days a week)</option>
-                      <option value="Intense exercise/sports">Intense exercise/sports</option>
-                    <% } %>
+
+                  <option value="" <% if (!fprofile || !fprofile.act) { %>selected<% } %>></option>
+                  <option value="Little to no exercise" <% if (fprofile && fprofile.act === 'Little to no exercise') { %>selected<% } %>>Little to no exercise</option>
+                  <option value="Lightly exercise (1-3 days a week)" <% if (fprofile && fprofile.act === 'Lightly exercise (1-3 days a week)') { %>selected<% } %>>Lightly exercise (1-3 days a week)</option>
+                  <option value="Medium exercise (3-5 days a week)" <% if (fprofile && fprofile.act === 'Medium exercise (3-5 days a week)') { %>selected<% } %>>Medium exercise (3-5 days a week)</option>
+                  <option value="Hard exercise (6-7 days a week)" <% if (fprofile && fprofile.act === 'Hard exercise (6-7 days a week)') { %>selected<% } %>>Hard exercise (6-7 days a week)</option>
+                  <option value="Intense exercise/sports" <% if (fprofile && fprofile.act === 'Intense exercise/sports') { %>selected<% } %>>Intense exercise/sports</option>
                   </select>
                 <br>
                 
@@ -150,49 +154,47 @@
                 
                 <label for="goal" class = "fprofile_labels" id="goal_label">Goal: </label>
                 <select name="goal" id="goal" class="combobox">
-                    <option value="Maintain weight" <% if (fprofile && fprofile.goal === "Maintain weight") { %> selected <% } %>>Maintain weight</option>
-                    <option value="Lose weight" <% if (fprofile && fprofile.goal === "Lose weight") { %> selected <% } %>>Lose weight</option>
-                    <option value="Gain weight" <% if (fprofile && fprofile.goal === "Gain weight") { %> selected <% } %>>Gain weight</option>
+                  <option value="" <% if (!fprofile || !fprofile.goal) { %>selected<% } %>></option>
+                  <option value="Maintain weight" <% if (fprofile && fprofile.goal === 'Maintain weight') { %>selected<% } %>>Maintain weight</option>
+                  <option value="Lose weight" <% if (fprofile && fprofile.goal === 'Lose weight') { %>selected<% } %>>Lose weight</option>
+                  <option value="Gain weight" <% if (fprofile && fprofile.goal === 'Gain weight') { %>selected<% } %>>Gain weight</option>
                 </select>
 <br>
                 <label for="howMuch" class = "fprofile_labels" id = "kglabel">How much in kg?: </label>
                 <select name="howMuch" id="howMuch" class="combobox">
-                    <% if (fprofile && fprofile.kg) { %>
-                        <option value="<%= fprofile.kg %>" selected><%= fprofile.kg %></option>
-                      <% } %>                    
-                    <option value="0">0</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
-                    <option value="11">11</option>
-                    <option value="12">12</option>
-                    <option value="13">13</option>
-                    <option value="14">14</option>
-                    <option value="15">15</option>
-                    <option value="16">16</option>
-                    <option value="17">17</option>
-                    <option value="18">18</option>
-                    <option value="19">19</option>
-                    <option value="20">20</option>
+
+                  <option value="" <% if (!fprofile || !fprofile.kg) { %>selected<% } %>></option>
+                  <option value="0" <% if (fprofile && fprofile.kg === '0') { %>selected<% } %>>0</option>
+                  <option value="1" <% if (fprofile && fprofile.kg === '1') { %>selected<% } %>>1</option>
+                  <option value="2" <% if (fprofile && fprofile.kg === '2') { %>selected<% } %>>2</option>
+                  <option value="3" <% if (fprofile && fprofile.kg === '3') { %>selected<% } %>>3</option>
+                  <option value="4" <% if (fprofile && fprofile.kg === '4') { %>selected<% } %>>4</option>
+                  <option value="5" <% if (fprofile && fprofile.kg === '5') { %>selected<% } %>>5</option>
+                  <option value="6" <% if (fprofile && fprofile.kg === '6') { %>selected<% } %>>6</option>
+                  <option value="7" <% if (fprofile && fprofile.kg === '7') { %>selected<% } %>>7</option>
+                  <option value="8" <% if (fprofile && fprofile.kg === '8') { %>selected<% } %>>8</option>
+                  <option value="9" <% if (fprofile && fprofile.kg === '9') { %>selected<% } %>>9</option>
+                  <option value="10" <% if (fprofile && fprofile.kg === '10') { %>selected<% } %>>10</option>
+                  <option value="11" <% if (fprofile && fprofile.kg === '11') { %>selected<% } %>>11</option>
+                  <option value="12" <% if (fprofile && fprofile.kg === '12') { %>selected<% } %>>12</option>
+                  <option value="13" <% if (fprofile && fprofile.kg === '13') { %>selected<% } %>>13</option>
+                  <option value="14" <% if (fprofile && fprofile.kg === '14') { %>selected<% } %>>14</option>
+                  <option value="15" <% if (fprofile && fprofile.kg === '15') { %>selected<% } %>>15</option>
+                  <option value="16" <% if (fprofile && fprofile.kg === '16') { %>selected<% } %>>16</option>
+                  <option value="17" <% if (fprofile && fprofile.kg === '17') { %>selected<% } %>>17</option>
+                  <option value="18" <% if (fprofile && fprofile.kg === '18') { %>selected<% } %>>18</option>
+                  <option value="19" <% if (fprofile && fprofile.kg === '19') { %>selected<% } %>>19</option>
+                  <option value="20" <% if (fprofile && fprofile.kg === '20') { %>selected<% } %>>20</option>
                 </select>
 
                 <br>
 
                 <label for="timeFrame" class = "fprofile_labels">Time frame (days): </label>
                 <select name="timeFrame" id="timeFrame" class="combobox">
-                    <% if (fprofile && fprofile.time) { %>
-                        <option value="<%= fprofile.time %>" selected><%= fprofile.time %></option>
-                      <% } %>
-                    <option value="30 days">30</option>
-                    <option value="60 days">60</option>
-                    <option value="90 days">90</option>
+                  <option value="" <% if (!fprofile || !fprofile.time) { %>selected<% } %>></option>
+                  <option value="30" <% if (fprofile && fprofile.time === '30') { %>selected<% } %>>30</option>
+                  <option value="60" <% if (fprofile && fprofile.time === '60') { %>selected<% } %>>60</option>
+                  <option value="90" <% if (fprofile && fprofile.time === '90') { %>selected<% } %>>90</option>
                   
                 </select>
                 <br>
@@ -213,18 +215,7 @@
         </div>
     
       
-        <div id="student-links">
-          <h2>List of currently available fitness profile :</h2>
-          <% if (data && data.length > 0) { %>
-            <ul>
-              <% data.forEach(function(item) { %>
-                <li><a href="/fprofile?decodedID=<%= item.idFromUser %>"><%= item.fullname %></a></li>
-              <% }); %>
-            </ul>
-          <% } else { %>
-            <p>No data available</p>
-          <% } %>
-        </div>  
+        
 
 
     <!--BOOTSTRAP REFERENCE-->
