@@ -51,6 +51,7 @@
     margin-top: -5%;
     font-family: "roboto";
     overflow: hidden;
+    
 }
 .homeAbtTitle{
     color: #FEC00F;
@@ -58,7 +59,8 @@
 }
 .homePharagraph{
     font-family: "Poppins";
-    margin: 2%;
+    margin: 4%;
+    padding: rem;
 }
   
 .logo2Container {
