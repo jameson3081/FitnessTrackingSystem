@@ -55,20 +55,28 @@ router.post("/adminAcctMgt", async(req,res) => {
 
 
 router.delete('/adminAcctMgt/:userId', async (req, res) => {
-    const userId = req.params.userId;
-    console.log(userId)
-    try {
-      const user = await User.findById(userId);
-      if (!user) {
-        return res.json({status: 'error', error: 'User not found'});
-      }
-      await user.deleteOne();
-      console.log('User deleted successfully', user);
-    } catch (err) {
-      console.error(err);
-      res.status(500).send('Internal server error');
-    }   
-    res.json({status: 'ok'});
+  const userId = req.params.userId;
+  console.log(userId)
+  try {
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.json({status: 'error', error: 'User not found'});
+    }
+
+    // Delete all documents with idFromUser = userId from FProfile collection
+    await FProfile.deleteOne({idFromUser: userId});
+
+    // Delete all documents with idFromUser = userId from FLog collection
+    await FLog.deleteOne({idFromUser: userId});
+
+    // Delete the user with userId from User collection
+    await user.deleteOne();
+    console.log('User deleted successfully', user);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Internal server error');
+  }   
+  res.json({status: 'ok'});
 });
   
 router.get("/adminFlog", (req,res) => {
