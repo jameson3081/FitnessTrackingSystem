@@ -516,13 +516,6 @@
     input.addEventListener('input', handleInputChange)
     })
 
-    let imgInp = document.getElementById('activity-snippet1')
-    imgInp.onchange = evt => {
-    const [file] = imgInp.files
-    if (file) {
-        blah.src = URL.createObjectURL(file)
-    }
-    }
 
     function parseJwt2 (token2) { 
         var base64Url = token2.split('.')[1];
