@@ -1,26 +1,13 @@
 const express = require('express')
 const router = express.Router()
-const User = require("../model/User")
-const FProfile = require("../model/FProfile")
-const FLog = require("../model/FLog")
+const User = require("./User")
+const FProfile = require("./FProfile")
+const FLog = require("./FLog")
 //Account security
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
-const { findById, findByIdAndUpdate } = require('../model/FLog')
+/* const { findById, findByIdAndUpdate } = require('../model/FLog') */
 const JWT_SECRET = 'adjs0asfkjkoldmokjadjasopd'
-
-
-
-/* User.findByIdAndDelete('64089880693fe1020b6c1038')
-.then((data) => {
-
-    console.log(data)
-})
-.catch((error) => {
-    console.log(error)
-})
- */
-
 
 
 //ROUTES
