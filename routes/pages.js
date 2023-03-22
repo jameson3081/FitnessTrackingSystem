@@ -1,8 +1,8 @@
 const express = require('express')
 const router = express.Router()
-const User = require('../model/User')
-const FProfile = require('../model/FProfile')
-const FLog = require('../model/FLog')
+const User = require("../model/User")
+const FProfile = require("../model/FProfile")
+const FLog = require("../model/FLog")
 //Account security
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
