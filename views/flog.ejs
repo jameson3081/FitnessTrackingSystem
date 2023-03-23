@@ -59,7 +59,7 @@
                 <option value=4>4</option>
             </select> -->
             <h3>Day 1</h3>
-            <br>
+            
 
             <div id="student-links">
                 <h2>List of currently available fitness log : (Click the names to view)</h2>
@@ -71,7 +71,7 @@
                             <div class="half">
                         <li><a href="/flog?decodedID=<%= item.idFromUser._id %>"><%= item.fullname %></a></li>
                     </div>
-                <div class="half">
+                <!-- <div class="half">
                         <label>Grade
                             <br>
                             <input type="number" id="grade-<%= item.idFromUser._id %>" class="gradeInp" value="<%= item.grade %>">
@@ -85,7 +85,7 @@
                     <div class="half">
                         <br> 
                             <button type="button" id="<%= item.idFromUser._id %>" onclick="gradeFeedback(event)" class="giveBtn" name="remove">Give Grade and Feedback</button>
-                        </div>
+                        </div> -->
                         </div>
                             <% } %>
                     <% }); %>
@@ -96,6 +96,7 @@
               </div>
        
             
+              
             <section class="section-log">
                 <h2>SLEEP LOG</h2>
                     <ul>
@@ -469,8 +470,9 @@
             <div class="save-container">
             <button class="save-record" id="save-btn" type="submit">SAVE RECORDS FOR TODAY</button>
             <h5 class="grade-feedback">GRADE AND FEEDBACK</h5>
-            <p class="score"><input type="number" class="score-inp" value="<%= flog && flog.grade || '' %>" disabled>/100</p>
-            <textarea class="feedback-container" readonly name="grade-and-feedback" id="" cols="5" rows="5" value=""><%= flog ? flog.feedback || '' : '' %></textarea>
+            <p class="score"><input type="number" class="score-inp" value="<%= flog && flog.grade || '' %>" id="grade1" disabled>/100</p>
+            <textarea class="feedback-container" readonly name="grade-and-feedback" id="feedback1" cols="5" rows="5" value=""><%= flog ? flog.feedback || '' : '' %></textarea>
+            <button type="button" onclick="gradeFeedback()" class="giveBtn" id="giveGrade">SUBMIT GRADE</button>
         </div>
        </form>
         </main>
@@ -533,10 +535,15 @@ const studentLinks = document.getElementById("student-links");
 
 if (!token2) {
   studentLinks.style.display = "none";
+  document.getElementById('giveGrade').style.display = "none"
 } else if (typeacc === "Admin") {
   studentLinks.style.display = "block";
+  document.getElementById('feedback1').removeAttribute('readonly')
+  document.getElementById('grade1').removeAttribute('disabled')
 } else {
   studentLinks.style.display = "none";
+  document.getElementById('giveGrade').style.display = "none"
+
 }
 
 //FOR SENDING DATA TO DATABASE (POST)
@@ -693,7 +700,7 @@ const form = document.getElementById('flog-form')
       }
 
 
-      function gradeFeedback(event) {
+      /* function gradeFeedback(event) {
   const flogId = event.target.id;
   const grade = document.getElementById(`grade-${flogId}`).value;
   const feedback = document.getElementById(`feedback-${flogId}`).value;
@@ -723,7 +730,41 @@ console.log(feedback)
     })
     .catch(err => console.error(err));
 }
+ */
 
+//TEMPORARY
+
+function gradeFeedback(event) {
+  const urlParams = new URLSearchParams(window.location.search);
+  const flogId = urlParams.get('decodedID');
+  const grade = document.getElementById('grade1').value;
+  const feedback = document.getElementById('feedback1').value;
+console.log(flogId)
+console.log(grade)
+console.log(feedback)
+
+  fetch('/submit', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      flogId,
+      grade,
+      feedback
+    })
+  })
+    .then(res => res.json())
+    .then(data => {
+      if (data.status === 'ok') {
+        alert('Grade and feedback submitted');
+        console.log(data.data);
+      } else {
+        alert(JSON.stringify(data.error));
+      }
+    })
+    .catch(err => console.error(err));
+}
 
 
 

@@ -115,30 +115,39 @@ router.get("/flog", async(req,res) => {
   let data = [];
 
   try {
-    const fprofiles = await FProfile.find().select("idFromUser fullname").populate('idFromUser', 'type')
+    const fprofiles = await FProfile.find().select("idFromUser fullname section").populate('idFromUser', 'type')
 
     data = await Promise.all(fprofiles.map(async (fprofile) => {
       let flog = await FLog.findOne({ idFromUser: fprofile.idFromUser._id });
       return { 
         idFromUser: fprofile.idFromUser, 
-        fullname: fprofile.fullname, 
+        fullname: fprofile.fullname,
+        section: fprofile.section, 
         type: fprofile.idFromUser.type,
         grade: flog ? flog.grade: "",
         feedback: flog ? flog.feedback : "" // add feedback property to data object
       };
     }));
+
+    const uniqueSections = [...new Set(data.map(fprofile => fprofile.section))];
+
+    let filteredData = data;
+    const section = req.query.section;
+    if (section) {
+      filteredData = data.filter(item => item.section === section);
+    }
+
     let flog = await FLog.findOne({ idFromUser: decodedID });
     if (flog) {
-      res.render("flog", { title: "Fitness Log With Data", flog, data});
+      res.render("flog", { title: "Fitness Log With Data", flog, data: filteredData, uniqueSections });
     } else {
-      res.render("flog", { title: "Fitness Log", flog, data});
+      res.render("flog", { title: "Fitness Log", flog, data: filteredData, uniqueSections });
     }
   } catch (error) {
     console.log(error);
     res.json({ status: "error", error: "An error occurred" });
   }
 });
-
 
 
 router.post("/flog", async (req, res) => {
