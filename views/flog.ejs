@@ -133,8 +133,8 @@
                         <h3>How Am I Feeling Today?</h3><br>
                         <input type="range" min="1" max="3"  class="slider" id="moodSlider" disabled>
                         <div class="feeling-label-container" style="width: 100%; display: flex; justify-content: space-between;">
-                            <h4 style="color: white; text-align: left; padding-left: 27%;">Terrible</h4>
-                            <h4 style="color: white; text-align: right; padding-right: 28%; ">Great</h4>
+                            <h4 style="color: white; text-align: left; padding-left: 27%; margin-top: 1%;">Terrible</h4>
+                            <h4 style="color: white; text-align: right; padding-right: 28%; margin-top: 1%; ">Great</h4>
                         </div>
 
                         
@@ -170,7 +170,7 @@
                         </select>
                     </div>
                     <div class="duration">
-                        <h3>Duration</h3>
+                        <h3>Duration(Minutes)</h3>
                         <input type="number" name="duration1" id="duration1" value="<%= flog && flog.duration1|| '' %>">
                     </div>
                     <div class="calorie-burned">
@@ -459,8 +459,9 @@
                 <input type="range" min="1" max="3"  class="slider-food" id="deficitOrSurplus" value="<%= flog && flog.deficitOrSurplus || '' %>">
                 
                 <div class="slider-food-label-container" style="width: 100%; display: flex; justify-content: space-between;">
-                    <h4 style="color: white; text-align: left; padding-left: 23%;">Deficit</h4>
-                    <h4 style="color: white; text-align: right; padding-right: 22%; ">Surplus</h4>
+                    <h4 style="color: white; text-align: left; padding-left: 23%; margin-top: 1%;">Deficit</h4>
+                    <h4 style="color: white; text-align: center; margin-top: 1%;">Sufficient</h4>
+                    <h4 style="color: white; text-align: right; padding-right: 22%; margin-top: 1%;">Surplus</h4>
                 </div>
 
 
