@@ -204,9 +204,9 @@
                 </select>
                 <br>
                 <label for="goalKcal" class = "fprofile_labels">Goal kCal intake: </label>
-                <input type="number" id="goalKcal" name="goalKcal" value="<%= fprofile && fprofile.goalKcal ? fprofile.goalKcal : '' %>">
-<!--                 <span id="goalCheck" class="check">Correct ✅ </span>  
- -->                <br>
+                <input type="number"  onchange="goalKcals()" id="goalKcal" name="goalKcal" value="<%= fprofile && fprofile.goalKcal ? fprofile.goalKcal : '' %>">
+                <span id="goalCheck" class="check"></span>  
+                <br>
 
 <!--                 <p class="fprofile_labels" id="goal_result">This is a good goal! 🙂</p>
  -->
@@ -241,8 +241,125 @@
     } else {
 
     }
- 
- 
+
+  
+
+    function goalKcals() {
+      let bmr = document.getElementById("bmr").value
+      let actLevel = document.getElementById("actLevel").value
+      let goal = document.getElementById("goal").value
+      let goalKcal = document.getElementById("goalKcal").value
+
+      let kgGainLose = document.getElementById("howMuch").value
+      let timeFrame = document.getElementById('timeFrame').value
+
+      let goalCheck = document.getElementById("goalCheck")
+
+      let little = bmr * 1.2
+      let light = bmr * 1.375
+      let medium = bmr * 1.55
+      let hard = bmr * 1.725
+      let intense = bmr * 1.9
+
+    //Gain 1 kilo in 30 days, 1kg = 2.20462 * 3500 = 7,716.17 kCal / 30 = 257.21. Total = little + added = daily
+   //                        let added = (kgGainLose * 2.20462) / timeFrame
+   // let totalNeeded = little + added
+      let added = ((kgGainLose * 2.20462) * (3500)) / timeFrame
+
+      let totalNeedGainLittle = little + added
+      let totalNeedGainLight = light + added
+      let totalNeedGainMedium = medium + added
+      let totalNeedGainHard = hard + added
+      let totalNeedGainIntense = intense + added
+
+      let totalNeedLoseLittle = little - added
+      let totalNeedLoseLight = light - added
+      let totalNeedLoseMedium = medium - added
+      let totalNeedLoseHard = hard - added
+      let totalNeedLoseIntense = intense - added
+
+      if (goal === "Maintain weight" && actLevel === "Little to no exercise" && Math.floor(little) == goalKcal) {
+       goalCheck.textContent = "Correct ✅";
+        
+      } else if (goal === "Maintain weight" && actLevel === "Lightly exercise (1-3 days a week)" && Math.floor(light) == goalKcal){
+        goalCheck.textContent = "Correct ✅";
+
+      } else if (goal === "Maintain weight" && actLevel === "Medium exercise (3-5 days a week)" && Math.floor(medium) == goalKcal){
+        goalCheck.textContent = "Correct ✅";
+
+      } else if (goal === "Maintain weight" && actLevel === "Hard exercise (6-7 days a week)" && Math.floor(hard) == goalKcal){
+        goalCheck.textContent = "Correct ✅";
+        
+      } else if (goal === "Maintain weight" && actLevel === "Intense exercise/sports" && Math.floor(intense) == goalKcal){
+        goalCheck.textContent = "Correct ✅";
+
+      }
+
+
+    //LOSE WEIGHT
+    else if (goal === "Lose weight" && actLevel === "Little to no exercise" && goalKcal == Math.floor(totalNeedLoseLittle)){
+        goalCheck.textContent = "Correct ✅"; 
+
+      }
+    else if (goal === "Lose weight" && actLevel === "Lightly exercise (1-3 days a week)" && goalKcal == Math.floor(totalNeedLoseLight)){
+        goalCheck.textContent = "Correct ✅";
+
+      } else if (goal === "Lose weight" && actLevel === "Medium exercise (3-5 days a week)" && goalKcal == Math.floor(totalNeedLoseMedium)){
+        goalCheck.textContent = "Correct ✅";
+
+      } else if (goal === "Lose weight" && actLevel === "Hard exercise (6-7 days a week)" && goalKcal == Math.floor(totalNeedLoseHard)){
+        goalCheck.textContent = "Correct ✅";
+
+      } else if (goal === "Lose weight" && actLevel === "Intense exercise/sports" && goalKcal == Math.floor(totalNeedLoseIntense)){
+        goalCheck.textContent = "Correct ✅";
+        
+      }
+
+
+      //GAIN WEIGHT
+      else if (goal === "Gain weight" && actLevel === "Little to no exercise" && goalKcal == Math.floor(totalNeedGainLittle)){
+        goalCheck.textContent = "Correct ✅"; 
+
+      }
+      else if (goal === "Gain weight" && actLevel === "Lightly exercise (1-3 days a week)" && goalKcal == Math.floor(totalNeedGainLight)){
+        goalCheck.textContent = "Correct ✅";
+
+      } else if (goal === "Gain weight" && actLevel === "Medium exercise (3-5 days a week)" && goalKcal == Math.floor(totalNeedGainMedium)){
+        goalCheck.textContent = "Correct ✅";
+
+      } else if (goal === "Gain weight" && actLevel === "Hard exercise (6-7 days a week)" && goalKcal == Math.floor(totalNeedGainHard)){
+        goalCheck.textContent = "Correct ✅";
+
+      } else if (goal === "Gain weight" && actLevel === "Intense exercise/sports" && goalKcal == Math.floor(totalNeedGainIntense)){
+        goalCheck.textContent = "Correct ✅";
+        
+      } else {
+        goalCheck.textContent = "Incorrect ❌"
+      }
+  
+console.log("MAINTAIN")
+      console.log(Math.floor(little))
+console.log(Math.floor(light))
+console.log(Math.floor(medium))
+console.log(Math.floor(hard))
+console.log(Math.floor(intense))
+
+console.log("GAIN")
+console.log(Math.floor(totalNeedGainLittle))
+console.log(Math.floor(totalNeedGainLight))
+console.log(Math.floor(totalNeedGainMedium))
+console.log(Math.floor(totalNeedGainHard))
+console.log(Math.floor(totalNeedGainIntense))
+
+console.log("LOSE")
+console.log(Math.floor(totalNeedLoseLittle))
+console.log(Math.floor(totalNeedLoseLight))
+console.log(Math.floor(totalNeedLoseMedium))
+console.log(Math.floor(totalNeedLoseHard))
+console.log(Math.floor(totalNeedLoseIntense))
+
+    }
+
     let bmrCorrectSymbol = document.getElementById('bmrCheck')
    
     let bmrVal = document.getElementById('bmr').value
@@ -307,10 +424,10 @@
     let weightUser = document.getElementById('weight').value
     let heightUser = document.getElementById('Height').value
 
-    let bmrMen = 88.362 + (13.397 * weightUser) + (4.799 * heightUser) - (5.677 * ageUser)
+    let bmrMen = 66 + (13.7 * weightUser) + (5 * heightUser) - (6.8 * ageUser)
     let bmrMenRounded = bmrMen.toFixed(2)
 
-    let bmrWomen = 447.593 + (9.247 * weightUser) + (3.098 * heightUser) - (4.330 * ageUser)
+    let bmrWomen = 655 + (9.6 * weightUser) + (1.8 * heightUser) - (4.7 * ageUser)
     let bmrWomenRounded = bmrWomen.toFixed(2)
 
     if (sexUser == "Male" && bmrMenRounded == bmrVal) {
@@ -319,11 +436,13 @@
       bmrCorrectSymbol.innerText = "Correct ✅"
     } else {
       bmrCorrectSymbol.innerText = "Incorrect ❌"
-      console.log(bmrMenRounded)
-      console.log(bmrWomenRounded)
+      console.log("BMR FOR MEN: ", bmrMenRounded)
+      console.log("BMR FOR WOMEN: ", bmrWomenRounded)
 
     }
   }
+
+  goalKcals()
 
 function parseJwt2 (token2) { 
         var base64Url = token2.split('.')[1];
