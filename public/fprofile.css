@@ -318,3 +318,8 @@ select, input[type="text"], input[type="number"] {
     margin-bottom: 0.8rem;
     
 }
+#fitness-profile-select {
+    font-size: 20px;
+    padding: 8px;
+    height: 42px;
+  }

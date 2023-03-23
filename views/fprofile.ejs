@@ -40,18 +40,24 @@
 
 
     <!--Main Page Content-->
+
+   
+
     <div id="student-links">
-      <h2>List of currently available fitness profile :</h2>
+      <h2>List of currently available fitness logs: (Click the names to view)</h2>
       <% if (data && data.length > 0) { %>
-        <ul>
-          <% data.forEach(function(item) { %>
-            <% if (item.type === 'Student') { %>
-              <li><a href="/fprofile?decodedID=<%= item.idFromUser._id %>"><%= item.fullname %></a></li>
-            <% } %>
-          <% }); %>
-        </ul>
-      <% } else { %>
-        <p>No data available</p>
+        <div class="flex-all">
+          <div class="half">
+            <select id="fitness-profile-select">
+              <option value="">Select a student...</option>
+              <% data.forEach(function(item) { %>
+                <% if (item.type === 'Student') { %>
+                  <option value="/fprofile?decodedID=<%= item.idFromUser._id %>"><%= item.fullname %></option>
+                <% } %>
+              <% }); %>
+            </select>
+          </div>
+        </div>
       <% } %>
     </div>
 
@@ -586,7 +592,12 @@ if (decodedID) {
   // Redirect to the same URL with decodedID query string appended
   window.location.href = `/fprofile?decodedID=${id}`;
 }
-  
+document.getElementById('fitness-profile-select').addEventListener('change', function() {
+    var selectedValue = this.value;
+    if (selectedValue !== '') {
+      window.location.href = selectedValue;
+    }
+  }); 
 
     </script>
 </body>

@@ -566,3 +566,8 @@ textarea {
 .half {
     width: 25%;
 }
+#fitness-log-select {
+    font-size: 20px;
+    padding: 8px;
+    height: 42px;
+  }

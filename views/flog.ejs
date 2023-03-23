@@ -42,7 +42,6 @@
     <i class="bi bi-arrow-down down-icon"></i>
 </a>
 
-
     <!--Main Page Content-->
 
     
@@ -59,44 +58,25 @@
                 <option value=4>4</option>
             </select> -->
             <h3>Day 1</h3>
-            
 
             <div id="student-links">
-                <h2>List of currently available fitness log : (Click the names to view)</h2>
+                <h2>List of currently available fitness logs: (Click the names to view)</h2>
                 <% if (data && data.length > 0) { %>
-                  <ul>
-                    <% data.forEach(function(item) { %>
-                      <% if (item.type === 'Student') { %>
-                        <div class="flex-all">
-                            <div class="half">
-                        <li><a href="/flog?decodedID=<%= item.idFromUser._id %>"><%= item.fullname %></a></li>
-                    </div>
-                <!-- <div class="half">
-                        <label>Grade
-                            <br>
-                            <input type="number" id="grade-<%= item.idFromUser._id %>" class="gradeInp" value="<%= item.grade %>">
-                        </label>
-                    </div>
+                  <div class="flex-all">
                     <div class="half">
-                        <label>Feedback                       
-                            <input type="text" id="feedback-<%= item.idFromUser._id %>" class="feedbackInp" value="<%= item.feedback %>">
-                        </label>
+                      <select id="fitness-log-select">
+                        <option value="">Select a student...</option>
+                        <% data.forEach(function(item) { %>
+                          <% if (item.type === 'Student') { %>
+                            <option value="/flog?decodedID=<%= item.idFromUser._id %>"><%= item.fullname %></option>
+                          <% } %>
+                        <% }); %>
+                      </select>
                     </div>
-                    <div class="half">
-                        <br> 
-                            <button type="button" id="<%= item.idFromUser._id %>" onclick="gradeFeedback(event)" class="giveBtn" name="remove">Give Grade and Feedback</button>
-                        </div> -->
-                        </div>
-                            <% } %>
-                    <% }); %>
-                  </ul>
-                <% } else { %>
-                  <p>No data available</p>
+                  </div>
                 <% } %>
               </div>
-       
-            
-              
+ 
             <section class="section-log">
                 <h2>SLEEP LOG</h2>
                     <ul>
@@ -316,7 +296,6 @@
                 </div>
                 </div>
 
-
             <div class="last">
                 <div class="steps">
                     <h4>NUMBER OF STEPS FOR THE DAY</h4>
@@ -362,7 +341,6 @@
                     </div> -->
                 </div>
 
-
                 <div class="flex-row">
                     <div class="food-time">
                         <input type="time" name="foodTime2" id="foodTime2" value="<%= flog && flog.foodTime2 || '' %>">
@@ -381,7 +359,6 @@
                     </div> -->
                     
                 </div>
-
 
            
                 <div class="flex-row">
@@ -464,7 +441,6 @@
                     <h4 style="color: white; text-align: right; padding-right: 22%; margin-top: 1%;">Surplus</h4>
                 </div>
 
-
     </div>
             </section>
 
@@ -519,7 +495,6 @@
     rangeInputs.forEach(input => {
     input.addEventListener('input', handleInputChange)
     })
-
 
     function parseJwt2 (token2) { 
         var base64Url = token2.split('.')[1];
@@ -589,7 +564,6 @@ const form = document.getElementById('flog-form')
         const calorieBurned5 = document.getElementById('calorieBurned5').value
         const numSteps = document.getElementById('numSteps').value
         const totalCaloriesBurned = document.getElementById('totalCaloriesBurned').value
-
 
         //FOOD LOG
         const foodTime1 = document.getElementById('foodTime1').value
@@ -700,7 +674,6 @@ const form = document.getElementById('flog-form')
         }
       }
 
-
       /* function gradeFeedback(event) {
   const flogId = event.target.id;
   const grade = document.getElementById(`grade-${flogId}`).value;
@@ -768,7 +741,6 @@ console.log(feedback)
 }
 
 
-
 function parseJwt (token) { 
         var base64Url = token.split('.')[1];
         var base64 = decodeURIComponent(atob(base64Url).split('').map(function(c) {
@@ -784,6 +756,7 @@ const { id } = parseJwt(token);
 const urlParams = new URLSearchParams(window.location.search);
 const decodedID = urlParams.get('decodedID');
 
+       
 
 
 if (decodedID) {
@@ -804,6 +777,14 @@ if (decodedID) {
 }
 
 
+
+document.getElementById('fitness-log-select').addEventListener('change', function() {
+    var selectedValue = this.value;
+    if (selectedValue !== '') {
+      window.location.href = selectedValue;
+    }
+  });
+
  function changeSlider() {
     let moodOptions = document.getElementById('moodOptions')
     let moodSlider = document.getElementById('moodSlider')
@@ -821,6 +802,8 @@ if (decodedID) {
     changeSlider();
   };
  
+
     </script>
 </body>
 </html>
+
