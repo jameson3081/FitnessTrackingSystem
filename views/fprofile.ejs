@@ -129,7 +129,7 @@
                 <input type="number" id = "age" name = "age" value="<%= fprofile && fprofile.age || '' %>" onchange="bmrChecker()">
 
                 <label for="BMR" class = "fprofile_labels" id="bmrlabel">BMR: </label>
-                <input type="number" id = "bmr" name = "BMR" value="<%= fprofile && fprofile.bmr || '' %>" onchange="bmrChecker()" step="0.01">
+                <input type="number" id = "bmr" name = "BMR" value="<%= fprofile && fprofile.bmr || '' %>" onchange="bmrChecker(); goalKcals()"" step="0.01">
                 <span id="bmrCheck" class="check"></span>  
                 <br>
                 </div>
@@ -139,7 +139,7 @@
                 <input type="number" id = "Height" class = "heightweight" name = "Height" value="<%= fprofile && fprofile.height || '' %>" onchange="bmiChecker(); bmrChecker()">
                     
                 <label for="actLevel" class = "fprofile_labels" id = actLevelLabel>Activity level:</label>
-                <select name="actLevel" id="actLevel" class="combobox">
+                <select name="actLevel" id="actLevel" class="combobox" onchange="goalKcals()">
 
                   <option value="" <% if (!fprofile || !fprofile.act) { %>selected<% } %>></option>
                   <option value="Little to no exercise" <% if (fprofile && fprofile.act === 'Little to no exercise') { %>selected<% } %>>Little to no exercise</option>
@@ -164,7 +164,7 @@
                 <br>
                 
                 <label for="goal" class = "fprofile_labels" id="goal_label">Goal: </label>
-                <select name="goal" id="goal" class="combobox">
+                <select name="goal" id="goal" class="combobox" onchange="goalKcals()">
                   <option value="" <% if (!fprofile || !fprofile.goal) { %>selected<% } %>></option>
                   <option value="Maintain weight" <% if (fprofile && fprofile.goal === 'Maintain weight') { %>selected<% } %>>Maintain weight</option>
                   <option value="Lose weight" <% if (fprofile && fprofile.goal === 'Lose weight') { %>selected<% } %>>Lose weight</option>
@@ -172,7 +172,7 @@
                 </select>
 <br>
                 <label for="howMuch" class = "fprofile_labels" id = "kglabel">How much in kg?: </label>
-                <select name="howMuch" id="howMuch" class="combobox">
+                <select name="howMuch" id="howMuch" class="combobox" onchange="goalKcals()">
 
                   <option value="" <% if (!fprofile || !fprofile.kg) { %>selected<% } %>></option>
                   <option value="0" <% if (fprofile && fprofile.kg === '0') { %>selected<% } %>>0</option>
@@ -201,7 +201,7 @@
                 <br>
 
                 <label for="timeFrame" class = "fprofile_labels">Time frame (days): </label>
-                <select name="timeFrame" id="timeFrame" class="combobox">
+                <select name="timeFrame" id="timeFrame" class="combobox" onchange="goalKcals()">
                   <option value="" <% if (!fprofile || !fprofile.time) { %>selected<% } %>></option>
                   <option value="30" <% if (fprofile && fprofile.time === '30') { %>selected<% } %>>30</option>
                   <option value="60" <% if (fprofile && fprofile.time === '60') { %>selected<% } %>>60</option>
@@ -344,25 +344,25 @@
       }
   
 console.log("MAINTAIN")
-      console.log(Math.floor(little))
-console.log(Math.floor(light))
-console.log(Math.floor(medium))
-console.log(Math.floor(hard))
-console.log(Math.floor(intense))
+      console.log(Math.floor(little), "LITTLE")
+console.log(Math.floor(light), "LIGHT")
+console.log(Math.floor(medium), "MEDIUM")
+console.log(Math.floor(hard), "HARD")
+console.log(Math.floor(intense), "INTENSE")
 
 console.log("GAIN")
-console.log(Math.floor(totalNeedGainLittle))
-console.log(Math.floor(totalNeedGainLight))
-console.log(Math.floor(totalNeedGainMedium))
-console.log(Math.floor(totalNeedGainHard))
-console.log(Math.floor(totalNeedGainIntense))
+console.log(Math.floor(totalNeedGainLittle), "LITTLE")
+console.log(Math.floor(totalNeedGainLight), "LIGHT")
+console.log(Math.floor(totalNeedGainMedium), "MEDIUM")
+console.log(Math.floor(totalNeedGainHard), "HARD")
+console.log(Math.floor(totalNeedGainIntense), "INTENSE")
 
 console.log("LOSE")
-console.log(Math.floor(totalNeedLoseLittle))
-console.log(Math.floor(totalNeedLoseLight))
-console.log(Math.floor(totalNeedLoseMedium))
-console.log(Math.floor(totalNeedLoseHard))
-console.log(Math.floor(totalNeedLoseIntense))
+console.log(Math.floor(totalNeedLoseLittle), "LITTLE")
+console.log(Math.floor(totalNeedLoseLight), "LIGHT")
+console.log(Math.floor(totalNeedLoseMedium), "MEDIUM")
+console.log(Math.floor(totalNeedLoseHard), "HARD")
+console.log(Math.floor(totalNeedLoseIntense), "INTENSE")
 
     }
 
@@ -467,6 +467,7 @@ if (!token2) {
   studentLinks.style.display = "none";
 } else if (typeacc === "Admin") {
   studentLinks.style.display = "block";
+  document.getElementById('saveButton').style.display = "none"
 } else {
   studentLinks.style.display = "none";
 }
