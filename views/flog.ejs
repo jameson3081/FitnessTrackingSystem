@@ -790,7 +790,7 @@ document.getElementById('fitness-log-select').addEventListener('change', functio
 //LETS THE SELECTED ITEM IN THE DROPDOWN MENU STAY UPON RELOAD OF THE PAGE
 document.addEventListener('DOMContentLoaded', function() {
   var selectEl = document.getElementById('fitness-log-select');
-  var selectedValue = localStorage.getItem('selectedValue');
+  var selectedValue = sessionStorage.getItem('selectedValue');
   if (selectedValue) {
     selectEl.value = selectedValue;
   }else{
@@ -800,7 +800,7 @@ document.addEventListener('DOMContentLoaded', function() {
   selectEl.addEventListener('change', function() {
     var value = selectEl.value;
     if (value) {
-      localStorage.setItem('selectedValue', value);
+      sessionStorage.setItem('selectedValue', value);
       window.location.href = value;
     }
   });
