@@ -778,23 +778,21 @@ if (decodedID) {
 }
 
 
-/* issue where the selected dropdown menu item doesn't stay upon reloading the page.
+/*There's an issue where the selected dropdown menu item doesn't stay upon reloading the page.
 document.getElementById('fitness-log-select').addEventListener('change', function() {
     var selectedValue = this.value;
     if (selectedValue !== '') {
       window.location.href = selectedValue;
     }
   });
-*/
 
-//LETS THE SELECTED ITEM IN THE DROPDOWN MENU STAY UPON RELOAD OF THE PAGE
+*/
+//LETS THE SELECTED ITEM IN THE DROPDOWN MENU STAY UPON RELOAD OF THE PAGE(BUGGY ON DEPLOYED BUT WORKS ON LOCALHOST)
 document.addEventListener('DOMContentLoaded', function() {
   var selectEl = document.getElementById('fitness-log-select');
   var selectedValue = sessionStorage.getItem('selectedValue');
   if (selectedValue) {
     selectEl.value = selectedValue;
-  }else{
-    return
   }
 
   selectEl.addEventListener('change', function() {
@@ -804,6 +802,15 @@ document.addEventListener('DOMContentLoaded', function() {
       window.location.href = value;
     }
   });
+
+  // Set the selected attribute on the option element that matches the selected value
+  var options = selectEl.options;
+  for (var i = 0; i < options.length; i++) {
+    if (options[i].value === selectedValue) {
+      options[i].selected = true;
+      break;
+    }
+  }
 });
 
 

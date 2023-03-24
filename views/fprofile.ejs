@@ -593,13 +593,15 @@ if (decodedID) {
   // Redirect to the same URL with decodedID query string appended
   window.location.href = `/fprofile?decodedID=${id}`;
 }
-/* issue where the selected dropdown menu item doesn't stay upon reloading the page.
+
+/* tHERE'S AN issue where the selected dropdown menu item doesn't stay upon reloading the page.
 document.getElementById('fitness-profile-select').addEventListener('change', function() {
     var selectedValue = this.value;
     if (selectedValue !== '') {
       window.location.href = selectedValue;
     }
   }); 
+
 */
 
 //LETS THE SELECTED ITEM IN THE DROPDOWN MENU STAY UPON RELOAD OF THE PAGE
@@ -608,8 +610,6 @@ document.addEventListener('DOMContentLoaded', function() {
   var selectedValue = sessionStorage.getItem('selectedValue');
   if (selectedValue) {
     selectEl.value = selectedValue;
-  }else{
-    return
   }
 
   selectEl.addEventListener('change', function() {
@@ -619,6 +619,15 @@ document.addEventListener('DOMContentLoaded', function() {
       window.location.href = value;
     }
   });
+
+  // Set the selected attribute on the option element that matches the selected value
+  var options = selectEl.options;
+  for (var i = 0; i < options.length; i++) {
+    if (options[i].value === selectedValue) {
+      options[i].selected = true;
+      break;
+    }
+  }
 });
     </script>
 </body>
