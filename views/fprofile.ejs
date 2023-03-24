@@ -468,8 +468,13 @@ if (!token2) {
 } else if (typeacc === "Admin") {
   studentLinks.style.display = "block";
   document.getElementById('saveButton').style.display = "none"
+  let formId = document.getElementById('fprofile-form')
+  formId.onkeydown = function(event) {
+    return event.key != 'Enter';
+  }
 } else {
   studentLinks.style.display = "none";
+  
 }
 
 

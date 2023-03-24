@@ -517,6 +517,10 @@ if (!token2) {
   document.getElementById('feedback1').removeAttribute('readonly')
   document.getElementById('grade1').removeAttribute('disabled')
   document.getElementById('save-btn').style.display = "none"
+  let formId = document.getElementById('flog-form')
+  formId.onkeydown = function(event) {
+    return event.key != 'Enter';
+  }
 } else {
   studentLinks.style.display = "none";
   document.getElementById('giveGrade').style.display = "none"
