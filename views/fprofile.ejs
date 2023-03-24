@@ -44,12 +44,12 @@
    
 
     <div id="student-links">
-      <h2>List of currently available fitness logs: (Click the names to view)</h2>
+      <h2>List of Currently Available Fitness Logs: (Click the names to view)</h2>
       <% if (data && data.length > 0) { %>
         <div class="flex-all">
           <div class="half">
             <select id="fitness-profile-select">
-              <option value="">Select a student...</option>
+              <option value="">SELECT STUDENT</option>
               <% data.forEach(function(item) { %>
                 <% if (item.type === 'Student') { %>
                   <option value="/fprofile?decodedID=<%= item.idFromUser._id %>"><%= item.fullname %></option>
