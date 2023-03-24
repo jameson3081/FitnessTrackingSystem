@@ -625,8 +625,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
-  // Set the selected attribute on the option element that matches the selected value
-  var options = selectEl.options;
+  var options = selectEl.options; // Set the selected attribute on the option element that matches the selected value
   for (var i = 0; i < options.length; i++) {
     if (options[i].value === selectedValue) {
       options[i].selected = true;

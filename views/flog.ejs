@@ -791,7 +791,7 @@ document.getElementById('fitness-log-select').addEventListener('change', functio
   });
 
 */
-//LETS THE SELECTED ITEM IN THE DROPDOWN MENU STAY UPON RELOAD OF THE PAGE(BUGGY ON DEPLOYED BUT WORKS ON LOCALHOST)
+//LETS THE SELECTED ITEM IN THE DROPDOWN MENU STAY UPON RELOAD OF THE PAGE
 document.addEventListener('DOMContentLoaded', function() {
   var selectEl = document.getElementById('fitness-log-select');
   var selectedValue = sessionStorage.getItem('selectedValue');
@@ -807,8 +807,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
-  // Set the selected attribute on the option element that matches the selected value
-  var options = selectEl.options;
+  var options = selectEl.options; // Set the selected attribute on the option element that matches the selected value
   for (var i = 0; i < options.length; i++) {
     if (options[i].value === selectedValue) {
       options[i].selected = true;
