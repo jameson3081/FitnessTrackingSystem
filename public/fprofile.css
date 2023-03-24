@@ -291,7 +291,7 @@ select, input[type="text"], input[type="number"] {
 /* PAGE NAME */
     
 #student-links {
-    width: 52%;
+    width: 1000px;
     margin: auto;
     background: #782924;
     color: #ECEFF2;
