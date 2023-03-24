@@ -291,9 +291,10 @@ select, input[type="text"], input[type="number"] {
 /* PAGE NAME */
     
 #student-links {
-    width: 52%;
+    width: 1000px;
     margin: auto;
-    background: lightgreen;
+    background: #782924;
+    color: #ECEFF2;
     padding: 1rem;
     margin-top: 2rem;
 }
@@ -322,4 +323,6 @@ select, input[type="text"], input[type="number"] {
     font-size: 20px;
     padding: 8px;
     height: 42px;
+    background-color: #FEC00F;
+    color: #2D2427;
   }

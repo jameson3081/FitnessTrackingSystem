@@ -44,12 +44,12 @@
    
 
     <div id="student-links">
-      <h2>List of currently available fitness logs: (Click the names to view)</h2>
+      <h2>List of Currently Available Fitness Logs: (Click the names to view)</h2>
       <% if (data && data.length > 0) { %>
         <div class="flex-all">
           <div class="half">
             <select id="fitness-profile-select">
-              <option value="">Select a student...</option>
+              <option value="">SELECT STUDENT</option>
               <% data.forEach(function(item) { %>
                 <% if (item.type === 'Student') { %>
                   <option value="/fprofile?decodedID=<%= item.idFromUser._id %>"><%= item.fullname %></option>
@@ -598,6 +598,8 @@ if (decodedID) {
   // Redirect to the same URL with decodedID query string appended
   window.location.href = `/fprofile?decodedID=${id}`;
 }
+
+/* tHERE'S AN issue where the selected dropdown menu item doesn't stay upon reloading the page.
 document.getElementById('fitness-profile-select').addEventListener('change', function() {
     var selectedValue = this.value;
     if (selectedValue !== '') {
@@ -605,6 +607,33 @@ document.getElementById('fitness-profile-select').addEventListener('change', fun
     }
   }); 
 
+*/
+
+//LETS THE SELECTED ITEM IN THE DROPDOWN MENU STAY UPON RELOAD OF THE PAGE
+document.addEventListener('DOMContentLoaded', function() {
+  var selectEl = document.getElementById('fitness-profile-select');
+  var selectedValue = sessionStorage.getItem('selectedValue');
+  if (selectedValue) {
+    selectEl.value = selectedValue;
+  }
+
+  selectEl.addEventListener('change', function() {
+    var value = selectEl.value;
+    if (value) {
+      sessionStorage.setItem('selectedValue', value);
+      window.location.href = value;
+    }
+  });
+
+  // Set the selected attribute on the option element that matches the selected value
+  var options = selectEl.options;
+  for (var i = 0; i < options.length; i++) {
+    if (options[i].value === selectedValue) {
+      options[i].selected = true;
+      break;
+    }
+  }
+});
     </script>
 </body>
 </html>
