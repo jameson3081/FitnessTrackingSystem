@@ -121,7 +121,7 @@
                   <option value="Female" <% if (fprofile && fprofile.sex === 'Female') { %>selected<% } %>>Female</option>
                   </select>
                 <label for="BMI" class = "fprofile_labels" id = "bmilabel">BMI: </label>
-                <input type="number" id = "bmi" name = "BMI" value="<%= fprofile && fprofile.bmi || '' %>" onchange="bmiChecker()" step="0.01">
+                <input type="number" id = "bmi" name = "BMI" value="<%= fprofile && fprofile.bmi || '' %>" onchange="bmiChecker(); BMItranslation()" step="0.01">
                 <span id="bmiCheck" class="check"></span>    
     
                 <br>
@@ -129,7 +129,7 @@
                 <input type="number" id = "age" name = "age" value="<%= fprofile && fprofile.age || '' %>" onchange="bmrChecker()">
 
                 <label for="BMR" class = "fprofile_labels" id="bmrlabel">BMR: </label>
-                <input type="number" id = "bmr" name = "BMR" value="<%= fprofile && fprofile.bmr || '' %>" onchange="bmrChecker(); goalKcals()"" step="0.01">
+                <input type="number" id = "bmr" name = "BMR" value="<%= fprofile && fprofile.bmr || '' %>" onchange="bmrChecker(); goalKcals()" step="1">
                 <span id="bmrCheck" class="check"></span>  
                 <br>
                 </div>
@@ -154,7 +154,8 @@
                 <input type="number" id = "weight" class = "heightweight" name = "weight" value="<%= fprofile && fprofile.weight || '' %>" onchange="bmiChecker(); bmrChecker()">
                 <br>
                 
-                
+                <span id="translation">Translation: </span>
+
             
     
 
@@ -375,11 +376,11 @@ console.log(Math.floor(totalNeedLoseIntense), "INTENSE")
     let weightUser = document.getElementById('weight').value
     let heightUser = document.getElementById('Height').value
 
-    let bmrMen = 88.362 + (13.397 * weightUser) + (4.799 * heightUser) - (5.677 * ageUser)
-    let bmrMenRounded = bmrMen.toFixed(2)
+    let bmrMen = 66 + (13.7 * weightUser) + (5 * heightUser) - (6.8 * ageUser)
+    let bmrMenRounded = bmrMen.toFixed(0)
 
     let bmrWomen = 447.593 + (9.247 * weightUser) + (3.098 * heightUser) - (4.330 * ageUser)
-    let bmrWomenRounded = bmrWomen.toFixed(2)
+    let bmrWomenRounded = bmrWomen.toFixed(0)
 
     if (sexUser == "Male" && bmrMenRounded == bmrVal) {
       bmrCorrectSymbol.innerText = "Correct ✅"
@@ -431,13 +432,15 @@ console.log(Math.floor(totalNeedLoseIntense), "INTENSE")
     let heightUser = document.getElementById('Height').value
 
     let bmrMen = 66 + (13.7 * weightUser) + (5 * heightUser) - (6.8 * ageUser)
-    let bmrMenRounded = bmrMen.toFixed(2)
+    let bmrMenRounded = bmrMen.toFixed(0)
 
     let bmrWomen = 655 + (9.6 * weightUser) + (1.8 * heightUser) - (4.7 * ageUser)
-    let bmrWomenRounded = bmrWomen.toFixed(2)
+    let bmrWomenRounded = bmrWomen.toFixed(0)
 
     if (sexUser == "Male" && bmrMenRounded == bmrVal) {
       bmrCorrectSymbol.innerText = "Correct ✅"
+      console.log("BMR FOR MEN: ", bmrMenRounded)
+      console.log("BMR FOR WOMEN: ", bmrWomenRounded)
     } else if (sexUser == "Female" && bmrWomenRounded == bmrVal) {
       bmrCorrectSymbol.innerText = "Correct ✅"
     } else {
@@ -477,7 +480,24 @@ if (!token2) {
   
 }
 
+//Translation for BMI
+BMItranslation()
+  function BMItranslation() {
+    let bmiVal = document.getElementById('bmi').value
+    let translation = document.getElementById('translation')
 
+    if (bmiVal < 18.5) {
+      translation.textContent = "Translation: Underweight"
+    } else if (bmiVal >= 18.5 && bmiVal <= 24.9 ) {
+      translation.textContent = "Translation: Normal"
+    } else if (bmiVal => 25 && bmiVal <= 29.9) {
+      translation.textContent = "Translation: Overweight"
+    } else if (bmiVal => 30) {
+      translation.textContent = "Translation: Obese"
+    } else {
+      translation.textContent += " "
+    }
+  }
 
 
 

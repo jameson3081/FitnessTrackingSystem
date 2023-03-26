@@ -326,3 +326,9 @@ select, input[type="text"], input[type="number"] {
     background-color: #FEC00F;
     color: #2D2427;
   }
+
+  #translation {
+    font-family: "roboto";
+    font-weight: bold;
+    color: white;
+  }
