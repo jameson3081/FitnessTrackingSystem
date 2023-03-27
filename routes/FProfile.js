@@ -15,7 +15,7 @@ const fprofileData = new mongoose.Schema({
     goal: {type: String, required: true},
     time: {type: String, required: true},
     kg: {type: String, required: true},
-    goalKcal: {type: String, required: true},
+    goalKcal: {type: Number, required: true},
 },
 {collection: 'user-profiles'}
 )

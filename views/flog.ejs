@@ -37,10 +37,10 @@
         </div>
 
         <!--SHORTCUT FOR SAVE BTN-->
-<a href="#save-btn" class="down">
-    <p>Click me to go down</p>
-    <i class="bi bi-arrow-down down-icon"></i>
-</a>
+    <a href="#save-btn" class="down">
+        <p>Click me to go down</p>
+        <i class="bi bi-arrow-down down-icon"></i>
+    </a>
 
     <!--Main Page Content-->
 
@@ -155,7 +155,7 @@
                     </div>
                     <div class="calorie-burned">
                         <h3>Calorie Burned</h3>
-                        <input type="number" name="calorieBurned1" id="calorieBurned1" value="<%= flog && flog.calorieBurned1|| '' %>">
+                        <input type="number" name="calorieBurned1" id="calorieBurned1" value="<%= flog && flog.calorieBurned1|| '' %>" >
                     </div>
                    <!--  <div class="activity-snippet">
                         <h3>Snippet</h3>
@@ -191,7 +191,7 @@
                         <input type="number" name="duration2" id="duration2" value="<%= flog && flog.duration2|| '' %>">
                     </div>
                     <div class="calorie-burned">
-                        <input type="number" name="calorieBurned2" id="calorieBurned2" value="<%= flog && flog.calorieBurned2|| '' %>">
+                        <input type="number" name="calorieBurned2" id="calorieBurned2" value="<%= flog && flog.calorieBurned2|| '' %>" >
                     </div>
                     <!-- <div class="activity-snippet">
                         <input type="file" name="activity-snippet2" id="activity-snippet2">
@@ -224,7 +224,7 @@
                         <input type="number" name="duration3" id="duration3" value="<%= flog && flog.duration3|| '' %>">
                     </div>
                     <div class="calorie-burned">
-                        <input type="number" name="calorieBurned3" id="calorieBurned3" value="<%= flog && flog.calorieBurned3|| '' %>">
+                        <input type="number" name="calorieBurned3" id="calorieBurned3" value="<%= flog && flog.calorieBurned3|| '' %>" >
                     </div>
                     <!-- <div class="activity-snippet">
                         <input type="file" name="activity-snippet3" id="activity-snippet3">
@@ -256,7 +256,7 @@
                         <input type="number" name="duration4" id="duration4" value="<%= flog && flog.duration4|| '' %>">
                     </div>
                     <div class="calorie-burned">
-                        <input type="number" name="calorieBurned4" id="calorieBurned4" value="<%= flog && flog.calorieBurned4|| '' %>">
+                        <input type="number" name="calorieBurned4" id="calorieBurned4" value="<%= flog && flog.calorieBurned4|| '' %>" >
                     </div>
                     <!-- <div class="activity-snippet">
                         <input type="file" name="activity-snippet4" id="activity-snippet4">
@@ -308,7 +308,7 @@
  -->
                 <div class="total-calories-burned">
                     <h4>TOTAL CALORIES BURNED</h4>
-                    <input type="number" name="totalCaloriesBurned" id="totalCaloriesBurned" value="<%= flog && flog.totalCaloriesBurned|| '' %>">
+                    <input type="number" name="totalCaloriesBurned" id="totalCaloriesBurned" value="<%= flog && flog.totalCaloriesBurned|| '' %>" onchange="add()" readonly>
                 </div>
             </div>
             
@@ -333,7 +333,7 @@
                     </div>
                     <div class="total-calories-food">
                         <h3>Total Calories</h3>
-                        <input type="number" name="totalCalories1" id="totalCalories1" value="<%= flog && flog.totalCalories1 || '' %>">
+                        <input type="number" name="totalCalories1" id="totalCalories1" value="<%= flog && flog.totalCalories1 || '' %>" onchange="add()">
                     </div>
                     <!-- <div class="food-snippet">
                         <h3>Snippet</h3>
@@ -352,7 +352,7 @@
                         <input type="text" name="beverage2" id="beverage2" value="<%= flog && flog.beverage2 || '' %>">
                     </div>
                     <div class="total-calories-food">
-                        <input type="number" name="totalCalories2" id="totalCalories2" value="<%= flog && flog.totalCalories2 || '' %>">
+                        <input type="number" name="totalCalories2" id="totalCalories2" value="<%= flog && flog.totalCalories2 || '' %>" onchange="add()">
                     </div>
                     <!-- <div class="food-snippet">
                         <input type="file" name="food-snippet2" id="food-snippet2">
@@ -372,7 +372,7 @@
                         <input type="text" name="beverage3" id="beverage3" value="<%= flog && flog.beverage3 || '' %>">
                     </div>
                     <div class="total-calories-food">
-                        <input type="number" name="totalCalories3" id="totalCalories3" value="<%= flog && flog.totalCalories3 || '' %>">
+                        <input type="number" name="totalCalories3" id="totalCalories3" value="<%= flog && flog.totalCalories3 || '' %>" onchange="add()">
                     </div>
                     <!-- <div class="food-snippet">
                         <input type="file" name="food-snippet3" id="food-snippet3">
@@ -391,7 +391,7 @@
                         <input type="text" name="beverage4" id="beverage4" value="<%= flog && flog.beverage4 || '' %>">
                     </div>
                     <div class="total-calories-food">
-                        <input type="number" name="totalCalories4" id="totalCalories4" value="<%= flog && flog.totalCalories4 || '' %>">
+                        <input type="number" name="totalCalories4" id="totalCalories4" value="<%= flog && flog.totalCalories4 || '' %>" onchange="add()">
                     </div>
                     <!-- <div class="food-snippet">
                         <input type="file" name="food-snippet4" id="food-snippet4">
@@ -409,7 +409,7 @@
                         <input type="text" name="beverage5" id="beverage5" value="<%= flog && flog.beverage5|| '' %>">
                     </div>
                     <div class="total-calories-food">
-                        <input type="number" name="totalCalories5" id="totalCalories5" value="<%= flog && flog.totalCalories5 || '' %>">
+                        <input type="number" name="totalCalories5" id="totalCalories5" value="<%= flog && flog.totalCalories5 || '' %>" onchange="add()">
                     </div>
                    <!--  <div class="food-snippet">
                         <input type="file" name="food-snippet5" id="food-snippet5">
@@ -425,15 +425,13 @@
             <!--     <div class="add-row-food">
                     <button id="add-food-rows" type="button" onclick="addFoodRow()">ADD ROW</button>
                 </div> -->
+                <input type="number" class="hidden-goalkcal" id="goalKcalFromUser" value="<%= goalKcal %>">
 
-                <div class="overall-total-calories">
-                    <h4>OVERALL TOTAL CALORIES</h4>
-                    <input type="number" name="overallFoodCalories" id="overallFoodCalories" value="<%= flog && flog.overallFoodCalories || '' %>">
-                </div>
+        
                 <br>
                 <div class="slider-container">
                     <h1 style="color: white; text-align: center; margin: 5rem 0; font-size: 1.5rem;">Am I eating more than, less than or just as I should?</h1>
-                <input type="range" min="1" max="3"  class="slider-food" id="deficitOrSurplus" value="<%= flog && flog.deficitOrSurplus || '' %>">
+                <input type="range" min="1" max="3"  class="slider-food" id="deficitOrSurplus" disabled>
                 
                 <div class="slider-food-label-container" style="width: 100%; display: flex; justify-content: space-between;">
                     <h4 style="color: white; text-align: left; padding-left: 23%; margin-top: 1%;">Deficit</h4>
@@ -441,9 +439,10 @@
                     <h4 style="color: white; text-align: right; padding-right: 22%; margin-top: 1%;">Surplus</h4>
                 </div>
 
+                
+
     </div>
             </section>
-
             <div class="save-container">
             <button class="save-record" id="save-btn" type="submit">SAVE RECORDS FOR TODAY</button>
             <h5 class="grade-feedback">GRADE AND FEEDBACK</h5>
@@ -527,6 +526,68 @@ if (!token2) {
 
 }
 
+function totalCaloriesBurned() {
+  let totalCalories = 0; // Initialize a variable to store the sum of the calories
+
+  for (let i = 1; i <= 5; i++) {
+    let inputVal = document.getElementById('calorieBurned' + i).value;
+    if (inputVal !== '') {
+      totalCalories += parseInt(inputVal);
+    }
+  }
+
+  // Set the value of the 'totalCaloriesBurned' element to the sum of the calories
+  document.getElementById('totalCaloriesBurned').value = totalCalories;
+
+  console.log("TOTAL CALORIES BURNED: " + totalCalories); // Log the result to the console
+  add()
+}
+
+document.getElementById('calorieBurned1').addEventListener('change', totalCaloriesBurned);
+document.getElementById('calorieBurned2').addEventListener('change', totalCaloriesBurned);
+document.getElementById('calorieBurned3').addEventListener('change', totalCaloriesBurned);
+document.getElementById('calorieBurned4').addEventListener('change', totalCaloriesBurned);
+document.getElementById('calorieBurned5').addEventListener('change', totalCaloriesBurned);
+
+function add() {
+  let goalKcal = document.getElementById('goalKcalFromUser').value
+    let totalCaloriesBurned = document.getElementById('totalCaloriesBurned').value
+
+  let totalFoodCalories = 0
+
+
+  // Check each totalCalories input field for a value and add it to the total
+  for (let i = 1; i <= 5; i++) {
+    let inputVal = document.getElementById('totalCalories' + i).value
+    if (inputVal !== '') {
+      totalFoodCalories += parseInt(inputVal)
+    }
+  }
+
+  
+
+  let OverallTotalCalories = totalFoodCalories - totalCaloriesBurned
+  let added = OverallTotalCalories - parseInt(goalKcal)
+  console.log("MINUSED: " + OverallTotalCalories)
+  console.log("GOAL KCAL: " + goalKcal)
+  console.log("MINUSED FROM OVERALL: " + added)
+
+  let deficitOrSurplus1 = document.getElementById('deficitOrSurplus')
+
+if (OverallTotalCalories < goalKcal) {
+    console.log("DEFICIT")
+    deficitOrSurplus1.value = 1
+} else if (OverallTotalCalories > goalKcal) {
+    console.log("SURPLUS")
+    deficitOrSurplus1.value = 3
+} else {
+   console.log("SUFFICIENT")
+   deficitOrSurplus1.value = 2
+}
+}
+
+add()
+
 //FOR SENDING DATA TO DATABASE (POST)
 
 const form = document.getElementById('flog-form')
@@ -591,7 +652,6 @@ const form = document.getElementById('flog-form')
         const totalCalories3 = document.getElementById('totalCalories3').value
         const totalCalories4 = document.getElementById('totalCalories4').value
         const totalCalories5 = document.getElementById('totalCalories5').value
-        const overallFoodCalories = document.getElementById('overallFoodCalories').value
         let deficitOrSurplus = document.getElementById('deficitOrSurplus').value
         
 
@@ -666,7 +726,6 @@ const form = document.getElementById('flog-form')
             totalCalories3,
             totalCalories4,
             totalCalories5,
-            overallFoodCalories,
             deficitOrSurplus,
             decodedID
           })

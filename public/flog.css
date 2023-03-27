@@ -574,3 +574,7 @@ textarea {
     background-color: #FEC00F;
     color: #2D2427;
   }
+
+.hidden-goalkcal {
+    display: none
+}

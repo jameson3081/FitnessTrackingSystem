@@ -54,8 +54,7 @@ const flogData = new mongoose.Schema({
     totalCalories3: {type: Number},
     totalCalories4: {type: Number},
     totalCalories5: {type: Number},
-    overallFoodCalories: {type: Number},
-    deficitOrSurplus: {type: Number},
+    deficitOrSurplus: {type: String},
     grade: {type: Number},
     feedback: {type: String}
 },

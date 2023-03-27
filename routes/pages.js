@@ -113,12 +113,18 @@ router.post("/submit", async (req, res) => {
 router.get("/flog", async(req,res) => {
   let decodedID = req.query.decodedID;
   let data = [];
+  let goalKcal = 0;
+  let currentFullname = "";
 
   try {
-    const fprofiles = await FProfile.find().select("idFromUser fullname section").populate('idFromUser', 'type')
+    const fprofiles = await FProfile.find().select("idFromUser fullname goalKcal section").populate('idFromUser', 'type')
 
     data = await Promise.all(fprofiles.map(async (fprofile) => {
       let flog = await FLog.findOne({ idFromUser: fprofile.idFromUser._id });
+      if (fprofile.idFromUser._id.toString() === decodedID) {
+        goalKcal = fprofile.goalKcal;
+        currentFullname = fprofile.fullname;
+      }
       return { 
         idFromUser: fprofile.idFromUser, 
         fullname: fprofile.fullname,
@@ -139,15 +145,16 @@ router.get("/flog", async(req,res) => {
 
     let flog = await FLog.findOne({ idFromUser: decodedID });
     if (flog) {
-      res.render("flog", { title: "Fitness Log With Data", flog, data: filteredData, uniqueSections });
+      res.render("flog", { title: "Fitness Log With Data", flog, data: filteredData, uniqueSections, goalKcal, currentFullname });
     } else {
-      res.render("flog", { title: "Fitness Log", flog, data: filteredData, uniqueSections });
+      res.render("flog", { title: "Fitness Log", flog, data: filteredData, uniqueSections, goalKcal, currentFullname });
     }
   } catch (error) {
     console.log(error);
     res.json({ status: "error", error: "An error occurred" });
   }
 });
+
 
 
 router.post("/flog", async (req, res) => {
@@ -215,7 +222,7 @@ router.post("/flog", async (req, res) => {
         );
         console.log("Flog data sent", flog);
         const data = await FLog.find().populate('idFromUser', 'email');
-        console.log(data)
+   
         res.json({ status: 'ok', data });
     } catch(error) {
         if (error.code === 11000) {
