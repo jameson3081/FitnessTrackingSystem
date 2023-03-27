@@ -37,7 +37,7 @@
         </div>
 
         <!--SHORTCUT FOR SAVE BTN-->
-    <a href="#save-btn" class="down">
+    <a href="#scroll-down" class="down">
         <p>Click me to go down</p>
         <i class="bi bi-arrow-down down-icon"></i>
     </a>
@@ -445,7 +445,7 @@
             </section>
             <div class="save-container">
             <button class="save-record" id="save-btn" type="submit">SAVE RECORDS FOR TODAY</button>
-            <h5 class="grade-feedback">GRADE AND FEEDBACK</h5>
+            <h5 class="grade-feedback" id="scroll-down">GRADE AND FEEDBACK</h5>
             <p class="score"><input type="number" class="score-inp" value="<%= flog && flog.grade || '' %>" id="grade1" disabled>/100</p>
             <textarea class="feedback-container" readonly name="grade-and-feedback" id="feedback1" cols="5" rows="5" value=""><%= flog ? flog.feedback || '' : '' %></textarea>
             <button type="button" onclick="gradeFeedback()" class="giveBtn" id="giveGrade">SUBMIT GRADE</button>
