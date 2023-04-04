@@ -50,13 +50,6 @@
         <main>
         <form id="flog-form">
             <h1 class="page-title">FITNESS LOG</h1>
-            <!-- <select name="day" id="day">
-                <option value="">SELECT DAY</option>
-                <option value=1>1</option>
-                <option value=2>2</option>
-                <option value=3>3</option>
-                <option value=4>4</option>
-            </select> -->
             <h3>Day 1</h3>
 
             <div id="student-links">
@@ -125,23 +118,41 @@
                 <h2>ACTIVITY LOG</h2>
                 <div class="types">
                 
+            
+
+                <div class="flex-types">
+                    <div class="act-types">
+                    <h3>Physical Activity</h3>
+                </div>
+                <div class="act-types">
+                    <h3>Type of Physical Activity</h3>
+                </div>
+                <div class="act-types">
+                    <h3>Intensity</h3>
+                </div>
+                <div class="act-types">
+                    <h3>Duration (Minutes)</h3>
+                </div>
+                <div class="act-types">
+                    <h3>Calorie Burned</h3>
+                </div>
+                </div>
+
+
                 <div class="flex-row">
                     <div class="phys-act">
-                        <h3>Physical Activity</h3>
-                        <input type="text" name="physicalAct1" id="physicalAct1" value="<%= flog && flog.physicalAct1|| '' %>">
+                        <input type="text" name="physicalAct1" id="physicalAct1" value="<%= flog && flog.physicalAct1|| '' %>" autocomplete="off">
                     </div>
                     <div class="type-act">
-                        <h3>Type of Physical Activity</h3>
                         <select name="typeOfPa1" id="typeOfPa1">
                             <option value="" <% if (!flog || !flog.typeOfPa1) { %>selected<% } %>></option>
-                            <option value="Endurance" <% if (flog && flog.typeOfPa1 === 'Endurance') { %>selected<% } %>>Endurance</option>
+                            <option value="Endurance" <% if (flog && flog.typeofPa1 === 'Endurance') { %>selected<% } %>>Endurance</option>
                             <option value="Strength" <% if (flog && flog.typeOfPa1 === 'Strength') { %>selected<% } %>>Strength</option>
                             <option value="Balance" <% if (flog && flog.typeOfPa1 === 'Balance') { %>selected<% } %>>Balance</option>
                             <option value="Flexibility" <% if (flog && flog.typeOfPa1 === 'Flexibility') { %>selected<% } %>>Flexibility</option>
                         </select>
                     </div>
                     <div class="intensity">
-                        <h3>Intensity</h3>
                         <select name="intensity1" id="intensity1">
                             <option value="" <% if (!flog || !flog.intensity1) { %>selected<% } %>></option>
                             <option value="Light" <% if (flog && flog.intensity1 === 'Light') { %>selected<% } %>>Light</option>
@@ -150,25 +161,17 @@
                         </select>
                     </div>
                     <div class="duration">
-                        <h3>Duration(Minutes)</h3>
                         <input type="number" name="duration1" id="duration1" value="<%= flog && flog.duration1|| '' %>">
                     </div>
                     <div class="calorie-burned">
-                        <h3>Calorie Burned</h3>
                         <input type="number" name="calorieBurned1" id="calorieBurned1" value="<%= flog && flog.calorieBurned1|| '' %>" >
                     </div>
-                   <!--  <div class="activity-snippet">
-                        <h3>Snippet</h3>
-                        <div class="two-img">
-                        <input type="file" accept="image/*" name="activity-snippet1" id="activity-snippet1">
-                        
-                    </div>
-                    </div> -->
+                  
                 </div>
 
                 <div class="flex-row">
                     <div class="phys-act">
-                        <input type="text" name="physicalAct2" id="physicalAct2" value="<%= flog && flog.physicalAct2|| '' %>">
+                        <input type="text" name="physicalAct2" id="physicalAct2" value="<%= flog && flog.physicalAct2|| '' %>" autocomplete="off">
                     </div>
                     <div class="type-act">
                         <select name="typeOfPa2" id="typeOfPa2">
@@ -181,10 +184,10 @@
                     </div>
                     <div class="intensity">
                         <select name="intensity2" id="intensity2">
-                            <option value="" <% if (!flog || !flog.intensity1) { %>selected<% } %>></option>
-                            <option value="Light" <% if (flog && flog.intensity1 === 'Light') { %>selected<% } %>>Light</option>
-                            <option value="Moderate" <% if (flog && flog.intensity1 === 'Moderate') { %>selected<% } %>>Moderate</option>
-                            <option value="Vigorous" <% if (flog && flog.intensity1 === 'Vigorous') { %>selected<% } %>>Vigorous</option>
+                            <option value="" <% if (!flog || !flog.intensity2) { %>selected<% } %>></option>
+                            <option value="Light" <% if (flog && flog.intensity2 === 'Light') { %>selected<% } %>>Light</option>
+                            <option value="Moderate" <% if (flog && flog.intensity2 === 'Moderate') { %>selected<% } %>>Moderate</option>
+                            <option value="Vigorous" <% if (flog && flog.intensity2 === 'Vigorous') { %>selected<% } %>>Vigorous</option>
                         </select>
                     </div>
                     <div class="duration">
@@ -193,15 +196,12 @@
                     <div class="calorie-burned">
                         <input type="number" name="calorieBurned2" id="calorieBurned2" value="<%= flog && flog.calorieBurned2|| '' %>" >
                     </div>
-                    <!-- <div class="activity-snippet">
-                        <input type="file" name="activity-snippet2" id="activity-snippet2">
-                    </div> -->
+                  
                 </div>
 
-                <!--EXTRA ROWS-->
                 <div class="flex-row">
                     <div class="phys-act">
-                        <input type="text" name="physicalAct3" id="physicalAct3" value="<%= flog && flog.physicalAct3|| '' %>">
+                        <input type="text" name="physicalAct3" id="physicalAct3" value="<%= flog && flog.physicalAct3|| '' %>" autocomplete="off">
                     </div>
                     <div class="type-act">
                         <select name="typeOfPa3" id="typeOfPa3">
@@ -226,14 +226,11 @@
                     <div class="calorie-burned">
                         <input type="number" name="calorieBurned3" id="calorieBurned3" value="<%= flog && flog.calorieBurned3|| '' %>" >
                     </div>
-                    <!-- <div class="activity-snippet">
-                        <input type="file" name="activity-snippet3" id="activity-snippet3">
-                    </div> -->
                 </div>
 
                 <div class="flex-row">
                     <div class="phys-act">
-                        <input type="text" name="physicalAct4" id="physicalAct4" value="<%= flog && flog.physicalAct4|| '' %>">
+                        <input type="text" name="physicalAct4" id="physicalAct4" value="<%= flog && flog.physicalAct4|| '' %>" autocomplete="off">
                     </div>
                     <div class="type-act">
                         <select name="typeOfPa4" id="typeOfPa4">
@@ -258,14 +255,11 @@
                     <div class="calorie-burned">
                         <input type="number" name="calorieBurned4" id="calorieBurned4" value="<%= flog && flog.calorieBurned4|| '' %>" >
                     </div>
-                    <!-- <div class="activity-snippet">
-                        <input type="file" name="activity-snippet4" id="activity-snippet4">
-                    </div> -->
                 </div>
 
                 <div class="flex-row">
                     <div class="phys-act">
-                        <input type="text" name="physicalAct5" id="physicalAct5" value="<%= flog && flog.physicalAct5|| '' %>">
+                        <input type="text" name="physicalAct5" id="physicalAct5" value="<%= flog && flog.physicalAct5|| '' %>" autocomplete="off">
                     </div>
                     <div class="type-act">
                         <select name="typeOfPa5" id="typeOfPa5">
@@ -278,7 +272,7 @@
                     </div>
                     <div class="intensity">
                         <select name="intensity5" id="intensity5">
-                            <option value="" <% if (!flog || !flog.intensity1) { %>selected<% } %>></option>
+                            <option value="" <% if (!flog || !flog.intensity5) { %>selected<% } %>></option>
                             <option value="Light" <% if (flog && flog.intensity5 === 'Light') { %>selected<% } %>>Light</option>
                             <option value="Moderate" <% if (flog && flog.intensity5 === 'Moderate') { %>selected<% } %>>Moderate</option>
                             <option value="Vigorous" <% if (flog && flog.intensity5 === 'Vigorous') { %>selected<% } %>>Vigorous</option>
@@ -290,24 +284,19 @@
                     <div class="calorie-burned">
                         <input type="number" name="calorieBurned5" id="calorieBurned5" value="<%= flog && flog.calorieBurned5|| '' %>">
                     </div>
-                    <!-- <div class="activity-snippet">
-                        <input type="file" name="activity-snippet5" id="activity-snippet5">
-                    </div> -->
                 </div>
                 </div>
 
+                <br><br><br><br><br><br><br>
             <div class="last">
                 <div class="steps">
                     <h4>NUMBER OF STEPS FOR THE DAY</h4>
                     <input type="number" name="numSteps" id="numSteps" value="<%= flog && flog.numSteps|| '' %>">
                 </div>
 
-               <!--  <div class="add-row">
-                    <button id="add-btn" type="button" onclick="add()">ADD ROW</button>
-                </div>
- -->
+     
                 <div class="total-calories-burned">
-                    <h4>TOTAL CALORIES BURNED</h4>
+                    <h4>TOTAL CALORIES BURNED (AUTO)</h4>
                     <input type="number" name="totalCaloriesBurned" id="totalCaloriesBurned" value="<%= flog && flog.totalCaloriesBurned|| '' %>" onchange="add()" readonly>
                 </div>
             </div>
@@ -318,27 +307,37 @@
                 <h2>FOOD LOG</h2>
                 <div class="types-2">
 
+                
+                    <div class="flex-foodType">
+                        <div class="foodTypes">
+                        <h3>Time</h3>
+                    </div>
+                    <div class="foodTypes">
+                        <h3>Meal</h3>
+                    </div>
+                    <div class="foodTypes">
+                        <h3>Beverage</h3>
+                    </div>
+                    <div class="foodTypes">
+                        <h3>Total Calories</h3>
+                    </div>
+                    </div>
+
+
                 <div class="flex-row">
                     <div class="food-time">
-                        <h3>Time</h3>
                         <input type="time" name="foodTime1" id="foodTime1" value="<%= flog && flog.foodTime1 || '' %>">
                     </div>
                     <div class="meal">
-                        <h3>Meal</h3>
-                        <input type="text" name="meal1" id="meal1" value="<%= flog && flog.meal1 || '' %>">
+                        <input type="text" name="meal1" id="meal1" value="<%= flog && flog.meal1 || '' %>" autocomplete="off">
                     </div>
                     <div class="beverage">
-                        <h3>Beverage</h3>
-                        <input type="text" name="beverage1" id="beverage1" value="<%= flog && flog.beverage1 || '' %>">
+                        <input type="text" name="beverage1" id="beverage1" value="<%= flog && flog.beverage1 || '' %>" autocomplete="off">
                     </div>
                     <div class="total-calories-food">
-                        <h3>Total Calories</h3>
                         <input type="number" name="totalCalories1" id="totalCalories1" value="<%= flog && flog.totalCalories1 || '' %>" onchange="add()">
                     </div>
-                    <!-- <div class="food-snippet">
-                        <h3>Snippet</h3>
-                        <input type="file" name="food-snippet1" id="food-snippet1">
-                    </div> -->
+                    
                 </div>
 
                 <div class="flex-row">
@@ -346,17 +345,14 @@
                         <input type="time" name="foodTime2" id="foodTime2" value="<%= flog && flog.foodTime2 || '' %>">
                     </div>
                     <div class="meal">
-                        <input type="text" name="meal2" id="meal2" value="<%= flog && flog.meal2 || '' %>">
+                        <input type="text" name="meal2" id="meal2" value="<%= flog && flog.meal2 || '' %>" autocomplete="off">
                     </div>
                     <div class="beverage">
-                        <input type="text" name="beverage2" id="beverage2" value="<%= flog && flog.beverage2 || '' %>">
+                        <input type="text" name="beverage2" id="beverage2" value="<%= flog && flog.beverage2 || '' %>" autocomplete="off">
                     </div>
                     <div class="total-calories-food">
                         <input type="number" name="totalCalories2" id="totalCalories2" value="<%= flog && flog.totalCalories2 || '' %>" onchange="add()">
                     </div>
-                    <!-- <div class="food-snippet">
-                        <input type="file" name="food-snippet2" id="food-snippet2">
-                    </div> -->
                     
                 </div>
 
@@ -366,17 +362,14 @@
                         <input type="time" name="foodTime3" id="foodTime3" value="<%= flog && flog.foodTime3 || '' %>">
                     </div>
                     <div class="meal">
-                        <input type="text" name="meal3" id="meal3" value="<%= flog && flog.meal3 || '' %>">
+                        <input type="text" name="meal3" id="meal3" value="<%= flog && flog.meal3 || '' %>" autocomplete="off">
                     </div>
                     <div class="beverage">
-                        <input type="text" name="beverage3" id="beverage3" value="<%= flog && flog.beverage3 || '' %>">
+                        <input type="text" name="beverage3" id="beverage3" value="<%= flog && flog.beverage3 || '' %>" autocomplete="off">
                     </div>
                     <div class="total-calories-food">
                         <input type="number" name="totalCalories3" id="totalCalories3" value="<%= flog && flog.totalCalories3 || '' %>" onchange="add()">
                     </div>
-                    <!-- <div class="food-snippet">
-                        <input type="file" name="food-snippet3" id="food-snippet3">
-                    </div> -->
                 </div>
                     
 
@@ -385,17 +378,15 @@
                         <input type="time" name="foodTime4" id="foodTime4" value="<%= flog && flog.foodTime4 || '' %>">
                     </div>
                     <div class="meal">
-                        <input type="text" name="meal4" id="meal4" value="<%= flog && flog.meal4 || '' %>">
+                        <input type="text" name="meal4" id="meal4" value="<%= flog && flog.meal4 || '' %>" autocomplete="off">
                     </div>
                     <div class="beverage">
-                        <input type="text" name="beverage4" id="beverage4" value="<%= flog && flog.beverage4 || '' %>">
+                        <input type="text" name="beverage4" id="beverage4" value="<%= flog && flog.beverage4 || '' %>" autocomplete="off">
                     </div>
                     <div class="total-calories-food">
                         <input type="number" name="totalCalories4" id="totalCalories4" value="<%= flog && flog.totalCalories4 || '' %>" onchange="add()">
                     </div>
-                    <!-- <div class="food-snippet">
-                        <input type="file" name="food-snippet4" id="food-snippet4">
-                    </div> -->
+
                 </div>
 
                 <div class="flex-row">
@@ -403,17 +394,15 @@
                         <input type="time" name="foodTime5" id="foodTime5" value="<%= flog && flog.foodTime5 || '' %>">
                     </div>
                     <div class="meal">
-                        <input type="text" name="meal5" id="meal5" value="<%= flog && flog.meal5 || '' %>">
+                        <input type="text" name="meal5" id="meal5" value="<%= flog && flog.meal5 || '' %>" autocomplete="off">
                     </div>
                     <div class="beverage">
-                        <input type="text" name="beverage5" id="beverage5" value="<%= flog && flog.beverage5|| '' %>">
+                        <input type="text" name="beverage5" id="beverage5" value="<%= flog && flog.beverage5|| '' %>" autocomplete="off">
                     </div>
                     <div class="total-calories-food">
                         <input type="number" name="totalCalories5" id="totalCalories5" value="<%= flog && flog.totalCalories5 || '' %>" onchange="add()">
                     </div>
-                   <!--  <div class="food-snippet">
-                        <input type="file" name="food-snippet5" id="food-snippet5">
-                    </div> -->
+
                 </div>
                     
                     
@@ -422,9 +411,7 @@
 
              <p id="limitfood"></p>
         <div class="bottom-food">
-            <!--     <div class="add-row-food">
-                    <button id="add-food-rows" type="button" onclick="addFoodRow()">ADD ROW</button>
-                </div> -->
+  
                 <input type="number" class="hidden-goalkcal" id="goalKcalFromUser" value="<%= goalKcal %>">
 
         

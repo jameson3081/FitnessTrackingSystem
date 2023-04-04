@@ -41,14 +41,26 @@
 <div class="bg">
     <main>
         <div class="top">
+            
+            
+
 
             <div class="choices">
-                <label for="section">Select Section:</label>
+                <!-- <label for="section">Select Section:</label>
                 <select name="section" id="section-options">
                     <option value=""></option>
                     <option value="2ISA">2ISA</option>
                     <option value="2ISB">2ISB</option>
-                </select>
+                </select> -->
+
+                <label for="section">Select Section:</label>
+            <select name="section" id="section-options">
+              <option value=""></option>
+              <% uniqueSections.forEach(section => { %>
+                <option value="<%= section %>"><%= section %></option>
+              <% }); %>
+            </select>
+
                 <button id="generate-btn">Generate Report</button>
             </div>
             <h1 class="generator-title">Report Generator</h1>
@@ -60,8 +72,9 @@
             <table class="table" id="report-table">
                 <thead class="thead-light">
                   <tr>
-                    <th>Block</th>
+                    <th>Section</th>
                     <th>Class Number</th>
+                    <th>Student Number</th>
                     <th>Student Name</th>
                     <th>Day 1 Grade</th>
                   </tr>
@@ -69,8 +82,9 @@
                 <tbody id="report-table-body">
                     <% reportData.forEach(function(data) { %>
                         <tr>
-                          <td><%= data.section %></td>
+                          <td><%= data.dynamicSection %></td>
                           <td><%= data.classNumber %></td>
+                          <td><%= data.studentNumber %></td>
                           <td><%= data.fullname %></td>
                           <% let grade = "NA"; %>
                           <% logSection.forEach(function(log) { %>

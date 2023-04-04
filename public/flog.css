@@ -161,6 +161,7 @@ ul input, ul select {
     grid-template-rows: repeat(6, 150px);
     text-align: center;
     align-items: end;
+
 }
 
 .types-2 {
@@ -177,13 +178,17 @@ ul input, ul select {
 }
 
 .activity-log h3, .food-log h3 {
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     margin-bottom: 4rem;
     background-color: #782924;
     padding: 0.3rem;
-    
+
 }
 
+/* .activity-log h3 {
+    position: absolute;
+    top: 110%;
+} */
 .activity-log select, .food-log select {
     height: 30px;
 }
@@ -421,7 +426,29 @@ textarea {
 
 .flex-row {
     display: flex;
-    justify-content: space-around;    
+    width: 100%; 
+    justify-content: space-around;
+    margin: auto;
+}
+
+.flex-types {
+    display: flex;
+}
+
+.act-types {
+    width: 20%;
+}
+
+.act-types h3, .foodTypes h3 {
+    margin-bottom: 2.5rem;
+}
+
+.flex-foodType {
+    display: flex;
+}
+
+.foodTypes {
+    width: 25%;
 }
 
 
@@ -429,7 +456,6 @@ textarea {
     display: flex;
     justify-content: space-around;
     width: 80%;
-    
 }
 
 #limitm {
@@ -568,13 +594,36 @@ textarea {
     width: 25%;
 }
 #fitness-log-select {
-    font-size: 20px;
+    font-size: 1.5rem;
     padding: 8px;
-    height: 42px;
+    height: 60px;
     background-color: #FEC00F;
     color: #2D2427;
   }
 
 .hidden-goalkcal {
     display: none
+}
+
+
+.section-log input[type="text"], .section-log input[type="number"], 
+.activity-log input[type="text"], .activity-log input[type="number"] 
+.food-log input[type="text"], .food-log input[type="number"] {
+    font-size: 1.5rem;
+}
+
+#moodOptions, #numSteps, #totalCaloriesBurned, #sleepTime, #wakeTime, 
+#typeOfPa1, #typeOfPa2, #typeOfPa3, #typeOfPa4, #typeOfPa5,
+#duration1, #duration2, #duration3, #duration4, #duration5,
+#calorieBurned1, #calorieBurned2, #calorieBurned3, #calorieBurned4, #calorieBurned5, 
+#intensity1, #intensity2, #intensity3, #intensity4, #intensity5,
+.flex-row {
+   height: 40px;
+   font-size: 1.5rem;
+}
+
+
+
+option {
+    font-size: 1.5rem
 }

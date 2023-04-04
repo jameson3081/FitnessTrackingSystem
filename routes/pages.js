@@ -263,7 +263,8 @@ router.get("/fprofile", async (req, res) => {
 router.post("/fprofile", async (req, res) => {
     const classNumber = req.body.classNumber
     const fullname = req.body.fullname
-    const section = req.body.section
+    const studentNumber = req.body.studentNumber
+    const dynamicSection = req.body.dynamicSection
     const sex = req.body.sex
     const age = req.body.age
     const height = req.body.height
@@ -281,7 +282,7 @@ router.post("/fprofile", async (req, res) => {
     try {
         const fprofile = await FProfile.findOneAndUpdate(
           { idFromUser: decodedID },
-          { classNumber, fullname, section, sex, age, height, weight, bmi, bmr, act, goal, time, kg, goalKcal },
+          { classNumber, fullname, studentNumber, dynamicSection, sex, age, height, weight, bmi, bmr, act, goal, time, kg, goalKcal },
           { upsert: true, new: true }
         );
         console.log("Fprofile data sent", fprofile);
@@ -305,12 +306,13 @@ router.get("/report", async (req, res) => {
   
   try {
     // Fetch the data from the database
-    reportData = await FProfile.find({ section: selectedSection });
+    reportData = await FProfile.find({ dynamicSection: selectedSection });
     let logSection = await FLog.find({});
+    let allSections = await FProfile.distinct('dynamicSection');
+    let uniqueSections = [...new Set(allSections)];    
 
-    
     // Render the report template with the filtered data
-    res.render("report", { title: "Report with Data", section: selectedSection, reportData, logSection });
+    res.render("report", { title: "Report with Data", uniqueSections, section: selectedSection, reportData, logSection });
   } catch (error) {
     console.log(error);
     res.json({ status: "error", error: "An error occurred" });

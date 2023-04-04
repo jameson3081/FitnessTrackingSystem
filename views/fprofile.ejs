@@ -67,19 +67,21 @@
             <form id="fprofile-form">
                 <label for="classNumber" id="classnumLabel">Class number:</label>
                 <br>
-                <input type="number" id = "classNumber" name = "classNumber" class = "centerAligned" placeholder=" - ENTER CLASS NUM -" value="<%= fprofile && fprofile.classNumber || '' %>">
+                <input type="number" id = "classNumber" name = "classNumber" class = "centerAligned" placeholder=" - ENTER CLASS NUM -" value="<%= fprofile && fprofile.classNumber || '' %>" autocomplete="off">
                 <br>
                 <br>
                 
                 <label for="fullname" class = "fprofile_labels">Full Name:</label>
-                <input type="text" id="fullname" name="fullname" class="centerAligned" placeholder="- ENTER NAME -" value="<%= fprofile && fprofile.fullname || '' %>">
+                <input type="text" id="fullname" name="fullname" class="centerAligned" placeholder="e.g. Cruz, Juan Dela" value="<%= fprofile && fprofile.fullname || '' %>" autocomplete="off">
+                
                 <br>
-        <label for="sex" class = "fprofile_labels">Section:</label>
-        <select name="section" id="section" class="combobox">
-          <option value="" <% if (!fprofile || !fprofile.section) { %>selected<% } %>></option>
-          <option value="2ISA" <% if (fprofile && fprofile.section === '2ISA') { %>selected<% } %>>2ISA</option>
-          <option value="2ISB" <% if (fprofile && fprofile.section === '2ISB') { %>selected<% } %>>2ISB</option>
-          </select>
+                
+                <label for="studentNumber" class = "fprofile_labels">Student Number:</label>
+                <input type="number" id="studentNumber" name="studentNumber" class="centerAligned" placeholder="- Input student no. -" value="<%= fprofile && fprofile.studentNumber || '' %>" autocomplete="off">
+               
+          <br>
+           <label for="dynamicSection" class = "fprofile_labels">Section:</label>
+            <input type="text" id="dynamicSection" name="dynamicSection" class="centerAligned" placeholder="- DYNAMIC SECTION -" value="<%= fprofile && fprofile.dynamicSection || '' %>" autocomplete="off">
 
                 <label for="notes" id="notesLabel">NOTES</label>
                 <br>
@@ -121,22 +123,22 @@
                   <option value="Female" <% if (fprofile && fprofile.sex === 'Female') { %>selected<% } %>>Female</option>
                   </select>
                 <label for="BMI" class = "fprofile_labels" id = "bmilabel">BMI: </label>
-                <input type="number" id = "bmi" name = "BMI" value="<%= fprofile && fprofile.bmi || '' %>" onchange="bmiChecker(); BMItranslation()" step="0.01">
+                <input type="number" id = "bmi" name = "BMI" value="<%= fprofile && fprofile.bmi || '' %>" onchange="bmiChecker(); BMItranslation()" step="0.01" autocomplete="off">
                 <span id="bmiCheck" class="check"></span>    
     
                 <br>
                 <label for="Age" class = "fprofile_labels">Age: </label>
-                <input type="number" id = "age" name = "age" value="<%= fprofile && fprofile.age || '' %>" onchange="bmrChecker()">
+                <input type="number" id = "age" name = "age" value="<%= fprofile && fprofile.age || '' %>" onchange="bmrChecker()" autocomplete="off">
 
                 <label for="BMR" class = "fprofile_labels" id="bmrlabel">BMR: </label>
-                <input type="number" id = "bmr" name = "BMR" value="<%= fprofile && fprofile.bmr || '' %>" onchange="bmrChecker(); goalKcals()" step="1">
+                <input type="number" id = "bmr" name = "BMR" value="<%= fprofile && fprofile.bmr || '' %>" onchange="bmrChecker(); goalKcals()" step="1" autocomplete="off">
                 <span id="bmrCheck" class="check"></span>  
                 <br>
                 </div>
 
                 
                 <label for="Height" class = "fprofile_labels" id = "heightlabel">Height (cm): </label>
-                <input type="number" id = "Height" class = "heightweight" name = "Height" value="<%= fprofile && fprofile.height || '' %>" onchange="bmiChecker(); bmrChecker()">
+                <input type="number" id = "Height" class = "heightweight" name = "Height" value="<%= fprofile && fprofile.height || '' %>" onchange="bmiChecker(); bmrChecker()" autocomplete="off">
                     
                 <label for="actLevel" class = "fprofile_labels" id = actLevelLabel>Activity level:</label>
                 <select name="actLevel" id="actLevel" class="combobox" onchange="goalKcals()">
@@ -151,7 +153,7 @@
                 <br>
                 
                 <label for="Weight" class = "fprofile_labels" id = "weightlabel">Weight (kg): </label>
-                <input type="number" id = "weight" class = "heightweight" name = "weight" value="<%= fprofile && fprofile.weight || '' %>" onchange="bmiChecker(); bmrChecker()">
+                <input type="number" id = "weight" class = "heightweight" name = "weight" value="<%= fprofile && fprofile.weight || '' %>" onchange="bmiChecker(); bmrChecker()" autocomplete="off">
                 <br>
                 
                 <span id="translation">Translation: </span>
@@ -211,7 +213,7 @@
                 </select>
                 <br>
                 <label for="goalKcal" class = "fprofile_labels">Goal kCal intake: </label>
-                <input type="number"  onchange="goalKcals()" id="goalKcal" name="goalKcal" value="<%= fprofile && fprofile.goalKcal ? fprofile.goalKcal : '' %>">
+                <input type="number"  onchange="goalKcals()" id="goalKcal" name="goalKcal" value="<%= fprofile && fprofile.goalKcal ? fprofile.goalKcal : '' %>" autocomplete="off">
                 <span id="goalCheck" class="check"></span>  
                 <br>
 
@@ -345,7 +347,7 @@
       }
   
 console.log("MAINTAIN")
-      console.log(Math.floor(little), "LITTLE")
+console.log(Math.floor(little), "LITTLE")
 console.log(Math.floor(light), "LIGHT")
 console.log(Math.floor(medium), "MEDIUM")
 console.log(Math.floor(hard), "HARD")
@@ -509,7 +511,10 @@ BMItranslation()
 
         const classNumber = document.getElementById('classNumber').value
         const fullname = document.getElementById('fullname').value
-        const section = document.getElementById('section').value
+        const studentNumber = document.getElementById('studentNumber').value
+                
+        const dynamicSection = document.getElementById('dynamicSection').value
+
         const age = document.getElementById('age').value
         const height = document.getElementById('Height').value
         const weight = document.getElementById('weight').value
@@ -556,7 +561,8 @@ BMItranslation()
           body: JSON.stringify({
             classNumber,
             fullname,
-            section,
+            studentNumber,
+            dynamicSection,
             sex,
             age,
             height,
