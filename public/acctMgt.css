@@ -19,6 +19,11 @@
     font-weight: 500;
 }
 
+.save-acct {
+   text-align: center;
+
+}
+
 .mgt{
     background-color: #2D2427;
     padding: 2rem 1rem;
@@ -40,8 +45,8 @@
 .mgt-sec{
     background-color: #2D2427;
     padding: 2rem 1rem;
-    margin-bottom: 3rem;
     margin: 3rem;
+    margin-bottom: 1rem;
 }
 
 .acc-list{
@@ -113,3 +118,28 @@ table{
 .table tr{
     border-color: #2D2427;
 }
+
+.table th {
+    font-size: 1.4rem;
+}
+
+#type-options, .select {
+    height: 40px;
+    font-size: 1.2rem;
+    width: 100px;
+    text-align: center;
+}
+
+.emailInp, .passwordInp {
+    font-size: 1.4rem;
+}
+
+.deleteBTN {
+    width: 200px;
+    height: 45px;
+}
+
+.btn {
+    margin-top: 0;
+}
+

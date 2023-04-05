@@ -38,9 +38,6 @@
     <div class="background">
         <main>
           <form id="reg-form">
-          <div class="save-acct">
-            <button id="btn" type="submit">SAVE ACCOUNTS</button>
-        </div>
 
         <section class="mgt-sec">
     
@@ -50,7 +47,6 @@
                 <thead class="thead-light">
                     <tr>
                         <th>Type of Account</th>
-                     <!--    <th>Section</th> -->
                         <th>@Email</th>
                         <th>Password</th>
                         <th>Action</th>
@@ -67,22 +63,15 @@
                           <% } %>
                        
                         </td>
-                        <!-- <td>
-                          <select class="select">
-                            <option value="type0"></option>
-                            <option value="type1">3ISA</option>
-                            <option value="type2">3ISB</option>
-                         </select>
-                        </td> -->
-                        <!--<td><%= users[i].email %></td>-->
+                       <%= users[i].email %></td>
                         <td>                
-                          <input type="text"value="<%= users[i].email %>">
+                          <input type="text"value="<%= users[i].email %>" class="emailInp">
                           </td>
                         <td>                
-                        <input type="password" value="<%= users[i].password %>">
+                        <input type="password" value="<%= users[i].password %>" class="passwordInp">
                     </td>
                         <td>
-                          <button type="button" id="<%= users[i]._id %>"  onclick="deleteUser(event)" class="btn btn-danger" name="remove">DELETE ACCOUNT</button>  
+                          <button type="button" id="<%= users[i]._id %>"  onclick="deleteUser(event)" class="btn btn-danger deleteBTN" name="remove">DELETE ACCOUNT</button>  
                         </td>
                     </tr>
                     <% } %>
@@ -95,33 +84,29 @@
                       <option value="Admin">Admin</option>
                     </select>
                   </td>
-                 <!--  <td>
-                    <select class="select">
-                      <option value="type0"></option>
-                      <option value="type1">3ISA</option>
-                      <option value="type2">3ISB</option>
-                   </select>
-                  </td> -->
+            
           
                  
                   <td>                
-                    <input type="email" id="email" autocomplete="off">  
+                    <input type="email" id="email" autocomplete="off" class="emailInp">  
                     </td>
                   <td>             
-                    <input type="password" id="password"> 
+                    <input type="password" id="password" class="passwordInp"> 
                   </td>
                   <td>
-                    <button type="button" class="btn btn-danger" name="remove">DELETE ACCOUNT</button>  
+                    <button type="button" class="btn btn-danger deleteBTN" name="remove">DELETE ACCOUNT</button>  
                   </td>
             </table>
-            <!-- <div class="add-acc">
-              <button id="add-acc-btn" type="button">ADD MORE ACCOUNT</button>
-            </div> -->
           
-          </form>
+          
+         
      
-        </section> 
+        </section>
+        <div class="save-acct">
+          <button id="btn" type="submit">SAVE ACCOUNTS</button>
+      </div> 
         </main>
+      </form>
     </div>
 
 
