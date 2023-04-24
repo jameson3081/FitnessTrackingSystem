@@ -319,14 +319,23 @@ select, input[type="text"], input[type="number"] {
     margin-bottom: 0.8rem;
     
 }
-#fitness-profile-select {
-    font-size: 20px;
+#fitness-profile-select, #section-select {
+    font-size: 1.25rem;
     padding: 8px;
     height: 42px;
     background-color: #FEC00F;
     color: #2D2427;
-  }
+    width: 300px;
+}
 
+#section-select {
+    width: 200px;
+    margin-right: 1rem;
+
+}
+.half {
+    display: inline ;
+}
   #translation {
     font-family: "roboto";
     font-weight: bold;

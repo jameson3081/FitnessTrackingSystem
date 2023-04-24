@@ -52,24 +52,30 @@
             <h1 class="page-title">FITNESS LOG</h1>
             <h3>Day 1</h3>
 
-            <div id="student-links">
+              <div id="student-links">
                 <h2>List of Currently Available Fitness Logs: (Click the names to view)</h2>
                 <% if (data && data.length > 0) { %>
                   <div class="flex-all">
                     <div class="half">
+                      <select id="section-select">
+                        <option value="">SELECT SECTION</option>
+                        <% const sections = [...new Set(data.map(item => item.section))]; %>
+                        <% sections.forEach(function(section) { %>
+                          <option value="<%= section %>"><%= section %></option>
+                        <% }); %>
+                      </select>
+                    </div>  
+                    <div class="half">
                       <select id="fitness-log-select">
-                        <option value="">SELECT STUDENT</option>
-                        <% data.forEach(function(item) { %>
-                          <% if (item.type === 'Student') { %>
-                            <option value="/flog?decodedID=<%= item.idFromUser._id %>"><%= item.fullname %></option>
-                          <% } %>
+                        <option value="/flog" selected>SELECT STUDENT</option>
+                        <% data.filter(item => item.type === 'Student').forEach(function(student) { %>
+                          <option value="/flog?decodedID=<%= student.idFromUser._id %>" data-section="<%= student.section %>"><%= student.fullname %></option>
                         <% }); %>
                       </select>
                     </div>
                   </div>
                 <% } %>
               </div>
- 
             <section class="section-log">
                 <h2>SLEEP LOG</h2>
                     <ul>
@@ -422,7 +428,7 @@
                 
                 <div class="slider-food-label-container" style="width: 100%; display: flex; justify-content: space-between;">
                     <h4 style="color: white; text-align: left; padding-left: 23%; margin-top: 1%;">Deficit</h4>
-                    <h4 style="color: white; text-align: center; margin-top: 1%;">Sufficient</h4>
+                    <h4 style="color: white; text-align: center; margin-top: 1%;">Sufficient to your goal</h4>
                     <h4 style="color: white; text-align: right; padding-right: 22%; margin-top: 1%;">Surplus</h4>
                 </div>
 
@@ -434,7 +440,7 @@
             <button class="save-record" id="save-btn" type="submit">SAVE RECORDS FOR TODAY</button>
             <h5 class="grade-feedback" id="scroll-down">GRADE AND FEEDBACK</h5>
             <p class="score"><input type="number" class="score-inp" value="<%= flog && flog.grade || '' %>" id="grade1" disabled>/100</p>
-            <textarea class="feedback-container" readonly name="grade-and-feedback" id="feedback1" cols="5" rows="5" value=""><%= flog ? flog.feedback || '' : '' %></textarea>
+            <textarea class="feedback-container" readonly name="grade-and-feedback" id="feedback1" cols="5" rows="7" value=""><%= flog ? flog.feedback || '' : '' %></textarea>
             <button type="button" onclick="gradeFeedback()" class="giveBtn" id="giveGrade">SUBMIT GRADE</button>
         </div>
        </form>
@@ -462,6 +468,8 @@
     } else {
 
     }
+
+    
 
     //FOR SLIDER TRACKING PROGRESS RANGE STYLE
     const rangeInputs = document.querySelectorAll('input[type="range"]')
@@ -526,7 +534,6 @@ function totalCaloriesBurned() {
   // Set the value of the 'totalCaloriesBurned' element to the sum of the calories
   document.getElementById('totalCaloriesBurned').value = totalCalories;
 
-  console.log("TOTAL CALORIES BURNED: " + totalCalories); // Log the result to the console
   add()
 }
 
@@ -555,20 +562,15 @@ function add() {
 
   let OverallTotalCalories = totalFoodCalories - totalCaloriesBurned
   let added = OverallTotalCalories - parseInt(goalKcal)
-  console.log("MINUSED: " + OverallTotalCalories)
-  console.log("GOAL KCAL: " + goalKcal)
-  console.log("MINUSED FROM OVERALL: " + added)
+
 
   let deficitOrSurplus1 = document.getElementById('deficitOrSurplus')
 
 if (OverallTotalCalories < goalKcal) {
-    console.log("DEFICIT")
     deficitOrSurplus1.value = 1
 } else if (OverallTotalCalories > goalKcal) {
-    console.log("SURPLUS")
     deficitOrSurplus1.value = 3
 } else {
-   console.log("SUFFICIENT")
    deficitOrSurplus1.value = 2
 }
 }
@@ -719,54 +721,18 @@ const form = document.getElementById('flog-form')
         }).then((res) => res.json())
         if (result.status === 'ok') {
           alert('Fitness Log info submitted')
-          console.log(result.data)
         } else {
           alert(JSON.stringify(result.error))
         }
       }
 
-      /* function gradeFeedback(event) {
-  const flogId = event.target.id;
-  const grade = document.getElementById(`grade-${flogId}`).value;
-  const feedback = document.getElementById(`feedback-${flogId}`).value;
-console.log(flogId)
-console.log(grade)
-console.log(feedback)
-
-  fetch('/submit', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      flogId,
-      grade,
-      feedback
-    })
-  })
-    .then(res => res.json())
-    .then(data => {
-      if (data.status === 'ok') {
-        alert('Grade and feedback submitted');
-        console.log(data.data);
-      } else {
-        alert(JSON.stringify(data.error));
-      }
-    })
-    .catch(err => console.error(err));
-}
- */
-
-//TEMPORARY
 
 function gradeFeedback(event) {
   const urlParams = new URLSearchParams(window.location.search);
   const flogId = urlParams.get('decodedID');
   const grade = document.getElementById('grade1').value;
   const feedback = document.getElementById('feedback1').value;
-console.log(flogId)
-console.log(grade)
-console.log(feedback)
+
 
   fetch('/submit', {
     method: 'POST',
@@ -783,7 +749,6 @@ console.log(feedback)
     .then(data => {
       if (data.status === 'ok') {
         alert('Grade and feedback submitted');
-        console.log(data.data);
       } else {
         alert(JSON.stringify(data.error));
       }
@@ -816,9 +781,7 @@ if (decodedID) {
     .then(response => response.json())
     .then(data => {
       if (data.flog) {
-        console.log(data);
       } else {
-        console.log("I am else");
       }
     })
     .catch(error => console.error(error));
@@ -828,15 +791,7 @@ if (decodedID) {
 }
 
 
-/*There's an issue where the selected dropdown menu item doesn't stay upon reloading the page.
-document.getElementById('fitness-log-select').addEventListener('change', function() {
-    var selectedValue = this.value;
-    if (selectedValue !== '') {
-      window.location.href = selectedValue;
-    }
-  });
 
-*/
 //LETS THE SELECTED ITEM IN THE DROPDOWN MENU STAY UPON RELOAD OF THE PAGE
 document.addEventListener('DOMContentLoaded', function() {
   var selectEl = document.getElementById('fitness-log-select');
@@ -880,6 +835,22 @@ document.addEventListener('DOMContentLoaded', function() {
     changeSlider();
   };
  
+  const sectionSelect = document.getElementById('section-select');
+  const studentSelect = document.getElementById('fitness-log-select');
+
+  sectionSelect.addEventListener('change', function() {
+    const selectedSection = sectionSelect.value;
+
+    // Hide all students initially
+    studentSelect.querySelectorAll('option').forEach(function(student) {
+      student.style.display = 'none';
+    });
+
+    // Show students from selected section, or all students if no section selected
+    studentSelect.querySelectorAll(`option[data-section="${selectedSection}"], option[value=""]`).forEach(function(student) {
+      student.style.display = '';
+    });
+  });
 
     </script>
 </body>

@@ -555,11 +555,13 @@ textarea {
     text-align: center;
     margin-right: 1rem;
     font-weight: bold;
+    background-color: white;
 }
 
 .feedback-container {
     font-size: 2rem;
-    padding: 2rem;
+    padding: 0.8rem;
+    background-color: rgb(255, 255, 255);
 }
 
 .flex-all {
@@ -591,16 +593,23 @@ textarea {
 }
 
 .half {
-    width: 25%;
+  display: inline ;
 }
-#fitness-log-select {
-    font-size: 1.5rem;
+
+#fitness-log-select, #section-select {
+    font-size: 1.25rem;
     padding: 8px;
-    height: 60px;
+    height: 42px;
     background-color: #FEC00F;
     color: #2D2427;
-  }
+    width: 300px;
+    border-radius: 5px;
+}
 
+#section-select {
+    width: 200px;
+    margin-right: 1rem;
+}
 .hidden-goalkcal {
     display: none
 }

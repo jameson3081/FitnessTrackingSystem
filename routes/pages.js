@@ -117,7 +117,7 @@ router.get("/flog", async(req,res) => {
   let currentFullname = "";
 
   try {
-    const fprofiles = await FProfile.find().select("idFromUser fullname goalKcal section").populate('idFromUser', 'type')
+    const fprofiles = await FProfile.find().select("idFromUser fullname goalKcal dynamicSection").populate('idFromUser', 'type')
 
     data = await Promise.all(fprofiles.map(async (fprofile) => {
       let flog = await FLog.findOne({ idFromUser: fprofile.idFromUser._id });
@@ -128,7 +128,7 @@ router.get("/flog", async(req,res) => {
       return { 
         idFromUser: fprofile.idFromUser, 
         fullname: fprofile.fullname,
-        section: fprofile.section, 
+        section: fprofile.dynamicSection, 
         type: fprofile.idFromUser.type,
         grade: flog ? flog.grade: "",
         feedback: flog ? flog.feedback : "" // add feedback property to data object
@@ -241,10 +241,10 @@ router.get("/fprofile", async (req, res) => {
     let data = [];
 
     try {
-      const fprofiles = await FProfile.find().select("idFromUser fullname").populate('idFromUser', 'type')
+      const fprofiles = await FProfile.find().select("idFromUser fullname dynamicSection").populate('idFromUser', 'type')
 
       data = fprofiles.map((fprofile) => {
-        return { idFromUser: fprofile.idFromUser, fullname: fprofile.fullname, type: fprofile.idFromUser.type};
+        return { idFromUser: fprofile.idFromUser, fullname: fprofile.fullname, section: fprofile.dynamicSection, type: fprofile.idFromUser.type};
       });
       //RENDERING PAGE WITH DECODED ID IN URL
       let fprofile = await FProfile.findOne({ idFromUser: decodedID });

@@ -44,22 +44,30 @@
    
 
     <div id="student-links">
-      <h2>List of Currently Available Fitness Logs: (Click the names to view)</h2>
+      <h2>List of Currently Available Fitness Profiles: (Click the names to view)</h2>
       <% if (data && data.length > 0) { %>
         <div class="flex-all">
           <div class="half">
+            <select id="section-select">
+              <option value="">SELECT SECTION</option>
+              <% const sections = [...new Set(data.map(item => item.section))]; %>
+              <% sections.forEach(function(section) { %>
+                <option value="<%= section %>"><%= section %></option>
+              <% }); %>
+            </select>
+          </div>  
+          <div class="half">
             <select id="fitness-profile-select">
-              <option value="">SELECT STUDENT</option>
-              <% data.forEach(function(item) { %>
-                <% if (item.type === 'Student') { %>
-                  <option value="/fprofile?decodedID=<%= item.idFromUser._id %>"><%= item.fullname %></option>
-                <% } %>
+              <option value="/fprofile" selected>SELECT STUDENT</option>
+              <% data.filter(item => item.type === 'Student').forEach(function(student) { %>
+                <option value="/fprofile?decodedID=<%= student.idFromUser._id %>" data-section="<%= student.section %>"><%= student.fullname %></option>
               <% }); %>
             </select>
           </div>
         </div>
       <% } %>
     </div>
+    
 
     
         <div id = "fprofile_box" class="wrapper">
@@ -123,22 +131,22 @@
                   <option value="Female" <% if (fprofile && fprofile.sex === 'Female') { %>selected<% } %>>Female</option>
                   </select>
                 <label for="BMI" class = "fprofile_labels" id = "bmilabel">BMI: </label>
-                <input type="number" id = "bmi" name = "BMI" value="<%= fprofile && fprofile.bmi || '' %>" onchange="bmiChecker(); BMItranslation()" step="0.01" autocomplete="off">
+                <input type="number" id = "bmi" name = "BMI" value="<%= fprofile && fprofile.bmi || '' %>" onchange="bmiChecker(); BMItranslation()" step="0.01" autocomplete="off" placeholder="e.g. 23.88">
                 <span id="bmiCheck" class="check"></span>    
     
                 <br>
                 <label for="Age" class = "fprofile_labels">Age: </label>
-                <input type="number" id = "age" name = "age" value="<%= fprofile && fprofile.age || '' %>" onchange="bmrChecker()" autocomplete="off">
+                <input type="number" id = "age" name = "age" value="<%= fprofile && fprofile.age || '' %>" onchange="bmrChecker()" autocomplete="off" placeholder="e.g. 20">
 
                 <label for="BMR" class = "fprofile_labels" id="bmrlabel">BMR: </label>
-                <input type="number" id = "bmr" name = "BMR" value="<%= fprofile && fprofile.bmr || '' %>" onchange="bmrChecker(); goalKcals()" step="1" autocomplete="off">
+                <input type="number" id = "bmr" name = "BMR" value="<%= fprofile && fprofile.bmr || '' %>" onchange="bmrChecker(); goalKcals()" step="1" autocomplete="off" placeholder="e.g. 1646">
                 <span id="bmrCheck" class="check"></span>  
                 <br>
                 </div>
 
                 
                 <label for="Height" class = "fprofile_labels" id = "heightlabel">Height (cm): </label>
-                <input type="number" id = "Height" class = "heightweight" name = "Height" value="<%= fprofile && fprofile.height || '' %>" onchange="bmiChecker(); bmrChecker()" autocomplete="off">
+                <input type="number" id = "Height" class = "heightweight" name = "Height" value="<%= fprofile && fprofile.height || '' %>" onchange="bmiChecker(); bmrChecker()" autocomplete="off" placeholder="e.g. 165">
                     
                 <label for="actLevel" class = "fprofile_labels" id = actLevelLabel>Activity level:</label>
                 <select name="actLevel" id="actLevel" class="combobox" onchange="goalKcals()">
@@ -153,7 +161,7 @@
                 <br>
                 
                 <label for="Weight" class = "fprofile_labels" id = "weightlabel">Weight (kg): </label>
-                <input type="number" id = "weight" class = "heightweight" name = "weight" value="<%= fprofile && fprofile.weight || '' %>" onchange="bmiChecker(); bmrChecker()" autocomplete="off">
+                <input type="number" id = "weight" class = "heightweight" name = "weight" value="<%= fprofile && fprofile.weight || '' %>" onchange="bmiChecker(); bmrChecker()" autocomplete="off" placeholder="e.g. 65"> 
                 <br>
                 
                 <span id="translation">Translation: </span>
@@ -251,7 +259,6 @@
 
     }
 
-  
 
     function goalKcals() {
       let bmr = document.getElementById("bmr").value
@@ -346,26 +353,6 @@
         goalCheck.textContent = "Incorrect ❌"
       }
   
-console.log("MAINTAIN")
-console.log(Math.floor(little), "LITTLE")
-console.log(Math.floor(light), "LIGHT")
-console.log(Math.floor(medium), "MEDIUM")
-console.log(Math.floor(hard), "HARD")
-console.log(Math.floor(intense), "INTENSE")
-
-console.log("GAIN")
-console.log(Math.floor(totalNeedGainLittle), "LITTLE")
-console.log(Math.floor(totalNeedGainLight), "LIGHT")
-console.log(Math.floor(totalNeedGainMedium), "MEDIUM")
-console.log(Math.floor(totalNeedGainHard), "HARD")
-console.log(Math.floor(totalNeedGainIntense), "INTENSE")
-
-console.log("LOSE")
-console.log(Math.floor(totalNeedLoseLittle), "LITTLE")
-console.log(Math.floor(totalNeedLoseLight), "LIGHT")
-console.log(Math.floor(totalNeedLoseMedium), "MEDIUM")
-console.log(Math.floor(totalNeedLoseHard), "HARD")
-console.log(Math.floor(totalNeedLoseIntense), "INTENSE")
 
     }
 
@@ -390,8 +377,7 @@ console.log(Math.floor(totalNeedLoseIntense), "INTENSE")
       bmrCorrectSymbol.innerText = "Correct ✅"
     } else {
       bmrCorrectSymbol.innerText = "Incorrect ❌"
-      console.log(bmrMenRounded)
-      console.log(bmrWomenRounded)
+
 
     }
 
@@ -441,14 +427,10 @@ console.log(Math.floor(totalNeedLoseIntense), "INTENSE")
 
     if (sexUser == "Male" && bmrMenRounded == bmrVal) {
       bmrCorrectSymbol.innerText = "Correct ✅"
-      console.log("BMR FOR MEN: ", bmrMenRounded)
-      console.log("BMR FOR WOMEN: ", bmrWomenRounded)
     } else if (sexUser == "Female" && bmrWomenRounded == bmrVal) {
       bmrCorrectSymbol.innerText = "Correct ✅"
     } else {
       bmrCorrectSymbol.innerText = "Incorrect ❌"
-      console.log("BMR FOR MEN: ", bmrMenRounded)
-      console.log("BMR FOR WOMEN: ", bmrWomenRounded)
 
     }
   }
@@ -579,7 +561,6 @@ BMItranslation()
         }).then((res) => res.json())
         if (result.status === 'ok') {
           alert('Profile info submitted')
-          console.log(result.data)
         } else {
           alert(JSON.stringify(result.error))
         }
@@ -614,9 +595,7 @@ if (decodedID) {
     .then(response => response.json())
     .then(data => {
       if (data.fprofile) {
-        console.log(data.fprofile.fullname);
       } else {
-        console.log("I am else");
       }
     })
     .catch(error => console.error(error));
@@ -625,15 +604,7 @@ if (decodedID) {
   window.location.href = `/fprofile?decodedID=${id}`;
 }
 
-/* tHERE'S AN issue where the selected dropdown menu item doesn't stay upon reloading the page.
-document.getElementById('fitness-profile-select').addEventListener('change', function() {
-    var selectedValue = this.value;
-    if (selectedValue !== '') {
-      window.location.href = selectedValue;
-    }
-  }); 
 
-*/
 
 //LETS THE SELECTED ITEM IN THE DROPDOWN MENU STAY UPON RELOAD OF THE PAGE
 document.addEventListener('DOMContentLoaded', function() {
@@ -659,6 +630,24 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 });
+
+
+const sectionSelect = document.getElementById('section-select');
+  const studentSelect = document.getElementById('fitness-profile-select');
+
+  sectionSelect.addEventListener('change', function() {
+    const selectedSection = sectionSelect.value;
+
+    // Hide all students initially
+    studentSelect.querySelectorAll('option').forEach(function(student) {
+      student.style.display = 'none';
+    });
+
+    // Show students from selected section, or all students if no section selected
+    studentSelect.querySelectorAll(`option[data-section="${selectedSection}"], option[value=""]`).forEach(function(student) {
+      student.style.display = '';
+    });
+  });
     </script>
 </body>
 </html>

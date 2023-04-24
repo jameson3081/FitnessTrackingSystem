@@ -101,7 +101,6 @@
         form.addEventListener('submit', login)
         
         let signedIn = false;
-        console.log("Is the user logged in: " + signedIn)
         async function login(event) {
             event.preventDefault()
             const email = document.getElementById('email').value
@@ -118,11 +117,9 @@
                 })
             }).then((res) => res.json())
             if(result.status === 'ok') {
-                /* console.log('Got the token: ', result.data) */
                 alert('Successfully logged in')
                 location.href="/signIn"
                 signedIn = true;
-                console.log("Is the user logged in: " + signedIn)
                 localStorage.setItem("TOKEN", result.data)
             }else {
                 alert(result.error)
@@ -145,7 +142,6 @@ let emailToken = parseJwt(localStorage.getItem("TOKEN")).email
         let fullSentence = document.getElementById("full-sentence")
         let logoutBtn = document.getElementById("logout")
         showEmail.textContent = emailToken;
-        console.log("This is the token: ", localStorage.getItem("TOKEN"))
 
 let accountType = document.getElementById("account-type-show")
 let type = parseJwt(localStorage.getItem("TOKEN")).type
@@ -154,12 +150,10 @@ accountType.style.color = "green"
 
 function logout() {
 if (localStorage.getItem("TOKEN")) {
-    console.log("removing token, logging out")
     localStorage.removeItem("TOKEN")
     window.location.href = "/signIn"
     alert("Logged out sucessfully, redirecting to homepage")
 } else {
-    console.log("Not logged in")
     fullSentence.textContent = "Not logged in"
     showEmail.textContent = " "
 }
